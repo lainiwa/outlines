@@ -45,6 +45,9 @@ exclude_patterns = [
     'notes/**/.*.rst',  # Hide files starting with dot
 ]
 
+# https://github.com/readthedocs/readthedocs.org/issues/2569#issuecomment-485117471
+master_doc = 'index'
+
 
 # -- Options for HTML output -------------------------------------------------
 
