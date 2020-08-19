@@ -211,7 +211,7 @@ This setting can be changed with ``sudo dpkg-reconfigure snoopy``.
 
 **Note:** it made my browsers (chromium, firefox) to misbehave:
 
-.. code-block::
+.. code-block:: text
     :caption: /etc/ld.so.preload
 
     /lib/x86_64-linux-gnu/libsnoopy.so
