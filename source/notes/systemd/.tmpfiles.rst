@@ -1,0 +1,71 @@
+
+Temporary file units
+====================
+
+Source: `Managing temporary files with systemd-tmpfiles on Red Hat Enterprise Linux 7 <https://developers.redhat.com/blog/2016/09/20/managing-temporary-files-with-systemd-tmpfiles-on-rhel7/>`_
+
+Explore with:
+
+.. code-block:: sh
+
+    systemctl status systemd-tmpfiles-setup.service
+    cat /lib/systemd/system/systemd-tmpfiles-setup.service
+    systemctl status systemd-tmpfiles-clean.timer
+    man 5 tmpfiles.d
+    systemd-tmpfiles [command]
+
+systemd-tmpfiles directories (highest to lowest):
+
+* ``/etc/tmpfiles.d/*.conf``
+* ``/run/tmpfiles.d/*.conf``
+* ``/usr/lib/tmpfiles.d/*.conf``
+
+Configuration file syntax of systemd-tmpfiles::
+
+    Type, Path, Mode, UID, GID, Age, and Arguments
+
+Example: samba created ``/run/samba/`` for it's daemon
+with ``/usr/lib/tmpfiles.d/samba.conf`` setting:
+
+.. code-block:: sh
+
+    D /run/samba 0755 root root
+
+Another directory creation example (``cat /usr/lib/tmpfiles.d/httpd.conf``):
+
+.. code-block:: sh
+
+    d /run/httpd 710 root apache
+    d /run/httpd/htcacheclean 700 apache apache
+
+File removal example (``/usr/lib/tmpfiles.d/rpm.conf``):
+
+.. code-block:: sh
+
+    r /var/lib/rpm/__db.*
+
+Symlink creation and recursive file copy (``/usr/lib/tmpfiles.d/etc.conf``):
+
+.. code-block:: sh
+
+    L /etc/os-release - - - - ../usr/lib/os-release
+    L /etc/localtime - - - - ../usr/share/zoneinfo/UTC
+    L+ /etc/mtab - - - - ../proc/self/mounts
+    C /etc/nsswitch.conf - - - -
+    C /etc/pam.d - - - -
+
+The ``L+`` creates link forcefully.
+
+``C`` means copy file/directory from ``/usr/share/factory/``.
+
+Time option usage (``/usr/lib/tmpfiles.d/cups.conf``):
+
+.. code-block:: sh
+
+    d /run/cups 0755 root lp -
+    d /run/cups/certs 0511 lp sys -
+
+    d /var/spool/cups/tmp - - - 30d
+
+Files older (both atime, mtime and ctime) than 30 days
+on ``/var/spool/cups/tmp`` will be deleted.

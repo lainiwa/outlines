@@ -1,0 +1,153 @@
+
+Capabilities
+============
+
+Sources:
+
+* `Using systemd features to secure services <https://www.redhat.com/sysadmin/systemd-secure-services>`_
+* `Using systemd features to secure services - DevConf.CZ 2020 <https://www.youtube.com/watch?v=zWIYkDot3VM>`_
+* `Alvaro Leiva - Better Security with Python and Systemd - Pyninsula #10 <https://www.youtube.com/watch?v=o-OqslA5dkw>`_
+* `Изолируем демоны с systemd <https://habr.com/ru/post/270165/>`_
+
+Run command with systemd and show it's output with journalctl:
+
+.. code-block:: sh
+
+    sudo systemd-run whoami  # --> Running as unit: run-xxxx.service
+    journalctl -u run-xxxx.service  # --> ... whoami[28327]: root ...
+
+Simpler one: run with tty connected:
+
+.. code-block:: sh
+
+    sudo systemd-run -t whoami  # --> ... ... root
+
+Systemd creates temporary unit file on the fly.
+
+Specify user:
+
+.. code-block:: sh
+
+    sudo systemd-run -t --uid=nobody whoami
+    sudo systemd-run -t -p User=nobody whoami
+    sudo systemd-run -t -p DynamicUser=yes whoami  # create temporary user on the fly
+
+Let's try ping localhost interactively:
+
+.. code-block:: sh
+
+    sudo systemd-run -t -p IPAddressDeny=127.0.0.1/8 /bin/bash
+    # ping 127.0.0.1
+    # -->
+    # PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+    # ping: sendmsg: Operation not permitted
+
+Open shell:
+
+.. code-block:: sh
+
+    sudo systemd-run -p ProtectHome=yes --shell
+
+Options:
+
+.. code-block:: sh
+
+    ProtectHome=yes|read-only|no  # /home inaccessible or read-only
+        # yes: /home and /root are gone
+    ProtectSystem=yes|full|strict|no  # full: [/usr, /boot, /etc] are read-only
+     #   (use ReadWritePaths to punch holes)
+     # yes: [/usr, /boot] read-only
+     # strict: all read-only except [/dev, /proc, /sys]
+    PrivateTmp=yes|no  # tied to lifecycle of service (/tmp and /var/tmp)
+        # debuggable through /tmp/systemd-private-<random-suffix>-<name.service>-<random>/tmp
+    PrivateNetwork=yes|no  # no network access (only lo device)
+    PrivateDevices=yes|no  # isolate /dev except some commons (only includes pseudo-devices)
+        # useful when service doesn't need access to raw devices
+
+    JoinsNamespaceOf=  # join namespaces with other service (ex.: they will share same /tmp)
+        # use case: MySQL (and many other) puts it's listening socket to /tmp
+    CapabilityBoundingSet=  # makes use of unix capabilities (root privileges slitted to bits)
+        # limits capabilities the process is allowed to obtain. It doesn't grant any
+        # Example: CapabilityBoundingSet=CAP_SYS_TIME for NTP client
+        # (won't be able to do nothing privileged except set the time)
+    AmbientCapabilities=  # grants capabilities that the process normally wouldn't have started with
+    MountFlags=slave  # no able to change mount table
+
+    InaccessiblePaths=
+    ReadOnlyPaths=
+    ReadWritePaths=
+    BindPaths=
+    ReadOnlyBindPaths=
+
+    StateDirectory=          # /run/foo/
+    CacheDirectory=          # /var/lib/foo/
+    LogsDirectory=           # /var/cache/foo/
+    RuntimeDirectory=        # /var/log/foo/
+    ConfigurationDirectory=  # /etc/foo/
+
+    User=
+    Group=
+    SupplementaryGroups=
+    LimitNPROC=  # for fork() protection
+    RootDirectory=  # a bit like chroot (advanced topic)
+    LimitFSIZE=0  # limit file size the service can create (here: can't create any files)
+    DeviceAllow=/dev/sda5 rwm  # get access to no devices but sda5
+        # DeviceAllow=char-alsa rw  # can access only audio
+    TasksMax=  # against fork bomb (advices); tasks=processes+threads
+        # default: 512
+
+    # Low level stuff
+    MemoryDenyWriteExecute=yes  # disable ability to create executable-writable mappings
+    NoNewPrivileges=yes  # no further uid and gid changes
+    RestrictAddressFamilies=AF_UNIX|AF_INET|AF_INET6|AF_CAN|AF_APPLETALK
+    RestrictSUIDSGID=yes
+    ProtectKernelTunables=yes
+    ProtectHostname=yes
+    ProtectKernelLogs=yes
+    SystemCallArchitecture=native|x86_64|i386|...
+    SystemCallFilter=
+    LockPersonality=yes
+
+    SyscallFilter=@obsolete  # syscall1 | syscall2 | @group
+                             # group ex.: @basic-io
+                             # systemd-analyze syscall-filter @obsolete
+
+    IPAdressAllow=10.20.30.0/24 1.2.3.4
+    IPAdressDeny=*
+    IP{Ingress,Egress}FilterPath=
+
+    CPUQuota, MemoryMax, TasksMax, RuntimeMaxSec.
+    RootDyrectory, RootImage, MountAPIVFS
+    PrivateUsers
+
+Examples:
+
+.. code-block:: sh
+
+    sudo systemd-run -t -p User=lain -p RuntimeDirectory=foo ls -ld /run/foo
+    ls -ld /run/foo  # --> does not exist (cleaned up)
+
+    sudo systemd-run -t -p DynamicUser=true whoami  # --> ... run-u99
+
+    echo -e 'asdf\nasdf' |\
+    sudo systemd-run --pipe -p DynamicUser=1 bash -c 'grep .; whoami' |\
+    sudo systemd-run --pipe -p DynamicUser=1 bash -c 'grep .; whoami' |\
+    sudo systemd-run --pipe -p DynamicUser=1 bash -c 'grep .; whoami'
+    # --->
+    # Running as unit: run-u101.service
+    # Running as unit: run-u103.service
+    # Running as unit: run-u102.service
+    # asdf
+    # asdf
+    # run-u101
+    # run-u103
+    # run-u102
+
+``PrivateNetwork=yes`` is a recommended way to run network services.
+A daemon does not open a socket itself, it receives a socket from manager.
+
+Grade service security:
+
+.. code-block:: sh
+
+    systemd-analyze security systemd-resolved.service

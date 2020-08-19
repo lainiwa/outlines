@@ -1,0 +1,46 @@
+
+Time and Locales
+================
+
+Time
+####
+
+Sources:
+
+* `systemd-timesyncd (Русский) <https://wiki.archlinux.org/index.php/Systemd-timesyncd_(Русский)>`_
+* `Time Synchronization with NTP and systemd <https://feeding.cloud.geek.nz/posts/time-synchronization-with-ntp-and-systemd/>`_
+* `NTP Pool Project <https://www.ntppool.org/zone/ru>`_
+
+Set timezone:
+
+.. code-block:: sh
+
+    timedatectl  # show current setup
+    timedatectl list-timezones
+    sudo timedatectl set-timezone Europe/Moscow
+
+Setup NTP servers (`sudo vim /etc/systemd/timesyncd.conf`):
+
+.. code-block:: ini
+
+    [Time]
+    NTP=0.ru.pool.ntp.org 1.ru.pool.ntp.org 2.ru.pool.ntp.org 3.ru.pool.ntp.org
+    FallbackNTP=ntp.ubuntu.com time.cloudflare.com
+
+Enable NTP:
+
+.. code-block:: sh
+
+    sudo timedatectl set-ntp true
+    sudo systemctl restart systemd-timesyncd.service
+    timedatectl status  # --> System clock synchronized: yes
+
+
+Locales
+#######
+
+.. code-block:: sh
+
+    localectl list-locales
+    localectl status
+    localectl set-locale LANG=en_US.UTF-8

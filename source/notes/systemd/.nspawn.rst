@@ -1,0 +1,22 @@
+
+Systemd-nspawn
+==============
+
+Create debian machine file structure:
+
+.. code-block:: sh
+
+    sudo debootstrap --arch=amd64 jessie /var/lib/machines/container1/
+
+Enter the chroot and set root password:
+
+.. code-block:: sh
+
+    sudo systemd-nspawn -D /var/lib/machines/container1/ --machine test_container
+    passwd
+
+Leave with ``^[[[``.
+
+.. code-block:: sh
+
+    sudo machinectl start container1

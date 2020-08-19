@@ -1,0 +1,30 @@
+
+Targets and Runlevels
+=====================
+
+Sysv runlevels vs systemd targets::
+
+    Targets Units                        Runlevel Description
+    runlevel0.target, poweroff.target    Shut down and power off the system.
+    runlevel1.target, rescue.target      Set up a rescue shell.
+    runlevel2.target, multi-user.target  Set up a non-graphical multi-user system.
+    runlevel3.target, multi-user.target  Set up a non-graphical multi-user system.
+    runlevel4.target, multi-user.target  Set up a non-graphical multi-user system.
+    runlevel5.target, graphical.target   Set up a graphical multi-user system.
+    runlevel6.target, reboot.target      Shut down and reboot the system.
+
+Default runlevel:
+
+.. code-block:: sh
+
+    systemctl get-default  # --> graphical.target
+    sudo systemctl set-default multi-user.target
+
+Another option is adding `systemd.unit=multi-user.target` or similar
+to `kernel parameters <https://wiki.archlinux.org/index.php/Kernel_parameters_(Русский)>`_ of the bootloader.
+
+Switch to certain runlevel:
+
+.. code-block:: sh
+
+    sudo systemctl isolate multi-user.target  # go to text mode

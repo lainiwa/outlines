@@ -1,0 +1,95 @@
+
+Networking
+==========
+
+By default Ubuntu uses `netplan <https://netplan.io/>`_
+``/etc/netplan/*.yaml`` files for configuration,
+which uses systemd-networkd as a backend
+(NetworkManager is another option).
+
+
+Hostaname
+#########
+
+Show:
+
+.. code-block:: sh
+
+    hostname  # --> u-navi
+    hostnamectl  # show names and some server info
+
+Set:
+
+.. code-block:: sh
+
+    echo u-navi | sudo tee /etc/hostname  # Would not last after reboot
+    sudo hostnamectl set-hostname u-navi  # The right way
+
+
+Substitute netplan with plain networkd
+######################################
+
+Source: `Disable netplan.io and use native systemd-networkd on ubuntu 18.04 <https://renediepstraten.nl/?p=51>`_.
+
+Remove netplan and enable networkd:
+
+.. code-block:: sh
+
+    sudo apt remove netplan
+    sudo systemctl enable systemd-networkd
+
+Create `/etc/systemd/network/99-wildcard.network`:
+
+.. code-block:: ini
+
+    [Match]
+    Name=en*
+
+    [Network]
+    DHCP=ipv4
+    #DHCP=yes
+    #IPv6AcceptRA=yes
+
+Edit systemd-networkd with the following to enable debug logging:
+
+.. code-block:: ini
+
+    [Service]
+    Environment=SYSTEMD_LOG_LEVEL=debug
+
+Reload the service and watch it.
+
+Reboot.
+
+Check:
+
+.. code-block:: sh
+
+    networkctl  # --> ... ens3 ether routable configured ...
+    networkctl status ens3
+
+
+Wait for `enp0s3` only
+######################
+
+Source: [Задержка при загрузке Ubuntu Server](https://tokmakov.msk.ru/blog/item/494)
+
+Create an override:
+
+.. code-block:: sh
+
+    sudo systemctl edit systemd-networkd-wait-online.service
+
+with the folllowing content:
+
+.. code-block:: ini
+
+    [Service]
+    ExecStart=
+    ExecStart=/lib/systemd/systemd-networkd-wait-online --interface=enp0s3
+
+Reload systemd:
+
+.. code-block:: sh
+
+    sudo systemctl daemon-reload

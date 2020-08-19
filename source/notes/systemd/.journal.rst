@@ -1,0 +1,231 @@
+Journaling
+==========
+
+Sources:
+
+* `Tutorial: Logging with journald <https://sematext.com/blog/journald-logging-tutorial/>`_
+
+- Journald stores data in ``/var/log/journal/`` in binary form (structured logging)
+- The service just writes everything to stdout/stderr and it is being logged by systemd
+- Unlike syslog, journald stores timezones
+- Indexing data (faster lookup than syslog)
+- Access control
+- Automatic log rotation
+
+
+Settings
+########
+* Edit ``/etc/systemd/journald.conf``
+* ``sudo systemctl reload systemd-journald.service``
+
+
+Previous sessions preview
+#########################
+
+Needs to be activated (it is not - by default - on some distros):
+
+.. code-block:: ini
+    :caption: /etc/systemd/journald.conf
+
+    [Journal]
+    Storage=persistent
+
+
+(or ``Storage=auto`` and create ``/var/run/journal`` directory).
+
+List previous boots (sessions):
+
+.. code-block:: sh
+
+    journalctl --list-boots
+
+
+Show log for certain boot:
+
+.. code-block:: sh
+
+    journalctl -b 0
+    # or...
+    journalctl -b 323000d9802642a098d47ae1b7384424
+
+
+CLI
+###
+
+Basic examples:
+
+.. code-block:: sh
+
+    journalctl     # all logs
+    journalctl -b  # all logs since last boot
+    journalctl -r  # list entries in reverse order
+
+Filtering examples:
+
+.. code-block:: sh
+
+    # Filter by date
+    journalctl --since "2015-07-20 17:15:00"
+    journalctl ---since yesterday
+    journalctl --since 09:00 --until now
+    journalctl --since 10:00 --until "1 hour ago"
+    # Filter by service
+    journalctl _SYSTEMD_UNIT=nginx.service
+    journalctl -u nginx.service  # shorter version
+    journalctl -u nginx.service --since yesterday
+    journalctl -u nginx.service -u php-fpm.service --since today
+    # Filter by process, user and group
+    journalctl _PID=381
+    journalctl _UID=33
+    # FIlter by executable's path
+    journalctl _EXE=/usr/bin/sudo
+    journalctl -F _UID  # List all possible values for field _UID
+    journalctl -F _GUID
+    # Other possible fields
+    man systemd.journal-fields
+    # Filter by path
+    journalctl /usr/bin/docker
+    # Kernel messages
+    journalctl -k
+    journalctl --dmesg
+    journalctl -k -b -2  # Kernel messages for certain previous boot
+    # Recent events
+    journalctl -n     # Latest 10 events
+    journalctl -n 20  # Latest 20 events
+    # Grep through logs
+    journalctl --grep 'Network Name Lookups'
+
+
+Dumping everything to terminal:
+.. code-block:: sh
+
+journalctl --no-pager
+# or...
+SYSTEMD_PAGER=cat journalctl
+
+
+Follow mode:
+
+.. code-block:: sh
+
+    journalctl -f
+
+
+Formatting/exporting/outputtig
+##############################
+
+Possible output formats:
+
+* ``cat`` -- only messages
+* ``export`` -- binary format (for export or backup);
+* ``short`` -- syslog format;
+* ``short-iso`` -- syslog format with ISO 8601 timestamps;
+* ``short-monotonic`` -- syslog format with monotonic timestamps;
+* ``short-precise`` -- syslog format with precise (milliseconds) timestamps;
+* ``verbose`` -- most verbose format (with all fields).
+
+Example:
+
+.. code-block:: sh
+
+    journalctl -u nginx.service -o json-pretty
+
+
+Log rotation
+############
+
+.. code-block:: sh
+
+    # Show disk space used  by logs
+    journalctl --disk-usage
+    # Rotate
+    sudo journalctl --vacuum-size=1G
+    sudo journalctl --vacuum-time=1years
+
+Set rotation through ``/еtc/systemd/journald.conf`` file:
+
+* ``SystemMaxUse=`` max logs total size;
+* ``SystemKeepFree=`` keep at least this much free space;
+* ``SystemMaxFileSize=`` max size of log file;
+* ``RuntimeMaxUse=`` max logs total size in ``/run``;
+* ``RuntimeKeepFree=`` keep at least this much free space in ``/run``;
+* ``RuntimeMaxFileSize=`` max size of log file in ``/run``.
+
+
+Containers
+##########
+
+Docker
+------
+
+.. code-block:: sh
+
+    docker run --rm --name my-pg \
+               -e POSTGRES_PASSWORD=123 \
+               --log-driver=journald \
+               -d postgres
+
+    journalctl CONTAINER_NAME=my-pg --all
+
+To log by default:
+
+.. code-block:: ini
+    :caption: /etc/docker/daemon.json
+
+    {
+     "log-driver": "journald"
+    }
+
+.. code-block:: sh
+
+    sudo systemctl restart docker
+
+Systemd-nspawn
+--------------
+
+.. code-block:: sh
+
+    journalctl --machine $MACHINE_NAME
+
+
+Centralized logs storage
+########################
+
+Systemd uses following components for this task (not present on some distros):
+
+* systemd-journal-remote
+* systemd-journal-upload
+* systemd-journal-gatewayd
+
+
+`Snoopy <https://github.com/a2o/snoopy>`_
+#########################################
+
+Used:
+
+* `Логирование вводимых команд в Linux <https://www.ylsoftware.com/news/722>`_
+
+Install with ``sudo apt install snoopy`` and choose to insert line into ``/etc/ld.so.preload``.
+This setting can be changed with ``sudo dpkg-reconfigure snoopy``.
+
+
+**Note:** it made my browsers (chromium, firefox) to misbehave:
+
+.. code-block::
+    :caption: /etc/ld.so.preload
+
+    /lib/x86_64-linux-gnu/libsnoopy.so
+
+Settings are stored at ``/etc/snoopy.ini``.
+Drop excessive information from logs by configuring snoopy with following configuration:
+
+.. code-block:: ini
+
+    [snoopy]
+    ; Log line format
+    message_format = "[login: %{login}, %{tty_username} as %{eusername}]: %{cmdline}"
+
+    ; Events filter
+    filter_chain = "only_tty"
+
+Look log with ``journalctl -xe -t snoopy``.

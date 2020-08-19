@@ -1,0 +1,84 @@
+
+Timer units
+===========
+
+Source: `Arch wiki systemd/Timers <https://wiki.archlinux.org/index.php/Systemd/Timers>`_
+
+Check with:
+
+.. code-block:: sh
+
+    systemctl list-timers [--all]
+    man 5 systemd.timer
+
+Timer units:
+
+* Realtime: much as cron; activate on calendar event (``OnCalendar=``)
+* Monotonic: activate after a time span relative to a starting point
+  (have format ``On[Type]Sec=``)
+
+A timer which will start 15 minutes after boot
+and again every week while the system is running
+(``/etc/systemd/system/foo.timer``):
+
+.. code-block:: ini
+
+    [Unit]
+    Description=Run foo weekly and on boot
+
+    [Timer]
+    OnBootSec=15min
+    OnUnitActiveSec=1w
+
+    [Install]
+    WantedBy=timers.target
+
+Starts once a week (at 12:00am on Monday).
+When activated, it triggers the service immediately
+if it missed the last start time (option ``Persistent=true``),
+for example due to the system being powered off:
+
+.. code-block:: ini
+
+    ...
+    [Timer]
+    OnCalendar=weekly
+    Persistent=true
+    ...
+
+``OnCalendar`` uses the format:
+
+.. code-block:: sh
+
+    DayOfWeek Year-Month-Day Hour:Minute:Second
+
+Ex.:
+
+.. code-block:: sh
+
+    OnCalendar=Mon,Tue *-*-01..04 12:00:00
+    # or
+    OnCalendar=Mon..Fri 22:30
+    OnCalendar=Sat,Sun 20:00
+
+Run ``systemd-analyze calendar`` to check expression validity:
+
+.. code-block:: sh
+
+    systemd-analyze calendar weekly  # ``daily``, ``weekly`` etc refer to specific time
+    systemd-analyze calendar "Mon,Tue *-*-01..04 12:00:00"
+
+Use ``RandomizedDelaySec`` in ``[Timer]`` section to avoid multiple (for example, weekly)
+services start simultaneously.
+
+Use ``AccuracySec=1us`` to the ``[Timer]```` section,
+to avoid the inaccuracy of the ``1m`` by default.
+
+Transient .timer units:
+
+.. code-block:: sh
+
+    # Touch file after 30sec
+    sudo systemd-run --on-active=30 /bin/touch /tmp/foo
+    # Can also be combined with existing unit
+    sudo systemd-run --on-active="12h 30m" --unit someunit.service

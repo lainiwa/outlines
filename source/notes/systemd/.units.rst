@@ -1,0 +1,133 @@
+
+Unit files
+==========
+
+Edit Systemd Files
+##################
+
+.. code-block:: sh
+
+    # Change file in-place
+    sudo vim /etc/systemd/system/ufw.service
+    # Put only section and options that should be changed
+    sudo systemctl edit ufw.service
+    # Pull a new copy of entire file
+    sudo systemctl edit --full ufw.service
+
+Drop changes:
+
+.. code-block:: sh
+
+    sudo systemctl revert ufw.service
+
+Show all files related to service:
+
+.. code-block:: sh
+
+    systemctl cat ufw.service
+
+Example: changing ``ExecStart``:
+
+.. code-block:: ini
+
+    [Service]
+    ExecStart=
+    ExecStart=new cmd
+
+Note: all commands that take multiple commands need to be cleaned up as shown.
+
+
+Unit Files
+##########
+
+List paths being looked up:
+
+.. code-block:: sh
+
+    systemctl show --property=UnitPath
+
+main ones being:
+
+* ``/usr/lib/systemd/system/``: units by packages
+* ``/etc/systemd/system/``: units by system administrator
+
+Unit file example:
+
+.. code-block:: ini
+
+    [Unit]
+    Description=OpenBSD Secure Shell server
+    # Documentation=man:sshd(8)  # or https:://...
+    # Before=
+    After=network.target auditd.service
+    ConditionPathExists=!/etc/ssh/sshd_not_to_be_run
+
+    [Service]
+    # User=
+    # Environment=VAR1=1 VAR2=2 VAR3=3
+    EnvironmentFile=-/etc/default/ssh
+    ExecStartPre=/usr/sbin/sshd -t
+    ExecStart=/usr/sbin/sshd -D $SSHD_OPTS
+    ExecReload=/usr/sbin/sshd -t
+    ExecReload=/bin/kill -HUP $MAINPID
+    KillMode=process
+    Restart=on-failure
+    RestartPreventExitStatus=255
+    Type=notify
+    RuntimeDirectory=sshd
+    RuntimeDirectoryMode=0755
+    # PrivateNetwork=yes
+    # PrivateTmp=yes
+
+    [Install]
+    WantedBy=multi-user.target
+    # RequiredBy=  # if service fails, target would not boot
+    Alias=sshd.service
+
+After applying changes or creating new unit:
+
+.. code-block:: sh
+
+    sudo systemctl daemon-reload
+
+
+Instances
+#########
+
+If ``syncthing@.service`` then it is not callable by itself, but you should call it as,
+for example, ``syncthing@lain.service``.
+Then ``%i`` in the unit file will be substituted with ``lain``:
+
+.. code-block:: ini
+
+    ...
+    [Service]
+    User=%i
+    ExecStart=/usr/bin/syncthing -no-browser -no-restart -logflags=0
+    ...
+
+
+Dependencies
+############
+
+.. code-block:: sh
+
+    systemctl list-dependencies sshd.service
+    systemctl list-dependencies sshd.service --all  # list recursively
+    systemctl list-dependencies sshd.service --reverse  # show who depends on it
+
+
+Unit Properties
+###############
+
+Show list of properties:
+
+.. code-block:: sh
+
+    systemctl show sshd.service
+
+Display a single property:
+
+.. code-block:: sh
+
+    systemctl show sshd.service -p Conflicts

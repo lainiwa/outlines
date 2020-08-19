@@ -1,0 +1,43 @@
+
+Static files (the ones that a launched dynamically)
+===================================================
+
+Example of ``micro-httpd``:
+
+.. code-block:: ini
+    :caption: /lib/systemd/system/micro-httpd@.service
+
+    [Unit]
+    Description=micro-httpd
+    Documentation=man:micro-httpd(8)
+
+    [Service]
+    User=nobody
+    Group=www-data
+    ExecStart=-/usr/sbin/micro-httpd /var/www/html
+    StandardInput=socket
+
+.. code-block:: ini
+    :caption: /lib/systemd/system/micro-httpd.socket
+
+    [Unit]
+    Description=micro-httpd
+    Documentation=man:micro-httpd(8)
+
+    [Socket]
+    ListenStream=0.0.0.0:80
+    Accept=true
+
+    [Install]
+    WantedBy=sockets.target
+
+Two types of socket activation:
+
+1. ``Accept=yes``
+    * a single instance of the service is started for each connection
+    * "wait" under inetd/xinetd
+2. ``Accept=no``
+    * a single instance of the service is started for each connection
+    * "nowait" under inetd/xinetd
+
+To disable: ``edit --full`` and ``Accept=false`` and ``daemon-reload``.
