@@ -150,3 +150,8 @@ Web Browsers
 * ★ `chromium <http://localhost>`_ []
 * :gh:`qutebrowser <qutebrowser/qutebrowser>` []
 * `lynx <http://localhost>`_ []
+
+Web Browsers
+############
+* :gh:`bitwarden <bitwarden/browser>` []
+* :gh:`KeePassXC <keepassxreboot/keepassxc>` []
