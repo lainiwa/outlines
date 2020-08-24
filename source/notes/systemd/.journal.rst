@@ -97,6 +97,7 @@ Filtering examples:
 
 
 Dumping everything to terminal:
+
 .. code-block:: sh
 
 journalctl --no-pager
