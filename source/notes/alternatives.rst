@@ -131,7 +131,35 @@ Grep through code
 
 Browser Extensions
 ##################
-* ★ :gh:`uBlock <gorhill/uBlock>` [~48k loc JavaScript]
+* ★ :gh:`display-anchors <Rob--W/display-anchors>` []
+* ★ :gh:`tosdr <tosdr/browser-extensions>` []
+* ★ :gh:`Memex <WorldBrain/Memex>` []
+* ★ :gh:`what-hn-says-webext <pinoceniccola/what-hn-says-webext>` []
+* ★ :gh:`bypass-paywalls-chrome <iamadamdev/bypass-paywalls-chrome>` []
+* ★ :gh:`ext-saladict <crimx/ext-saladict>` []
++ URLs Cleanup
+    * ★ :gh:`Neat-URL <Smile4ever/Neat-URL>` []
+    * ★ :gh:`ClearURLs <ClearURLs/Addon>` []
++ Redirect Skipping
+    * ★ :gh:`Redirector <einaregilsson/Redirector>` []
+    * ★ :gh:`webextension-skip-redirect <sblask/webextension-skip-redirect>` []
++ Tab Hibernation
+    * ★ :gh:`auto-tab-discard <rNeomy/auto-tab-discard>` []
+    * :gh:`better-onetab <cnwangjie/better-onetab>` []
+    * :gh:`Dormancy <autonome/Dormancy>` []
++ Hide Trash
+    * ★ :gh:`uBlock <gorhill/uBlock>` [~48k loc JavaScript]
+    * ★ :gh:`uBlacklist <iorate/uBlacklist>` []
+    * :gh:`blocktube <amitbl/blocktube>` []
++ Github
+    * ★ :gh:`CodeFlower <fzaninotto/CodeFlower>` []
+    * :gh:`octotree <ovity/octotree>` []
+    * :gh:`git-history <pomber/git-history>` []
+    * :gh:`refined-github <sindresorhus/refined-github>` []
++ Disabling JavaScript
+    * ★ :gh:`uMatrix <gorhill/uMatrix>` []
+        - ✖ Complicated UI
+    * :gh:`noscript <hackademix/noscript>` []
 
 Screenshoters
 #############
@@ -143,15 +171,17 @@ Screenshoters
 Wallpaper Setters
 #################
 
-Web Browsers
-############
+Internet Browsers
+#################
 * `firefox <http://localhost>`_ []
 * :gh:`brave <brave/brave-browser>` []
 * ★ `chromium <http://localhost>`_ []
 * :gh:`qutebrowser <qutebrowser/qutebrowser>` []
+* `castor <https://sr.ht/~julienxx/Castor/>`_ []
+    - ✔ can browse gemini, gopher and finger
 * `lynx <http://localhost>`_ []
 
-Web Browsers
-############
+Password Managers
+#################
 * :gh:`bitwarden <bitwarden/browser>` []
 * :gh:`KeePassXC <keepassxreboot/keepassxc>` []
