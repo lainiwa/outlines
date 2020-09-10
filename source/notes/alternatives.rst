@@ -15,11 +15,17 @@ Legend:
 Zsh plugin manager
 ##################
 
-I've tried a buch of zsh plugin managers (something like `antigen → antibody → zinit → antibody → zinit → zpm`).
+I've tried a buch of zsh plugin managers
+(something like `antigen → antibody → zinit → antibody → zinit → zpm`).
 
-For most of the time I've used to stick with `zinit`, using it as a sort of ports manager. It can fetch binaries along with completions, man pages etc. It is very complex though, being something of a "systemd of the zsh plugins world".
+For most of the time I've used to stick with `zinit`,
+using it as a sort of ports manager.
+It can fetch binaries along with completions, man pages etc.
+It is very complex though, being something of a "systemd of the zsh plugins world".
 
-I've switched to `zmp` later, as it is extrimely simple, and you can make most of the `zinit`'s functionality (that I've used) with simple wget/curl requests.
+I've switched to `zmp` later, as it is extrimely simple,
+and you can make most of the `zinit`'s functionality (that I've used)
+with just wget/curl requests + jq for parsing.
 
 * :gh:`zinit <zdharma/zinit>` [44k loc C]
     - ✔ Versatile tool, has it's own ports system, thus letting you install non-plugins along with completions and keybindings.
@@ -51,7 +57,7 @@ Dotfiles manager/bootstrapper
 Window Manager
 ##############
 * ★ :gh:`i3 <i3/i3>` [24k loc C]
-    - ✔ Has a drop-in Wayland-compatible replacement (:gh:`sway <swaywm/sway>`). X11 will get:gh: sooner or aer.
+    - ✔ Has a drop-in Wayland-compatible replacement (:gh:`sway <swaywm/sway>`). X11 will get deprecated sooner or later.
     - ✔ Good docs.
     - ✖ Complex. Sway is even bigger.
     - ✖ i3status :gh:`depends <i3/i3status/pull/43>` pulseaudio lbary
@@ -83,12 +89,12 @@ Seems like only `fzf` has decent environment & tools built around it.
     - ✖ No tools integrated
     - ✖ Not fuzzy
 
-
 Terminal emulator
 #################
 
 These two emulator seem to be most viable. `St` is better but source-code-as-a-config doesn't fit my workflow.
 
+* :gh:`alacritty <alacritty/alacritty>` [17.7k loc Rust]
 * ★ `urxvt <https://wiki.archlinux.org/index.php/rxvt-unicode>`_ [40k loc C]
     - ✔ Extendable with Perl plugins
     - ✖ Complex. Relies on Perl
@@ -98,14 +104,12 @@ These two emulator seem to be most viable. `St` is better but source-code-as-a-c
     - ✖ Having terminal multiplexer is essential.
     - ✖ Settings in source code.
 
-
 Shell
 #####
 * `bash <https://www.gnu.org/software/bash/>`_ [107k loc C]
 * ★ `zsh <http://www.zsh.org/>`_ [102k loc C]
 * :gh:`mksh <MirBSD/mksh>` [19k loc C]
 * :gh:`rc <rakitzis/rc>` [6.5k loc C]
-
 
 File Manager
 ############
@@ -116,7 +120,6 @@ The one thing I think file manager is useful for is picking files based on previ
 * :gh:`lf <gokcehan/lf>` [7k loc Go]
 * ★ :gh:`nnn <jarun/nnn>` [3.8k loc C]
 * :gh:`fff <dylanaraps/fff>` [674 loc Bash]
-
 
 Package Manager
 ###############
@@ -132,17 +135,24 @@ Grep through code
 Browser Extensions
 ##################
 * ★ :gh:`display-anchors <Rob--W/display-anchors>` []
-* ★ :gh:`tosdr <tosdr/browser-extensions>` []
 * ★ :gh:`Memex <WorldBrain/Memex>` []
 * ★ :gh:`what-hn-says-webext <pinoceniccola/what-hn-says-webext>` []
 * ★ :gh:`bypass-paywalls-chrome <iamadamdev/bypass-paywalls-chrome>` []
-* ★ :gh:`ext-saladict <crimx/ext-saladict>` []
+* :gh:`tosdr <tosdr/browser-extensions>` []
+* :gh:`ext-saladict <crimx/ext-saladict>` []
+* :gh:`mozilla/multi-account-containers` []
+* `decentraleyes <https://git.synz.io/Synzvato/decentraleyes>`_
++ Tab Management
+    * :gh:`Simple Tab Groups drive4ik/simple-tab-groups` []
+    * :gh:`Vertical Tabs Reloaded Croydon/vertical-tabs-reloaded` []
+    * :gh:`Tab Manager v2 xcv58/Tab-Manager-v2` []
+    * :gh:`Tree Style Tab piroor/treestyletab` []
 + URLs Cleanup
     * ★ :gh:`Neat-URL <Smile4ever/Neat-URL>` []
     * ★ :gh:`ClearURLs <ClearURLs/Addon>` []
 + Redirect Skipping
     * ★ :gh:`Redirector <einaregilsson/Redirector>` []
-    * ★ :gh:`webextension-skip-redirect <sblask/webextension-skip-redirect>` []
+    * ★ :gh:`Skip Redirect <sblask/webextension-skip-redirect>` []
 + Tab Hibernation
     * ★ :gh:`auto-tab-discard <rNeomy/auto-tab-discard>` []
     * :gh:`better-onetab <cnwangjie/better-onetab>` []
@@ -173,13 +183,38 @@ Wallpaper Setters
 
 Internet Browsers
 #################
-* `firefox <http://localhost>`_ []
+* ★ `firefox <http://localhost>`_ []
 * :gh:`brave <brave/brave-browser>` []
 * ★ `chromium <http://localhost>`_ []
 * :gh:`qutebrowser <qutebrowser/qutebrowser>` []
 * `castor <https://sr.ht/~julienxx/Castor/>`_ []
     - ✔ can browse gemini, gopher and finger
 * `lynx <http://localhost>`_ []
+
+Textual diff
+############
+* :gh:`delta <dandavison/delta>` [11.1k loc Rust]
+* :gh:`diffr <mookid/diffr>` [2.7k loc Rust]
+* :gh:`diff-so-fancy <so-fancy/diff-so-fancy>` [1.9k loc Perl]
+* :gh:`icdiff <jeffkaufman/icdiff>` [560 loc Python]
+
+Image diff
+##########
+* :gh:`git-diff-image <ewanmellor/git-diff-image>` [264 loc Bash]
+* :gh:`spaceman-diff <holman/spaceman-diff>` [130 loc Sh]
+
+Directories jumper
+##################
+* :gh:`z.lua <skywind3000/z.lua>` [2.4k loc Lua]
+* ★ :gh:`zsh-z <agkozak/zsh-z>` [416 loc Zsh]
+* :gh:`fasd <clvv/fasd>` [513 loc Sh]
+* :gh:`rupa/z <rupa/z>` [191 loc Bash]
+
+Sandboxing
+##########
+* :gh:`firejail <netblue30/firejail>` [30k loc C]
+* :gh:`nsjail <google/nsjail>` [4.4k loc C++]
+* :gh:`bubblewrap <containers/bubblewrap>` [3.2k loc C]
 
 Password Managers
 #################
