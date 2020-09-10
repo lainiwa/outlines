@@ -5,6 +5,8 @@ Systemd
 
 Todo/To read:
 
+* https://habr.com/ru/company/redhatrussia/blog/468931/
+* https://telegra.ph/Haker---Poleznyj-demon-Kak-perestat-boyatsya-systemd-i-sdelat-svoj-servis-dlya-Linux-12-10
 * https://wiki.archlinux.org/index.php/Systemd#See_also
 * https://wiki.archlinux.org/index.php/Systemd#Mounting
 * https://wiki.archlinux.org/index.php/Systemd#Enable_installed_units_by_default
