@@ -1,0 +1,46 @@
+
+Cgroups
+=======
+
+Sources:
+
+* `Борьба за ресурсы, часть 2: Играемся с настройками Cgroups <https://habr.com/ru/post/424367>`_
+
+
+Top and ls
+##########
+
+List cgroups tree list:
+
+.. code-block:: sh
+
+    systemd-cgls --no-pager
+
+Topmost cgroups: ``user.slice`` (50% CPU) and ``system.slice`` (50% CPU)
+(as ``machine.slice`` is inactive).
+
+``user.slice`` consists of ``user-1000.slice`` and `` user-0.slice``.
+
+Resources use in real-time:
+
+.. code-block:: sh
+
+    systemd-cgtop
+
+
+[Unit]
+Description=The foo service that does nothing useful
+After=remote-fs.target nss-lookup.target
+
+[Service]
+ExecStart=/usr/bin/sha1sum /dev/zero
+ExecStop=/bin/kill -WINCH ${MAINPID}
+
+[Install]
+WantendBy=multi-user.target
+
+
+systemctl set-property --runtime name property=value
+systemctl set-property httpd.service CPUShares=600 MemoryLimit=500M
+systemctl set-property --runtime httpd.service CPUShares=600 MemoryLimit=500M
+
