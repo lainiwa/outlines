@@ -161,6 +161,7 @@ Browser Extensions
     * ★ :gh:`uBlock <gorhill/uBlock>` [~48k loc JavaScript]
     * ★ :gh:`uBlacklist <iorate/uBlacklist>` []
     * :gh:`blocktube <amitbl/blocktube>` []
+    * :gh:`blocktube <ajayyy/SponsorBlock>` []
 + Github
     * ★ :gh:`CodeFlower <fzaninotto/CodeFlower>` []
     * :gh:`octotree <ovity/octotree>` []
