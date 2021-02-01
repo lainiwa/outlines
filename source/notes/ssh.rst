@@ -39,15 +39,24 @@ Example of how a service can know your github name by your ssh key:
 Generate Keys and Install
 =========================
 
+Sources:
+
+* `SSH algos comparison <https://goteleport.com/blog/comparing-ssh-keys/>`_
+
+Use either RSA-4096 for legacy and AWS
+or Ed25519 (EdDSA) for speed.
+Avoid ECDSA/DSA though.
+
 .. code-block:: sh
 
     # Generate key
-    ssh-keygen -b 4096 \
-               -t [dsa|ecdsa|ed25519|rsa] \
+    ssh-keygen [-b 4096 -t rsa | -t ed25519] \
                -f ~/.ssh/id_rsa_aws_$(date +%Y-%m-%d) \
                -C "Login to production cluster at xyz corp"
     # Install key
     ssh-copy-id [-i ~/.ssh/your-key] user@host
+    # or
+    # cat ~/.ssh/id_rsa.pub | ssh user@host 'cat >> .ssh/authorized_keys && echo "Key copied"'
     # Test
     ssh -i ~/.ssh/your-key user@host
 
