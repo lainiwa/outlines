@@ -1,0 +1,26 @@
+
+Blame and Bisect
+================
+
+.. code-block:: sh
+
+    git blame -L 12,22 products.php
+    git blame -L 12,22 -C products.php
+
+Bisect
+------
+
+.. code-block:: sh
+
+    # Start
+    # from
+    git bisect start
+    git bisect bad
+    # to
+    git bisect good HEAD~10
+    # ... check if the state
+    # and set it:
+    git bisect [good|bad]
+
+    # To initial state
+    git bisect reset

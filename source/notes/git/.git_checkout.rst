@@ -1,0 +1,50 @@
+
+Checkout
+========
+* `checkout vs switch/restore table <https://tanzu.vmware.com/developer/blog/git-switch-and-restore-an-improved-user-experience/#a-rosetta-stone>`__
+* git checkout **always** copies items out of the index into the worktree.
+
+Switch
+------
+
+.. image:: imgs/checkout-branch.png
+  :width: 49%
+  :target: https://marklodato.github.io/visual-git-guide/index-en.html#checkout
+
+.. image:: imgs/checkout-detached.png
+  :width: 49%
+  :target: https://marklodato.github.io/visual-git-guide/index-en.html#checkout
+
+.. image:: imgs/checkout-b-detached.png
+  :width: 49%
+  :target: https://marklodato.github.io/visual-git-guide/index-en.html#checkout
+
+.. code-block:: sh
+
+    git switch featureX    == git checkout featureX
+    git switch -d 5bb9e4c  == git checkout 5bb9e4c
+    git switch -C featureX == git checkout -b featureX
+    git switch -           == git checkout -
+                              git checkout @{-1}
+
+Restore
+-------
+
+.. image:: imgs/checkout-files.png
+  :width: 49%
+  :target: https://marklodato.github.io/visual-git-guide/index-en.html#checkout
+
+.. code-block:: sh
+
+    git restore fileA.txt                      == git checkout fileA.txt
+    git restore [-s|--source] <tree> fileA.txt == git checkout <tree> fileA.txt
+
+    git restore one.txt two.txt  # Mention multiple files
+    git restore .                # Discard all local changes
+    git restore *.rb             # Wildcard option
+
+    git restore [-W|--worktree] [-S|--staged]
+                      ^
+                      \------ default choice
+
+    git restore [-p|--patch] fileA.txt

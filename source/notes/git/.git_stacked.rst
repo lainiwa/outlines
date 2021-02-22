@@ -1,0 +1,6 @@
+
+Stacked Git
+===========
+* https://stacked-git.github.io/
+* https://ru.bmstu.wiki/Stacked_Git
+* http://events17.linuxfoundation.org/sites/events/files/slides/An Introduction to Stacked Git.pdf

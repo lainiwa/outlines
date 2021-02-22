@@ -1,0 +1,27 @@
+
+Tag
+===
+* `Atlassian: git tag <https://www.atlassian.com/ru/git/tutorials/inspecting-a-repository/git-tag>`_
+
+.. code-block:: sh
+
+    # Create lighter tags (please don't)
+    git tag v1.4-lw
+
+    # Create annotated tags
+    git tag -a v1.4
+    git tag -a v1.4 -m "my version 1.4"
+    git tag -a v1.2 15027957951b64cf874c3557a0f3547bd83b3ff6
+    # Reassign a tag
+    git tag -a -f v1.4 15027957951b64cf874c3557a0f3547bd83b3ff6
+
+    # List tags
+    git tag
+    git tag -l *-rc*
+
+    # Push tags
+    git push origin v1.4
+    git push --tags
+
+    # Delete tag
+     git tag -d v1

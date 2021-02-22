@@ -1,0 +1,13 @@
+
+Revert
+======
+
+.. code-block:: sh
+    # Revert multiple commits at once
+    git revert --no-commit commit-id-5
+    git revert --no-commit commit-id-4
+    git revert --no-commit commit-id-3
+    git revert --no-commit commit-id-2
+    git commit -m "The commit message"
+
+    git revert OLDER_COMMIT^..NEWER_COMMIT

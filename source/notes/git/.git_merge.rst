@@ -1,0 +1,16 @@
+
+Merge
+=====
+
+.. code-block:: sh
+
+    git merge feature master == git checkout feature && git merge master
+
+.. image:: imgs/git-merge-fast-forward.png
+  :width: 49%
+  :target: https://dev.to/neshaz/how-to-use-git-merge-the-correctway-25pd#fast-forward-merge
+
+
+.. image:: imgs/git-merge-three-way-merge.png
+  :width: 49%
+  :target: https://dev.to/neshaz/how-to-use-git-merge-the-correctway-25pd#threeway-merge

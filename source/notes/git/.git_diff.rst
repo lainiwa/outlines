@@ -1,0 +1,21 @@
+
+Diff
+====
+
+.. image:: imgs/diff.png
+  :width: 600
+  :target: https://marklodato.github.io/visual-git-guide/index-en.html#diff
+
+.. code-block:: sh
+
+    # Working Directory vs Stage
+    git diff
+    # Working Directory vs Tree
+    git diff ${tree}
+    # Stage vs Tree
+    git diff --cached ${tree:-HEAD}
+    # Tree vs Tree
+    git diff ${tree1} ${tree2}
+
+    # ... for a file
+    git diff ... -- <path>

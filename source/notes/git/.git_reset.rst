@@ -1,0 +1,61 @@
+
+Reset
+=====
+* https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_summary_8
+
+Reset current HEAD to the specified state
+
+.. .. image:: imgs/reset-commit.png
+..   :width: 49%
+..   :target: https://marklodato.github.io/visual-git-guide/index-ru.html#reset
+
+.. .. image:: imgs/reset.png
+..   :width: 49%
+..   :target: https://marklodato.github.io/visual-git-guide/index-ru.html#reset
+
+.. .. image:: imgs/reset-files.png
+..   :width: 49%
+..   :target: https://marklodato.github.io/visual-git-guide/index-ru.html#reset
+
+.. image:: imgs/reset-soft.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_step_1_move_head
+
+.. image:: imgs/reset-mixed.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_step_2_updating_the_index_mixed
+
+.. image:: imgs/reset-hard.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_step_3_updating_the_working_directory_hard
+
+.. image:: imgs/reset-path1.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_reset_with_a_path
+
+.. image:: imgs/reset-path3.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_reset_with_a_path
+
+.. image:: imgs/reset-checkout.png
+  :width: 49%
+  :target: https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_without_paths
+
+=============================  ====  =====  =======  ========
+Command                        HEAD  Index  Workdir  WD Safe?
+=============================  ====  =====  =======  ========
+**Commit Level**
+``reset --soft    [commit]``   REF   NO     NO       YES
+``reset [--mixed] [commit]``   REF   YES    NO       YES
+``reset --hard    [commit]``   REF   YES    YES      NO
+``checkout <commit>``          HEAD  YES    YES      YES
+**File Level**
+``reset [commit] <paths>``     NO    YES    NO       YES
+``checkout [commit] <paths>``  NO    YES    YES      NO
+=============================  ====  =====  =======  ========
+
+::
+
+    Стадия 1. git reset --soft   Обновление HEAD
+    Стадия 2. git reset --mixed  Обновление индекса
+    Стадия 3. git reset --hard   Обновление рабочей директории

@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+set -o errexit  # exit on fail
+set -o pipefail # catch errors in pipelines
+set -o nounset  # exit on undeclared variable
+set -o xtrace    # trace execution
+
+
+# A
+git init
+touch README.md
+git add README.md && git commit -m "add README.md"
+
+# B
+git flow init \
+    --feature feature \
+    --bugfix  bugfix  \
+    --release release \
+    --hotfix  hotfix  \
+    --support support \
+    --tag     v       \
+    --defaults
+touch fileA.txt
+git add fileA.txt && git commit -m "add fileA.txt"
+
+# C
+git flow feature start 1
+echo feature 1 wip > fileA.txt
+git add fileA.txt && git commit -m "feature 1 wip"
+
+# D
+echo feature 1 with 2 bugs > fileA.txt
+git add fileA.txt && git commit -m "add feature 1"
+
+# E
+GIT_EDITOR=true \
+    git flow feature finish --no-ff
+
+# F
+git flow feature start 2
+echo feature 2 wip >> fileA.txt
+git add fileA.txt && git commit -m "feature 2 wip"
+
+# G
+git flow release start 1
+echo feature 1 with 1 bug > fileA.txt
+git add fileA.txt && git commit -m "fix feature 1 bug X"
+
+# H
+git checkout master
+git merge release1 --no-ff --no-edit
+git tag -a v1.00 -m "v1.00"
+
+# I
+git checkout develop
+git merge release1 --no-ff --no-edit
+git branch -d release1
+
+# F1
+git flow feature rebase 2 || true
+echo feature 1 with 1 bug >  fileA.txt
+echo feature 2 wip        >> fileA.txt
+git add fileA.txt && git rebase --continue
+
+# K
+git flow hotfix start 1
+echo feature 1 > fileA.txt
+git add fileA.txt && git commit -m "fix feature 1 bug Y"
+
+# L
+git checkout master
+git merge hotfix1 --no-ff --no-edit
+git tag -a v1.01 -m "v1.01"
+
+# M
+git checkout develop
+git merge hotfix1 --no-ff --no-edit
+git branch -d hotfix1
+
+# F2
+git flow feature rebase 2 || true
+echo feature 1     >  fileA.txt
+echo feature 2 wip >> fileA.txt
+git add fileA.txt && git rebase --continue

@@ -1,0 +1,155 @@
+
+==========
+Git Basics
+==========
+
+* Repo: commits + HEAD + branches + tags
+* Index: staging area
+* Working tree: ``.git``'s parent directory
+* Commit: a snapshot of working tree; new commit becomes HEAD's child
+* Branch: a name for commit; also called reference
+* Tag: also a name for commit, except it always names the same commit and can have description text
+* Master: just a branch
+* HEAD: is what is currently checked out. Can be a branch or a commit (a detached HEAD)
+
+.. code-block:: console
+
+    $ mkdir sample; cd sample
+    $ echo 'Hello, world!' > greeting
+
+    $ git hash-object greeting
+    af5626b4a114abcb82d63db7c8082c3c4756e51b
+
+    $ git init
+    $ git add greeting
+    $ git commit -m "Added my greeting"
+
+    $ git cat-file -t af5626b
+    blob
+    $ git cat-file blob af5626b
+    Hello, world!
+
+    $ git ls-tree HEAD
+    100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
+
+    $ git rev-parse HEAD  # <-- decode HEAD alias to actual commit
+    e325b070453ff2359c7e7e2df13ff18fd0b12eb7
+    $ git cat-file -t HEAD
+    commit
+    $ git cat-file commit HEAD  # <-- accepts eather tree hash, or commit hash
+    tree 0563f77d884e4f79ce95117e2d686d7d6e282887
+    author lainiwa <kirrik96@gmail.com> 1590336582 +0300
+    committer lainiwa <kirrik96@gmail.com> 1590336582 +0300
+    Added my greeting
+
+
+Ground Up Approach
+##################
+
+Basic use of git:
+
+.. code-block:: console
+
+    $ git init jax
+    $ cd jax
+    $ echo 'So. The Spear-Danes in days gone by And the kings who ruled them had courage and greatness.' > beowulf.txt
+    $ git add beowulf.txt
+    $ git commit -m "Initial commit"
+
+Let's start from sratch!
+
+Remove stuff:
+
+.. code-block:: console
+
+    $ cd ..
+    $ rm -rf jax
+    $ mkdir jax
+
+Creating a ``.git`` directory:
+
+.. code-block:: console
+
+    $ mkdir -pv jax/.git/{objects,refs/heads}
+    $ echo 'ref: refs/heads/master' > .git/HEAD
+
+Monitoring ``.git`` from the other pane:
+
+.. code-block:: console
+
+    $ cd ~/projects/learn-git/jax
+    $ while :; do clear; tree .git; sleep 1; done
+
+sdasdsad:
+
+.. code-block:: console
+
+    $ echo 'So. The Spear-Danes in days gone by And the kings who ruled them had courage and greatness.' | git hash-object --stdin -w
+    e5c7fb36ba839439ec0408416ce3bf1e2e99851f
+
+    $ git cat-file -p e5c7
+    So. The Spear-Danes in days gone by And the kings who ruled them had courage and greatness.
+    $ git cat-file -t e5c7
+    blob
+    $ git cat-file -s e5c7
+    92
+
+    $ git update-index --add --cacheinfo 100644 e5c7fb36ba839439ec0408416ce3bf1e2e99851f beowulf.txt
+
+    $ git write-tree
+    ad842b948998513642dd1de781b4be1e4a647edc
+    $ git cat-file -t ad84
+    tree
+    $ git cat-file -t ad84
+    100644 blob e5c7fb36ba839439ec0408416ce3bf1e2e99851f    beowulf.txt
+    $ git commit-tree ad84 -m "Initial commit"
+    52a557d2008fda2c9d0055e78facce1e84c9d149
+    $ git status --short
+    AD beowulf.txt
+    $ cat .git/HEAD
+    ref: refs/heads/master
+    $ cat .git/refs/heads/master
+    cat: .git/refs/heads/master: No such file or directory
+    $ git cat-file -p 52a5
+    tree ad842b948998513642dd1de781b4be1e4a647edc
+    author lainiwa <kirrik96@gmail.com> 1590271402 +030
+    committer lainiwa <kirrik96@gmail.com> 1590271402 +0300
+
+    Initial commit
+    $ echo 52a557d2008fda2c9d0055e78facce1e84c9d149 > .git/refs/heads/master
+    $ ls
+    $ git checkout HEAD -- beowulf.txt
+
+
+
+dasdsdd
+
+    cd ~/projects/learn-git/jax
+    while :; do clear; tree .git; sleep 1; done
+
+
+
+
+.. code-block:: bash
+
+    $ ls -aF .git
+    branches/    <-- ссылки на обьекты коммитов
+    config
+    description
+    HEAD         <-- ссылка на актуальное состояние
+    hooks/
+    index        <-- содержимое индекса
+    info/
+    logs/
+    objects/     <-- git-обьекты
+    packed-refs
+    refs/
+
+branches/
+config
+description
+HEAD
+hooks/
+info/
+objects/
+refs/
