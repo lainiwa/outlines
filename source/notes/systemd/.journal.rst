@@ -94,15 +94,17 @@ Filtering examples:
     journalctl -n 20  # Latest 20 events
     # Grep through logs
     journalctl --grep 'Network Name Lookups'
+    # Filter by error level
+    journalctl --priority err
 
 
 Dumping everything to terminal:
 
 .. code-block:: sh
 
-journalctl --no-pager
-# or...
-SYSTEMD_PAGER=cat journalctl
+    journalctl --no-pager
+    # or...
+    SYSTEMD_PAGER=cat journalctl
 
 
 Follow mode:
