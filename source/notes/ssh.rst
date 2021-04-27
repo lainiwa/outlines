@@ -161,7 +161,57 @@ Examples:
 ######
 Attack
 ######
+* `SSH Pentesting Guide <https://community.turgensec.com/ssh-hacking-guide/>`_
+
+Misconfigurations:
+
+* ``#PermitRootLogin yes``
+    - Fix with ``PermitRootLogin no``
+* SFTP ``/usr/bin/false``/``/usr/bin/nologin`` placeholder: can be bypassed by ``ssh user@host /bin/bash``
+    - Restrict in SFTP block: `link <https://community.turgensec.com/ssh-hacking-guide/#SFTP_command_execution>`__
+* Password login enabled
+    - Can be bruteforced by: metasploit, hydra, medusa, ncrack
+
+#####################
+Signing with SSH Keys
+#####################
+* `SSH is the new GPG <https://blog.sigstore.dev/ssh-is-the-new-gpg-74b3c6cc51c0>`_
+
+Sign:
+
+.. code-block:: sh
+
+    ssh-keygen -Y sign -n file -f ~/.ssh/id_rsa.pub <FILE-TO-SIGN>
 
 
+Create allowed signers file:
+
+.. code-block:: sh
+
+    GH_NAME=lainiwa
+    curl -s https://github.com/${GH_NAME}.keys |
+        sed "s/^/${GH_NAME} /" |
+        tee -a allowed_signers.github
+
+Verify:
+
+.. code-block:: sh
+
+    cat git_tutorial.zip |
+        ssh-keygen -Y verify \
+                   -n file \
+                   -f allowed_signers.github \
+                   -I ${GH_NAME} \
+                   -s git_tutorial.zip.sig
 
 
+#######
+Linters
+#######
+* `mozilla/ssh_scan <https://github.com/mozilla/ssh_scan>`_
+
+Examples:
+
+.. code-block:: sh
+
+    docker run -it mozilla/ssh_scan -t 127.0.0.1 |jq
