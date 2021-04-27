@@ -4,39 +4,52 @@ Git
 
 Sources:
 
-* https://marklodato.github.io/visual-git-guide/index-en.html
+* `Visual Git <https://marklodato.github.io/visual-git-guide/index-en.html>`_
+* Cheat Sheets
+    - `Oh Shit Git <https://ohshitgit.com/>`_
+    - `Git and Github Cheatsheet <https://dev.to/zinox9/git-github-cheatsheet-22ok>`_
+* Exercises
+    - https://ohmygit.org/
+* Config
+    - `Limiting Upstream Tracking <https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking>`_
+* `Think Like a Git <http://think-like-a-git.net>`_
+* Git Standards: https://blog.carlmjohnson.net/post/2018/git-gud/
+* http://dept.cs.williams.edu/~freund/cs434/GitLab.html
+* https://dev.to/henryong92/yet-another-git-cheatsheet-4gjk
+* https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
+* https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/
+* https://git-scm.com/book/ru/v2/Ветвление-в-Git-Основы-ветвления-и-слияния
+* https://git-scm.com/docs/gitignore
+* https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
 * https://githowto.com/ru
-* http://think-like-a-git.net
+* https://githowto.com/ru/setup
+* https://habr.com/ru/post/512490/
+* https://xosh.org/explain-git-in-simple-words/
+* https://habr.com/ru/post/519314/
+* https://learngitbranching.js.org/
+* https://martinfowler.com/articles/branching-patterns.html
+* https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout
+* https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking
+* https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
+* https://www.atlassian.com/ru/git/tutorials/merging-vs-rebasing
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * The Problem with Git Flow: https://news.ycombinator.com/item?id=23622071
-* Visual and interactive way to learn Git: https://news.ycombinator.com/item?id=24586436
-* Git Standards: https://blog.carlmjohnson.net/post/2018/git-gud/
-* https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
-* https://ohshitgit.com/
-* https://dev.to/henryong92/yet-another-git-cheatsheet-4gjk
-* https://www.atlassian.com/ru/git/tutorials/merging-vs-rebasing
-* https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout
-* https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
-* https://git-scm.com/book/ru/v2/Ветвление-в-Git-Основы-ветвления-и-слияния
-* http://dept.cs.williams.edu/~freund/cs434/GitLab.html
-* https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/
-* https://git-scm.com/docs/gitignore
-* https://stackoverflow.com/questions/44163307/why-does-git-checkout-branch-file-stage-the-change
-* https://stackoverflow.com/questions/58003030/what-is-the-git-restore-command-and-what-is-the-difference-between-git-restor
-* https://githowto.com/ru/setup
-* https://learngitbranching.js.org/
+* https://people.kernel.org/monsieuricon/what-does-a-pgp-signature-on-a-git-commit-prove
+* https://symflower.com/en/company/blog/2021/git-autofixup/
 
 .. image:: imgs/rant.png
   :width: 49%
   :target: https://youtu.be/4XpnKHJAok8
 
 
+`References make commits reachable <http://think-like-a-git.net/sections/experimenting-with-git.html>`_
+
 Equivalents
 ###########
 
 .. code-block:: sh
 
-    git pull == git fetch && git merge
+    git pull == git fetch && git merge/rebase
 
     git branch -f master HEAD~ == git switch master && git reset --soft HEAD~
 
@@ -168,3 +181,13 @@ Commits
 #######
 * https://www.conventionalcommits.org
 * https://udacity.github.io/git-styleguide/index.html
+
+.git directory
+##############
+* `Storing files in .git <https://www.arp242.net/dot-git.html>`_
+
+::
+    vim .git/todo
+
+    vim .git/draft
+    git commit -eF .git/draft

@@ -3,6 +3,7 @@ Checkout
 ========
 * `checkout vs switch/restore table <https://tanzu.vmware.com/developer/blog/git-switch-and-restore-an-improved-user-experience/#a-rosetta-stone>`__
 * git checkout **always** copies items out of the index into the worktree.
+* https://stackoverflow.com/questions/44163307/why-does-git-checkout-branch-file-stage-the-change
 
 Switch
 ------
@@ -29,6 +30,7 @@ Switch
 
 Restore
 -------
+* https://stackoverflow.com/questions/58003030/what-is-the-git-restore-command-and-what-is-the-difference-between-git-restor
 
 .. image:: imgs/checkout-files.png
   :width: 49%
