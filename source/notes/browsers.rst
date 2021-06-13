@@ -23,3 +23,5 @@ Sources:
 * https://developer.mozilla.org/ru/docs/Mozilla/Projects/WebReplay
 * https://www.zdnet.com/article/firefox-now-shows-what-telemetry-data-its-collecting-about-you/
 * https://www.opennet.ru/opennews/art.shtml?num=52597
+* https://12bytes.org/articles/tech/firefox/firefoxgecko-configuration-guide-for-privacy-and-performance-buffs/
+* https://12bytes.org/articles/tech/firefox/firefox-extensions-my-picks/

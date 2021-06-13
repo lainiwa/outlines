@@ -55,6 +55,7 @@ Todo/To read:
 * Systemd logs
     - https://max-ko.ru/33-logi-v-linux-1.html
     - http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/
+    - https://m.habr.com/ru/post/546368/
 * Systemd-homed
     - https://news.ycombinator.com/item?id=22285538
     - https://hackaday.com/2019/10/16/pack-your-bags-systemd-is-taking-you-to-a-new-home/
