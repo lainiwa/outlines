@@ -4,7 +4,7 @@ Merge
 
 .. code-block:: sh
 
-    git merge feature master == git checkout feature && git merge master
+    git merge master feature == git checkout master && git merge feature
 
 .. image:: imgs/git-merge-fast-forward.png
   :width: 49%
