@@ -1,10 +1,10 @@
 
 Rebase and Cherry Pick
-======================
+######################
 * https://womanonrails.com/git-rebase-onto
 
 Rebase
-------
+======
 
 .. image:: imgs/rebase.png
   :width: 49%
@@ -64,7 +64,7 @@ Rebase
                                                       D---E---H---I (my-branch)
 
 Cherry pick
------------
+===========
 
 .. image:: imgs/cherry-pick.png
   :width: 49%

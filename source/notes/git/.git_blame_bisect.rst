@@ -1,6 +1,6 @@
 
 Blame and Bisect
-================
+################
 
 .. code-block:: sh
 
@@ -8,7 +8,7 @@ Blame and Bisect
     git blame -L 12,22 -C products.php
 
 Bisect
-------
+======
 
 .. code-block:: sh
 

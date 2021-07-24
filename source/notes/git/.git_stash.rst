@@ -1,6 +1,6 @@
 
 Stash
-=====
+#####
 * https://bluecast.tech/blog/git-stash/
 * https://www.atlassian.com/ru/git/tutorials/saving-changes/git-stash
 

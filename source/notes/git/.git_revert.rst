@@ -1,8 +1,9 @@
 
 Revert
-======
+######
 
 .. code-block:: sh
+
     # Revert multiple commits at once
     git revert --no-commit commit-id-5
     git revert --no-commit commit-id-4

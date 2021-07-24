@@ -1,6 +1,6 @@
 
 Diff
-====
+####
 
 .. image:: imgs/diff.png
   :width: 600

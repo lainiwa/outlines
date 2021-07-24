@@ -1,6 +1,6 @@
 
 Tag
-===
+###
 * `Atlassian: git tag <https://www.atlassian.com/ru/git/tutorials/inspecting-a-repository/git-tag>`_
 
 .. code-block:: sh

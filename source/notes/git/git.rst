@@ -89,13 +89,16 @@ Snippets
 .. include:: .git_tag.rst
 .. include:: .git_checkout.rst
 .. include:: .git_reset.rst
+.. include:: .git_revert.rst
 .. include:: .git_rebase_cherry_pick.rst
 .. include:: .git_merge.rst
 .. include:: .git_stash.rst
+.. include:: .git_blame_bisect.rst
+.. include:: .git_conflicts.rst
 .. include:: .git_stacked.rst
 
 Clean
-=====
+#####
 
 .. code-block:: sh
 
@@ -108,7 +111,7 @@ Clean
     git clean ... [-n|--dry-run]
 
 Create and use a local remote
-=============================
+#############################
 
 .. code-block:: sh
 
@@ -119,7 +122,7 @@ Create and use a local remote
     git clone ~/projects/remotes/test.git test1
 
 Sync a fork
-===========
+###########
 
 .. code-block:: sh
 
@@ -130,7 +133,7 @@ Sync a fork
     # <merge/rebase here>
 
 Unfuckup the master branch
-==========================
+##########################
 
 .. code-block:: sh
 
@@ -146,22 +149,24 @@ Practices
 #########
 
 Merge vs Rebase
----------------
+===============
 * `For rebase + merge --no-ff <https://gist.github.com/zerowidth/4684495>`__
 * `Comparison with conclusion <https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/>`__
 * https://randyfay.com/comment/1093
 * `Atlassian comparison <https://www.atlassian.com/git/articles/git-team-workflows-merge-or-rebase>`__
 
 Commit Messages
----------------
+===============
 * https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+* https://www.conventionalcommits.org
+* https://udacity.github.io/git-styleguide/index.html
 
 
 Extensions
 ##########
 
 Git DVC
--------
+=======
 * https://dvc.org/doc
 * too bad https://florianwinkelbauer.com/posts/2020-02-08-git-with-chunks/
 
@@ -176,11 +181,6 @@ Git DVC
 
     dvc remote add -d myremote /tmp/dvcstore
 
-
-Commits
-#######
-* https://www.conventionalcommits.org
-* https://udacity.github.io/git-styleguide/index.html
 
 .git directory
 ##############

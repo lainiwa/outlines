@@ -1,0 +1,98 @@
+
+Conflicts Resolving
+###################
+* `git - ours & theirs <https://nitaym.github.io/ourstheirs/>`_
+* `Who is "us" and who is "them" according to Git? <https://stackoverflow.com/q/21025314>`_
+* `What is the precise meaning of "ours" and "theirs" in git? <https://stackoverflow.com/q/25576415>`_
+
+Ours and Theirs
+===============
+* ``us``/``ours`` - current ``HEAD`` **at the moment of conflict** (not necessarily ``HEAD`` at the moment of writing the command)
+* ``them``/``theirs`` - the other commit
+
+merge (intuitive)
+-----------------
+
+.. code-block:: sh
+
+    # merge feature into master
+    git checkout master
+    git merge feature
+
+    #   us/ours   = HEAD = master
+    # them/theirs =        feature
+
+cherry-pick (intuitive)
+-----------------------
+
+.. code-block:: sh
+
+    # apply A to feature
+    git checkout feature
+    git cherry-pick A
+
+    #   us/ours   = HEAD = feature
+    # them/theirs =        A
+
+rebase (counter-intuitive)
+--------------------------
+
+.. code-block:: sh
+
+    # rebase feature onto latest master
+    git checkout feature
+    git rebase master
+
+1. checkouts ``m2`` (ours), cherry-picks ``f1`` (theirs)
+2. checkouts ``f1'`` (ours), cherry-picks ``f2`` (theirs)
+
+.. code-block:: text
+
+                                                     f2'  <-- feature'
+                                                    /
+    m2  <-- master               master -->  m2--f1'
+    |                                        |
+    m1    f2 <-- feature                     m1
+    |    /                                   |
+    o--f1                                    o
+    |                                        |
+
+revert (sort of intuitive)
+--------------------------
+
+.. code-block:: sh
+
+    xxx
+
+Merging example
+---------------
+
+.. code-block:: sh
+
+    git checkout master
+    git merge feature
+    # conflict
+
+    # resolve manulally. OR:
+    git checkout --ours   codefile.js  # to select the changes done in master
+    git checkout --theirs codefile.js  # to select the changes done in feature
+
+    # continue merge
+    git add codefile.js
+    git merge --continue
+
+Rebasing example
+----------------
+
+.. code-block:: sh
+
+    git checkout feature
+    git rebase master
+    # conflict
+
+    git checkout --ours   codefile.js  # to select the changes done in master
+    git checkout --theirs codefile.js  # to select the changes done in feature
+
+    # continue rebase
+    git add codefile.js
+    git rebase --continue
