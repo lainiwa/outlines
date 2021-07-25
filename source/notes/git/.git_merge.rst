@@ -1,6 +1,7 @@
 
 Merge
 #####
+* https://habr.com/ru/post/195674/
 
 .. code-block:: sh
 

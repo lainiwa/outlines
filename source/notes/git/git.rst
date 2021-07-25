@@ -8,15 +8,22 @@ Sources:
 * Cheat Sheets
     - `Oh Shit Git <https://ohshitgit.com/>`_
     - `Git and Github Cheatsheet <https://dev.to/zinox9/git-github-cheatsheet-22ok>`_
+    - https://bitbucket.org/BitPusher16/dotfiles/src/master/refs/git/git_examples.sh
 * Exercises
     - https://ohmygit.org/
+    - https://learngitbranching.js.org/
 * Config
     - `Limiting Upstream Tracking <https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking>`_
+* Fundamentals
+    - `The Wave/Particle Duality of Git Commits <https://www.thirtythreeforty.net/posts/2020/01/the-wave-particle-duality-of-git-commits/>`_
+    - https://habr.com/ru/company/badoo/blog/163853/
+    - https://www.kenneth-truyers.net/2016/10/13/git-nosql-database/
+* Others, used:
 * `Think Like a Git <http://think-like-a-git.net>`_
 * Git Standards: https://blog.carlmjohnson.net/post/2018/git-gud/
+* https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
 * http://dept.cs.williams.edu/~freund/cs434/GitLab.html
 * https://dev.to/henryong92/yet-another-git-cheatsheet-4gjk
-* https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
 * https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/
 * https://git-scm.com/book/ru/v2/Ветвление-в-Git-Основы-ветвления-и-слияния
 * https://git-scm.com/docs/gitignore
@@ -25,17 +32,12 @@ Sources:
 * https://githowto.com/ru/setup
 * https://habr.com/ru/post/512490/
 * https://xosh.org/explain-git-in-simple-words/
-* https://habr.com/ru/post/519314/
-* https://learngitbranching.js.org/
-* https://martinfowler.com/articles/branching-patterns.html
 * https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout
-* https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking
 * https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
 * https://www.atlassian.com/ru/git/tutorials/merging-vs-rebasing
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
-* The Problem with Git Flow: https://news.ycombinator.com/item?id=23622071
-* https://people.kernel.org/monsieuricon/what-does-a-pgp-signature-on-a-git-commit-prove
 * https://symflower.com/en/company/blog/2021/git-autofixup/
+* https://github.com/nikitavoloboev/knowledge/blob/master/programming/version-control/git.md
 
 .. image:: imgs/rant.png
   :width: 49%
@@ -44,23 +46,15 @@ Sources:
 
 `References make commits reachable <http://think-like-a-git.net/sections/experimenting-with-git.html>`_
 
-Equivalents
-###########
-
-.. code-block:: sh
-
-    git pull == git fetch && git merge/rebase
-
-    git branch -f master HEAD~ == git switch master && git reset --soft HEAD~
-
 
 Snippets
 ########
 
 .. code-block:: sh
 
-    git log --oneline --graph --all
-    gl --all
+    git pull == git fetch && git merge/rebase
+
+    git branch -f master HEAD~ == git switch master && git reset --soft HEAD~
 
     git pull --ff-only && git push
 
@@ -96,6 +90,38 @@ Snippets
 .. include:: .git_blame_bisect.rst
 .. include:: .git_conflicts.rst
 .. include:: .git_stacked.rst
+.. include:: .git_logs.rst
+
+
+Worktree
+########
+* https://gaurav5430.medium.com/git-using-git-worktree-to-run-2-versions-of-the-code-at-the-same-time-1b4586315a6c
+* https://dev.to/yankee/practical-guide-to-git-worktree-58o0
+* https://dzone.com/articles/a-2016-git-retrospective-worktrees
+* https://stackoverflow.com/questions/42457470/storage-efficient-of-a-git-clone
+
+PGP
+###
+* https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html
+* https://people.kernel.org/monsieuricon/what-does-a-pgp-signature-on-a-git-commit-prove
+* https://people.kernel.org/monsieuricon/signed-git-pushes
+* https://github.com/pstadler/keybase-gpg-github
+* https://github.com/jayphelps/git-blame-someone-else
+* https://github.com/lfit/itpol/blob/master/protecting-code-integrity.md
+
+.. code-block:: sh
+
+    # Show info on tag
+    git cat-file -p v5.8-rc7
+        #--> object 92ed30...
+        #--> type commit
+        #--> ...
+    # Show info on tagged commit
+    git cat-file -p 92ed30
+
+    # Verify tag
+    git verify-tag    v5.8-rc7
+    git verify-commit v5.8-rc7
 
 Clean
 #####
@@ -110,8 +136,12 @@ Clean
     #
     git clean ... [-n|--dry-run]
 
+
+Examples
+########
+
 Create and use a local remote
-#############################
+=============================
 
 .. code-block:: sh
 
@@ -122,7 +152,7 @@ Create and use a local remote
     git clone ~/projects/remotes/test.git test1
 
 Sync a fork
-###########
+===========
 
 .. code-block:: sh
 
@@ -133,7 +163,7 @@ Sync a fork
     # <merge/rebase here>
 
 Unfuckup the master branch
-##########################
+==========================
 
 .. code-block:: sh
 
@@ -147,6 +177,9 @@ Unfuckup the master branch
 
 Practices
 #########
+* The Problem with Git Flow: https://news.ycombinator.com/item?id=23622071
+* https://martinfowler.com/articles/branching-patterns.html
+* https://habr.com/ru/post/519314/
 
 Merge vs Rebase
 ===============
@@ -187,6 +220,7 @@ Git DVC
 * `Storing files in .git <https://www.arp242.net/dot-git.html>`_
 
 ::
+
     vim .git/todo
 
     vim .git/draft

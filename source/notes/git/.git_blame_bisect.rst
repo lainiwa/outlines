@@ -2,6 +2,9 @@
 Blame and Bisect
 ################
 
+Blame
+=====
+
 .. code-block:: sh
 
     git blame -L 12,22 products.php
