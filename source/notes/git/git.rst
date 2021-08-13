@@ -9,9 +9,11 @@ Sources:
     - `Oh Shit Git <https://ohshitgit.com/>`_
     - `Git and Github Cheatsheet <https://dev.to/zinox9/git-github-cheatsheet-22ok>`_
     - https://bitbucket.org/BitPusher16/dotfiles/src/master/refs/git/git_examples.sh
+    - https://github.com/k88hudson/git-flight-rules
 * Exercises
     - https://ohmygit.org/
     - https://learngitbranching.js.org/
+    - https://gitexercises.fracz.com
 * Config
     - `Limiting Upstream Tracking <https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking>`_
 * Fundamentals
@@ -55,6 +57,8 @@ Snippets
     git pull == git fetch && git merge/rebase
 
     git branch -f master HEAD~ == git switch master && git reset --soft HEAD~
+
+    git clone -b mybranch --single-branch git://sub.domain.com/repo.git
 
     git pull --ff-only && git push
 
@@ -136,6 +140,19 @@ Clean
     #
     git clean ... [-n|--dry-run]
 
+Reflog
+######
+
+Ignoring
+########
+
+``.gitignore``
+==============
+Shared gitignore.
+
+``.git/info/exclude``
+=====================
+Personal (local) gitignore.
 
 Examples
 ########
@@ -174,7 +191,6 @@ Unfuckup the master branch
     # Delete untracked
     git clean -fd
 
-
 Practices
 #########
 * The Problem with Git Flow: https://news.ycombinator.com/item?id=23622071
@@ -194,6 +210,12 @@ Commit Messages
 * https://www.conventionalcommits.org
 * https://udacity.github.io/git-styleguide/index.html
 
+Submodules
+##########
+* https://www.atlassian.com/git/tutorials/git-subtree
+* https://github.com/ingydotnet/git-subrepo
+* https://abildskov.io/2021/03/28/why-i-hate-submodules/
+* https://chrisjean.com/git-submodules-adding-using-removing-and-updating/
 
 Extensions
 ##########

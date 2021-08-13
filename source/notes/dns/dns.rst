@@ -5,7 +5,7 @@ DNS
 * `Troubleshooting DNS with dig <https://youtu.be/cFmy2wNw9RQ>`_
 * `DNS Root Servers <https://securitytrails.com/blog/dns-root-servers>`_
 * `The Sisyphean Task Of DNS Client Config on Linux <https://tailscale.com/blog/sisyphean-dns-client-linux/>`_
-
+* `Anatomy of a Linux DNS Lookup – Part I <https://zwischenzugs.com/2018/06/08/anatomy-of-a-linux-dns-lookup-part-i/>`_
 
 Vocabulary
 ==========

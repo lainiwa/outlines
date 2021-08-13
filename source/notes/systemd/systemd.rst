@@ -27,6 +27,8 @@ Todo/To read:
 * https://medium.com/@nickodell/sandboxing-nginx-with-systemd-80441923c555
 * https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/configuring-a-remote-logging-solution_configuring-basic-system-settings
 * apt search systemd-coredump
+* https://mgdm.net/weblog/systemd/
+* https://fedoramagazine.org/systemd-resolved-introduction-to-split-dns/
 * Logs
     - https://habr.com/ru/company/selectel/blog/264731/
     - https://www.dmosk.ru/miniinstruktions.php?mini=journald-remote
