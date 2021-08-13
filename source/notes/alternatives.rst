@@ -39,9 +39,11 @@ with just wget/curl requests + jq for parsing.
     - ✔ Simple
     - ✖ No ability to tightly integrate zsh settings with code installing non-plugins.
     - ✖ Go language. Have to grab a binary.
+* ★ :gh:`zgenom <jandamm/zgenom>` [680 loc Zsh]
 * ★ :gh:`zpm <zpm-zsh/zpm>` [650 loc Zsh]
     - ✔ Simple
     - ✔ Pure ZSH
+* ★ :gh:`zshing <zakariaGatter/zshing>` [180 loc Zsh]
 
 
 Dotfiles manager/bootstrapper
@@ -75,6 +77,7 @@ Picker
 
 Seems like only `fzf` has decent environment & tools built around it.
 
+* ★ :gh:`skim <lotabout/skim>` [7.1k loc Rust]
 * ★ :gh:`fzf <junegunn/fzf>` [10k loc Go]
     - ✔ Many tools integrating this (and only this).
     - ✖ Very complex for such simple task
@@ -117,20 +120,22 @@ File Manager
 The one thing I think file manager is useful for is picking files based on preview of their contents. For now only `ranger` has this functionality.
 
 * ★ :gh:`ranger <ranger/ranger>` [12.8k loc Python]
+* :gh:`joshuto <kamiyaa/joshuto>` [6.6k loc Rust]
 * :gh:`lf <gokcehan/lf>` [7k loc Go]
+    - ✖ No image preview
 * ★ :gh:`nnn <jarun/nnn>` [3.8k loc C]
 * :gh:`fff <dylanaraps/fff>` [674 loc Bash]
+    - ✖ No image preview
 
 Package Manager
 ###############
 * ★ :gh:`guix <guix-mirror/guix>` [~60k loc Scheme]
 * ★ :gh:`nix <NixOS/nix>` [~37 loc C++]
 
-
 Grep through code
 #################
-* ★ :gh:`ag <ggreer/the_silver_searcher>` [3.9 loc C]
 * :gh:`rg <BurntSushi/ripgrep>` [21k loc Rust]
+* ★ :gh:`ag <ggreer/the_silver_searcher>` [3.9 loc C]
 
 Browser Extensions
 ##################
