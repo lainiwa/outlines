@@ -20,9 +20,9 @@ Private Keys Surveillance
 
 Sources:
 
-* `ssh whoami.filippo.io <https://blog.filippo.io/ssh-whoami-filippo-io>`
-* `Public SSH keys can leak your private infrastructure <https://rushter.com/blog/public-ssh-keys>`
-* `SSH key validation example <https://github.com/rushter/blog_code/tree/master/ssh>`
+* `ssh whoami.filippo.io <https://blog.filippo.io/ssh-whoami-filippo-io>`_
+* `Public SSH keys can leak your private infrastructure <https://rushter.com/blog/public-ssh-keys>`_
+* `SSH key validation example <https://github.com/rushter/blog_code/tree/master/ssh>`_
 
 If someone knows your public key,
 he can chack if it is among the ``~/.ssh/authorized_keys`` file.
