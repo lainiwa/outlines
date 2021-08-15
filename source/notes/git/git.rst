@@ -4,42 +4,41 @@ Git
 
 Sources:
 
-* `Visual Git <https://marklodato.github.io/visual-git-guide/index-en.html>`_
 * Cheat Sheets
     - `Oh Shit Git <https://ohshitgit.com/>`_
     - `Git and Github Cheatsheet <https://dev.to/zinox9/git-github-cheatsheet-22ok>`_
     - https://bitbucket.org/BitPusher16/dotfiles/src/master/refs/git/git_examples.sh
     - https://github.com/k88hudson/git-flight-rules
+    - https://danielkummer.github.io/git-flow-cheatsheet/
+    - https://github.com/nikitavoloboev/knowledge/blob/master/programming/version-control/git.md
+    - https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
+    - https://dev.to/henryong92/yet-another-git-cheatsheet-4gjk
 * Exercises
     - https://ohmygit.org/
     - https://learngitbranching.js.org/
     - https://gitexercises.fracz.com
 * Config
     - `Limiting Upstream Tracking <https://utcc.utoronto.ca/~cks/space/blog/programming/GitUpstreamLimitedTracking>`_
-* Fundamentals
+* Intros
+    - `Visual Git <https://marklodato.github.io/visual-git-guide/index-en.html>`_
+    - `Git for Computer Scientists <https://eagain.net/articles/git-for-computer-scientists/>`_
     - `The Wave/Particle Duality of Git Commits <https://www.thirtythreeforty.net/posts/2020/01/the-wave-particle-duality-of-git-commits/>`_
+    - `Think Like a Git <http://think-like-a-git.net>`_
+    - `How to explain git in simple words? <https://xosh.org/explain-git-in-simple-words/>`_
+* Fundamentals
     - https://habr.com/ru/company/badoo/blog/163853/
     - https://www.kenneth-truyers.net/2016/10/13/git-nosql-database/
 * Others, used:
-* `Think Like a Git <http://think-like-a-git.net>`_
-* Git Standards: https://blog.carlmjohnson.net/post/2018/git-gud/
+* `GitLab Tutorial <http://dept.cs.williams.edu/~freund/cs434/GitLab.html>`_
 * https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
-* http://dept.cs.williams.edu/~freund/cs434/GitLab.html
-* https://dev.to/henryong92/yet-another-git-cheatsheet-4gjk
 * https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/
 * https://git-scm.com/book/ru/v2/Ветвление-в-Git-Основы-ветвления-и-слияния
-* https://git-scm.com/docs/gitignore
-* https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
 * https://githowto.com/ru
 * https://githowto.com/ru/setup
 * https://habr.com/ru/post/512490/
-* https://xosh.org/explain-git-in-simple-words/
-* https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout
 * https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
-* https://www.atlassian.com/ru/git/tutorials/merging-vs-rebasing
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * https://symflower.com/en/company/blog/2021/git-autofixup/
-* https://github.com/nikitavoloboev/knowledge/blob/master/programming/version-control/git.md
 
 .. image:: imgs/rant.png
   :width: 49%
@@ -74,10 +73,6 @@ Snippets
 
     # Modify specific commit
     git rebase --interactive 'bbc643cd^'  # -> `e`
-
-    # Change one word in all commits
-    FILTER_BRANCH_SQUELCH_WARNING=1 \
-    git filter-branch -f --tree-filter "sed -e 's#shit#flower#g' -i *.txt" 685966d6..HEAD
 
     # Accept pull request
     curl -sL https://github.com/nodejs/node/pull/37544.patch | git am
@@ -145,6 +140,7 @@ Reflog
 
 Ignoring
 ########
+* https://git-scm.com/docs/gitignore
 
 ``.gitignore``
 ==============
@@ -194,15 +190,18 @@ Unfuckup the master branch
 Practices
 #########
 * The Problem with Git Flow: https://news.ycombinator.com/item?id=23622071
+* `Git Standards <https://blog.carlmjohnson.net/post/2018/git-gud/>`_
 * https://martinfowler.com/articles/branching-patterns.html
 * https://habr.com/ru/post/519314/
+* `When it comes to git history, less is more <https://brennan.io/2021/06/15/git-less-is-more/>`_
 
 Merge vs Rebase
 ===============
 * `For rebase + merge --no-ff <https://gist.github.com/zerowidth/4684495>`__
 * `Comparison with conclusion <https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/>`__
-* https://randyfay.com/comment/1093
-* `Atlassian comparison <https://www.atlassian.com/git/articles/git-team-workflows-merge-or-rebase>`__
+* `A Rebase Workflow for Git  <https://randyfay.com/comment/1093>`_
+* `Git team workflows: merge or rebase? <https://www.atlassian.com/git/articles/git-team-workflows-merge-or-rebase>`__
+* `Merging vs. Rebasing <https://www.atlassian.com/git/tutorials/merging-vs-rebasing>`_
 
 Commit Messages
 ===============
@@ -216,6 +215,34 @@ Submodules
 * https://github.com/ingydotnet/git-subrepo
 * https://abildskov.io/2021/03/28/why-i-hate-submodules/
 * https://chrisjean.com/git-submodules-adding-using-removing-and-updating/
+
+Filer-repo
+##########
+* `How can I clang-format my WHOLE git history? <https://stackoverflow.com/questions/58042532/how-can-i-clang-format-my-whole-git-history>`_
+* `How to Use Git-Filter-Repo to Remove Files From Your Git Repository <https://improveandrepeat.com/2021/06/how-to-use-git-filter-repo-to-remove-files-from-your-git-repository/>`_
+* `Reduce repository size <https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html#purge-files-from-repository-history>`_
+* `Cheat Sheet: Conversion of Examples from the filter-branch manpage <https://github.com/newren/git-filter-repo/blob/main/Documentation/converting-from-filter-branch.md#cheat-sheet-conversion-of-examples-from-the-filter-branch-manpage>`_
+* https://blog.gitguardian.com/rewriting-git-history-cheatsheet/
+* https://marcofranssen.nl/remove-files-from-git-history-using-git-filter-repo
+* https://stackoverflow.com/questions/61420660/how-to-use-git-filter-repo-to-merge-one-repo-as-subdirectory-into-another
+
+.. code-block:: sh
+
+    # Remove file(s) from the repo
+    # without `--invert-paths` it will unuke everything but the `Templates/`
+    git filter-repo --invert-paths --path Templates/
+    git push origin --tags
+
+    # Remove big files
+    git filter-repo --strip-blobs-bigger-than 10M
+    git push origin --force 'refs/heads/*'    # Overwrite all branches
+    git push origin --force 'refs/tags/*'     # Remove large files from tagged releases
+    git push origin --force 'refs/replace/*'  # Prevent dead links (created by git filter-repo)
+
+    # Change one word in all commits
+    FILTER_BRANCH_SQUELCH_WARNING=1 \
+    git filter-branch -f --tree-filter "sed -e 's#shit#flower#g' -i *.txt" 685966d6..HEAD
+
 
 Extensions
 ##########

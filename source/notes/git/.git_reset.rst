@@ -1,6 +1,7 @@
 
 Reset
 #####
+* `What's the difference between "git reset" and "git checkout"? <https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout>`_
 * https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_summary_8
 
 Reset current HEAD to the specified state

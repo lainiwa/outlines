@@ -1,6 +1,7 @@
 
 Blame and Bisect
 ################
+* https://akrabat.com/ignoring-revisions-with-git-blame/
 
 Blame
 =====
@@ -9,6 +10,10 @@ Blame
 
     git blame -L 12,22 products.php
     git blame -L 12,22 -C products.php
+
+    # Ignore whitespace
+    # or: git config --local blame.ignoreRevsFile ignorerevs
+    git blame -w
 
 Bisect
 ======
