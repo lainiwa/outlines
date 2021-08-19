@@ -114,6 +114,11 @@ To disable root login::
 
     PermitRootLogin no
 
+To disable login by password::
+
+    PubkeyAuthentication yes
+    ChallengeResponseAuthentication no
+    PasswordAuthentication no
 
 #############
 SFTP security
