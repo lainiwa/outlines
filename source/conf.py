@@ -59,4 +59,18 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+# These folders are copied to the documentation's HTML output
 html_static_path = ['_static']
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'css/s4defs-roles.css',
+]
+
+# src: https://stackoverflow.com/a/60991308
+rst_prolog = '''
+.. include:: <s5defs.txt>
+
+'''
+
