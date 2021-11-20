@@ -56,6 +56,17 @@ Dotfiles manager/bootstrapper
 * ★ :gh:`dotbot <anishathalye/dotbot>` [0.7k loc Python]
 
 
+IMage viewers
+#############################
+* :gh:`feh <derf/feh>` [13.8k loc C]
+* :gh:`imv <eXeC64/imv>` [6.8k loc C]
+    - ✔ GIFs
+    - ✔ Various formats
+* :gh:`sxiv <muennich/sxiv>` [3.8k loc C]
+    - ✔ GIFs
+    - ✖ Repository archived
+
+
 Window Manager
 ##############
 * ★ :gh:`i3 <i3/i3>` [24k loc C]
