@@ -1,0 +1,35 @@
+
+#####################
+Signing with SSH Keys
+#####################
+* `SSH is the new GPG <https://blog.sigstore.dev/ssh-is-the-new-gpg-74b3c6cc51c0>`_
+* `It's Now Possible To Sign Arbitrary Data With Your SSH Keys <https://www.agwa.name/blog/post/ssh_signatures>`_
+
+Sign:
+
+.. code-block:: sh
+
+    ssh-keygen -Y sign -n file -f ~/.ssh/id_rsa     <FILE-TO-SIGN>
+    # or (private part being taken from ssh-agent)
+    ssh-keygen -Y sign -n file -f ~/.ssh/id_rsa.pub <FILE-TO-SIGN>
+
+
+Create allowed signers file:
+
+.. code-block:: sh
+
+    GH_NAME=lainiwa
+    curl -s https://github.com/${GH_NAME}.keys |
+        sed "s/^/${GH_NAME} /" |
+        tee -a allowed_signers.github
+
+
+Verify:
+
+.. code-block:: sh
+
+    ssh-keygen -Y verify \
+               -n file \
+               -f allowed_signers.github \
+               -I ${GH_NAME} \
+               -s git_tutorial.zip.sig <git_tutorial.zip
