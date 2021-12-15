@@ -29,6 +29,33 @@ Snippets
 .. include:: .signing.rst
 
 
+###############
+Authorized Keys
+###############
+* `TIL authorized_keys files can contain more than just public keys <https://twitter.com/cyb3rops/status/1395009709787258882>`_
+* `man 5 authorized_keys: AUTHORIZED_KEYS FILE FORMAT <https://www.commandlinux.com/man-page/man5/authorized_keys.5.html#lbAH>`_
+
+Adding keys to accepted:
+
+.. code-block:: sh
+
+    cat lainiwa_id_rsa_key.pub >> ~/.ssh/authorized_keys
+    # or, downloading from Github
+    curl -q https://github.com/lainiwa.keys >> ~/.ssh/authorized_keys
+    # or, same as above
+    ssh-import-id gh:lainiwa
+
+Options:
+
+.. code-block:: sh
+
+    from="*.sales.example.net,!pc.sales.example.net"    ssh-rsa AAAA...YZ== john@example.net
+    command="dump /home",no-pty,no-port-forwarding      ssh-dss AAAA...YZ== mary@example.net
+    permitopen="192.0.2.1:80",permitopen="192.0.2.2:25" ssh-dss AAAA...YZ== luke@example.net
+    tunnel="0",command="sh /etc/netstart tun0"          ssh-rsa AAAA...YZ== jane@example.net
+    command="echo go away"                              ssh-rsa AAAA...YZ== gary@example.net
+
+
 ############
 Private Keys
 ############
@@ -40,7 +67,7 @@ Private Keys Surveillance
 * `SSH key validation example <https://github.com/rushter/blog_code/tree/master/ssh>`_
 
 If someone knows your public key,
-he can chack if it is among the ``~/.ssh/authorized_keys`` file.
+he can check if it is among the ``~/.ssh/authorized_keys`` file.
 
 List public ssh keys on github: ``curl https://github.com/lainiwa.keys``.
 Same for gitlab (even private).
