@@ -105,7 +105,7 @@ Multi Factor Authenticator
 ##########################
 * `Trying to get SSH with public key (no password) + google authenticator working <https://serverfault.com/a/740881>`_
 * `SSH с авторизацией через Google Authenticator <https://habr.com/ru/sandbox/33416/>`_
-* `TOTP + password OR public key seems to be impossible to achieve <https://superuser.com/questions/1163942/#comment1678474_1163942>`
+* `TOTP + password OR public key seems to be impossible to achieve <https://superuser.com/questions/1163942/#comment1678474_1163942>`_
 
 Install google-authenticator on server:
 
