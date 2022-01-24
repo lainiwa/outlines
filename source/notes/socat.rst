@@ -8,9 +8,8 @@ Snippets
 ========
 * `Getting started with socat, a multipurpose relay tool for Linux <https://www.redhat.com/sysadmin/getting-started-socat>`_
 
------------
 HTTP client
------------
+###########
 
 .. code-block:: sh
 
@@ -24,12 +23,11 @@ HTTP client
     } | socat - TCP4:wttr.in:80
 
 
----------------
 Port forwarding
----------------
+###############
 
 Simple TCP port forwarding
-##########################
+==========================
 
 .. code-block:: sh
 
@@ -38,7 +36,7 @@ Simple TCP port forwarding
     ssh lain@localhost -p 9999
 
 HTTP port forwarding
-####################
+====================
 * `curl another host <https://daniel.haxx.se/blog/2018/04/05/curl-another-host/>`_
 
 .. code-block:: sh
@@ -52,7 +50,7 @@ HTTP port forwarding
     curl --connect-to wttr.in:443:localhost:9999 https://wttr.in
 
 Socket forwarding
-#################
+=================
 * `Can anyone explain docker.sock <https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock>`_
 * `Docker Tips: about /var/run/docker.sock <https://betterprogramming.pub/about-var-run-docker-sock-3bfd276e12fd>`_
 
@@ -72,7 +70,7 @@ Socket forwarding
     # docker rm ...
 
 Other examples
-##############
+==============
 
 .. code-block:: sh
 
