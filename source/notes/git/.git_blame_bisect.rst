@@ -17,6 +17,7 @@ Blame
 
 Bisect
 ======
+* `Fully automated bisecting with "git bisect run" <https://lwn.net/Articles/317154/>`_
 
 .. code-block:: sh
 
@@ -32,3 +33,9 @@ Bisect
 
     # To initial state
     git bisect reset
+
+    # Another example:
+    # git bisect start <bad> <good>
+    git bisect start linux-next/master v2.6.26-rc8
+    # find where make fails
+    git bisect run make kernel/fork.o
