@@ -90,6 +90,7 @@ Snippets
 .. include:: .git_conflicts.rst
 .. include:: .git_stacked.rst
 .. include:: .git_logs.rst
+.. include:: .git_submodule_subtree.rst
 
 
 Worktree
@@ -194,6 +195,7 @@ Practices
 * https://martinfowler.com/articles/branching-patterns.html
 * https://habr.com/ru/post/519314/
 * `When it comes to git history, less is more <https://brennan.io/2021/06/15/git-less-is-more/>`_
+* `Things I wish Git had: Commit groups <https://blog.danieljanus.pl/2021/07/01/commit-groups/>`_
 
 Merge vs Rebase
 ===============
@@ -209,12 +211,6 @@ Commit Messages
 * https://www.conventionalcommits.org
 * https://udacity.github.io/git-styleguide/index.html
 
-Submodules
-##########
-* https://www.atlassian.com/git/tutorials/git-subtree
-* https://github.com/ingydotnet/git-subrepo
-* https://abildskov.io/2021/03/28/why-i-hate-submodules/
-* https://chrisjean.com/git-submodules-adding-using-removing-and-updating/
 
 Filer-repo
 ##########
@@ -225,6 +221,7 @@ Filer-repo
 * https://blog.gitguardian.com/rewriting-git-history-cheatsheet/
 * https://marcofranssen.nl/remove-files-from-git-history-using-git-filter-repo
 * https://stackoverflow.com/questions/61420660/how-to-use-git-filter-repo-to-merge-one-repo-as-subdirectory-into-another
+* https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
 
 .. code-block:: sh
 
@@ -264,13 +261,18 @@ Git DVC
     dvc remote add -d myremote /tmp/dvcstore
 
 
-.git directory
-##############
+Internals
+#########
 * `Storing files in .git <https://www.arp242.net/dot-git.html>`_
+* `A Random Walk Through Git <https://bakkenbaeck.github.io/a-random-walk-through-git/>`_
+* `Git from the Bottom Up <https://jwiegley.github.io/git-from-the-bottom-up/>`_
+* `Some of git internals <https://yurichev.com/news/20201220_git/>`_
 
-::
+.. code-block:: sh
 
+    # A todo inside .git directory
     vim .git/todo
 
+    # Create and use a draft commit message
     vim .git/draft
     git commit -eF .git/draft

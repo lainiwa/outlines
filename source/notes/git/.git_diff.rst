@@ -1,6 +1,7 @@
 
 Diff
 ####
+* `When to Use Each of the Git Diff Algorithms <https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/>`_
 
 .. image:: imgs/diff.png
   :width: 600

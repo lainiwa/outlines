@@ -4,6 +4,7 @@ Logs
 * https://www.atlassian.com/git/tutorials/git-log
 * https://stackoverflow.com/questions/51009808/whats-the-difference-between-git-log-and-git-log-decorate
 * https://stackoverflow.com/a/7251377
+* https://elijahmanor.com/blog/git-log
 
 .. code-block:: sh
 
@@ -45,6 +46,9 @@ Logs
     # by range
     git log ..
     git log master..feature  # git log <not here>..<here>
+
+    # List files affected by commits
+    git whatchanged --since="1 week ago" --oneline
 
 .. image:: imgs/log_range.svg
   :width: 70%

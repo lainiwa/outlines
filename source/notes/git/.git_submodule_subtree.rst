@@ -1,0 +1,70 @@
+
+Submodule and subtree
+#####################
+* https://github.com/ingydotnet/git-subrepo
+
+Submodule
+=========
+* https://abildskov.io/2021/03/28/why-i-hate-submodules/
+* https://longair.net/blog/2010/06/02/git-submodules-explained/
+* https://chrisjean.com/git-submodules-adding-using-removing-and-updating/ (2009, deprecated)
+* https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial
+
+
+.. code-block:: sh
+
+    # Initialize and clone submodules on fresh-cloned repository
+    git submodule update --init == git submodule init && git submodule update
+    # or, clone with submodules
+    git clone --recursive ...
+    # or
+    git pull --recurse-submodules
+
+    # After moving HEAD (pull/switch),
+    # the submodule is not updated automatically
+    git submodule status
+    git submodule update
+
+    # pull submodule from remote
+    git submodule update --remote
+
+    # Add new submodule
+    git submodule add git://git.mysociety.org/plugin plugin
+
+
+Change submodule remote:
+
+.. code-block:: sh
+
+    cd plugin
+    git remote rm origin
+    git remote add origin git@github.com:lainiwa/plugin.git
+    git remote -v
+
+    git config branch.master.remote origin
+    git config branch.master.merge refs/heads/master
+
+    git config --list |grep '^submodule'
+    git config --list |grep '^branch'
+
+
+Remove submodule:
+
+.. code-block:: sh
+
+    # Clear `lib/plugin` and entry in the local `.git/config`
+    git submodule deinit lib/plugin
+    # Remove filetree at `lib/plugin` and entry in the `.gitmodules`
+    git rm lib/plugin
+
+    # or
+
+    # See above
+    git rm lib/plugin
+    # Remove gitdir repo and record from local `.git/config`
+    rm -rf .git/modules/lib/plugin
+    git config --remove-section submodule.lib/plugin
+
+Subtree
+=======
+* https://www.atlassian.com/git/tutorials/git-subtree
