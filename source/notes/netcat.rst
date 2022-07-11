@@ -145,6 +145,18 @@ Only possible on flavors with ``-e`` option:
     # 192.168.125.40 is server3
     ncat -klvnp 8000 -e "/bin/nc 192.168.125.40 8080"
 
+    # MITM with certificate spoofing example
+    curl -s https://storage.yandexcloud.net/cloud-certs/CA.pem > ca.crt
+    ncat -klvnp 8443 -e "
+        /usr/bin/ncat
+            --ssl-verify
+            --ssl-trustfile ca.pem
+            rc1b-inserttheaddress.mdb.yandexcloud.net 8443
+    "
+    # Check it's working:
+    echo 'SHOW DATABASES' |
+        curl 'http://localhost:8443/?user=admin&password=NimdaLol' --data-binary @-
+
 Other option:
 
 .. code-block:: sh
