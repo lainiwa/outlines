@@ -7,10 +7,11 @@ Curl
 * https://www.arp242.net/curl-to-sh.html
 * https://gms.tf/when-curl-sends-100-continue.html
 
-
 ########
 Snippets
 ########
+* https://www.dailysmarty.com/posts/escaping-hash-characters-and-other-symbols-in-curl
+* https://docs.docker.com/engine/api/v1.24/
 
 .. code-block:: sh
 
@@ -19,6 +20,19 @@ Snippets
 
     # Get both request and response headers
     curl -vsI https://example.com | grep "^[<>] "
+
+    # Get redirects chain
+    curl -sIL 'https://rb.gy/x7cg8r' |grep -i location
+
+    # Filter docker containers in Docker Swarm (only for current machine):
+    # * connect to unix socket
+    # * url-encode escapable characters
+    # * -G|--get means use GET
+    #   instead of POST (default with --data-urlencode) request
+    curl -Gv \
+        --unix-socket /var/run/docker.sock \
+        'http://localhost/containers/json' \
+        --data-urlencode 'filters={"label":["com.docker.swarm.service.name=traefik_whoami"]}' |jq
 
 
 ############
@@ -121,6 +135,13 @@ Converting to Languages
 
     # Export request to C
     curl https://httpbin.org/anything --libcurl main.c
+
+
+###########
+Other Tools
+###########
+* https://github.com/lwthiker/curl-impersonate
+* https://hurl.dev/
 
 
 #########
