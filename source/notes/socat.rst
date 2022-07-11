@@ -69,6 +69,21 @@ Socket forwarding
     docker ps -a
     # docker rm ...
 
+MITM
+====
+* https://stackoverflow.com/questions/46050238/socat-how-to-listen-on-non-ssl-tcp-and-forward-to-ssl-tcp-endpoint
+* https://pcarleton.com/2021/03/12/how-to-mitm-yourself-with-socat-on-linux/
+
+.. code-block:: sh
+
+    curl -s https://storage.yandexcloud.net/cloud-certs/CA.pem > ca.pem
+    socat \
+        TCP-LISTEN:8443,fork,reuseaddr \
+        OPENSSL:rc1b-inserttheaddress.mdb.yandexcloud.net:8443,cafile=ca.pem,verify=1
+    # Check it's working:
+    echo 'SHOW DATABASES' |
+        curl 'http://localhost:8443/?user=admin&password=NimdaLol' --data-binary @-
+
 Other examples
 ==============
 
