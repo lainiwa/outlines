@@ -3,6 +3,14 @@
 ZSH
 ===
 
+###########
+Completions
+###########
+* https://blog.mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
+* https://zsh.sourceforge.io/Refcard/
+    - rendered: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+
+
 #########
 Expansion
 #########
@@ -90,6 +98,14 @@ Glob Qualifiers
     ls -l    **/*(Lk+3)     # show files greater than 3 KB
     print -l **/*(mh-1)     # show files modified in the last hour
     ls -l    **/*(om[1,3])  # sort files from most to least recently modified and show the last 3
+
+    ls *.^c(.)            # all files excluding c files
+    ls -l *.(png|jpg|gif) # images only
+    ls *(*)               # executables only
+    ls /etc/**/zsh        # which directories contain 'zsh'?
+    ls **/*(/^F)          # list empty directories
+    ls /etc/*(@)          # symlinks only
+    ls **/*(-@)           # list dangling symlinks
 
     # .     - regular files
     # Lm-2  - files smaller than 2 MB
