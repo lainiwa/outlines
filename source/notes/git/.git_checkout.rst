@@ -38,8 +38,7 @@ Restore
 
 .. code-block:: sh
 
-    git restore fileA.txt                      == git checkout fileA.txt
-    git restore [-s|--source] <tree> fileA.txt == git checkout <tree> fileA.txt
+    git restore [-s|--source <tree>] fileA.txt == git checkout [<tree>] fileA.txt
 
     git restore one.txt two.txt  # Mention multiple files
     git restore .                # Discard all local changes
