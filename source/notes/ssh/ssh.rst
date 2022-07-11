@@ -224,3 +224,10 @@ Examples:
 .. code-block:: sh
 
     docker run -it mozilla/ssh_scan -t 127.0.0.1 |jq
+
+#########
+ssh-agent
+#########
+* `Про SSH Agent <https://habr.com/ru/company/skillfactory/blog/503466/>`_
+
+
