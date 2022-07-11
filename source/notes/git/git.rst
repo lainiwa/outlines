@@ -28,6 +28,8 @@ Sources:
 * Fundamentals
     - https://habr.com/ru/company/badoo/blog/163853/
     - https://www.kenneth-truyers.net/2016/10/13/git-nosql-database/
+* Alternatives
+    - https://monorepo.tools/
 * Others, used:
 * `GitLab Tutorial <http://dept.cs.williams.edu/~freund/cs434/GitLab.html>`_
 * https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
@@ -39,6 +41,7 @@ Sources:
 * https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * https://symflower.com/en/company/blog/2021/git-autofixup/
+
 
 .. image:: imgs/rant.png
   :width: 49%
