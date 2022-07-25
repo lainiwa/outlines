@@ -12,6 +12,7 @@ Snippets
 ########
 * https://www.dailysmarty.com/posts/escaping-hash-characters-and-other-symbols-in-curl
 * https://docs.docker.com/engine/api/v1.24/
+* https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
 
 .. code-block:: sh
 
@@ -34,6 +35,9 @@ Snippets
         'http://localhost/containers/json' \
         --data-urlencode 'filters={"label":["com.docker.swarm.service.name=traefik_whoami"]}' |jq
 
+    # Drop all default headers
+    # (dropping Host leads to invalid http request)
+    curl -v -H 'User-Agent:' -H 'Accept:' -H 'Host:' 'http://example.org/'
 
 ############
 Benchmarking
