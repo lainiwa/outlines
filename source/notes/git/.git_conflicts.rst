@@ -16,7 +16,7 @@ merge (intuitive)
 .. code-block:: sh
 
     # merge feature into master
-    git checkout master
+    git switch master
     git merge feature
 
     #   us/ours   = HEAD = master
@@ -28,7 +28,7 @@ cherry-pick (intuitive)
 .. code-block:: sh
 
     # apply A to feature
-    git checkout feature
+    git switch feature
     git cherry-pick A
 
     #   us/ours   = HEAD = feature
@@ -40,7 +40,7 @@ rebase (counter-intuitive)
 .. code-block:: sh
 
     # rebase feature onto latest master
-    git checkout feature
+    git switch feature
     git rebase master
 
 1. checkouts ``m2`` (ours), cherry-picks ``f1`` (theirs)
@@ -69,13 +69,13 @@ Merging example
 
 .. code-block:: sh
 
-    git checkout master
+    git switch master
     git merge feature
     # conflict
 
     # resolve manulally. OR:
-    git checkout --ours   codefile.js  # to select the changes done in master
-    git checkout --theirs codefile.js  # to select the changes done in feature
+    git restore --ours   codefile.js  # to select the changes done in master
+    git restore --theirs codefile.js  # to select the changes done in feature
 
     # continue merge
     git add codefile.js
@@ -86,12 +86,12 @@ Rebasing example
 
 .. code-block:: sh
 
-    git checkout feature
+    git switch feature
     git rebase master
     # conflict
 
-    git checkout --ours   codefile.js  # to select the changes done in master
-    git checkout --theirs codefile.js  # to select the changes done in feature
+    git restore --ours   codefile.js  # to select the changes done in master
+    git restore --theirs codefile.js  # to select the changes done in feature
 
     # continue rebase
     git add codefile.js
