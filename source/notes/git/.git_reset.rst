@@ -57,6 +57,6 @@ Command                        HEAD  Index  Workdir  WD Safe?
 
 ::
 
-    Стадия 1. git reset --soft   Обновление HEAD
-    Стадия 2. git reset --mixed  Обновление индекса
-    Стадия 3. git reset --hard   Обновление рабочей директории
+    Stage 1. git reset --soft   Update HEAD
+    Stage 2. git reset --mixed  Update index
+    Stage 3. git reset --hard   Update working directory
