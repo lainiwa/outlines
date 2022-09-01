@@ -25,19 +25,62 @@ Snippets
     # Get redirects chain
     curl -sIL 'https://rb.gy/x7cg8r' |grep -i location
 
-    # Filter docker containers in Docker Swarm (only for current machine):
-    # * connect to unix socket
-    # * url-encode escapable characters
-    # * -G|--get means use GET
-    #   instead of POST (default with --data-urlencode) request
+    # Drop all default headers
+    # (dropping Host leads to invalid http request)
+    curl -v -H 'User-Agent:' -H 'Accept:' -H 'Host:' 'http://example.org/'
+
+
+############
+Certificates
+############
+* https://support.kerioconnect.gfi.com/hc/en-us/articles/360015200119-Adding-Trusted-Root-Certificates-to-the-Server
+* https://github.com/gliderlabs/docker-alpine/issues/30
+
+
+############
+API examples
+############
+
+Docker
+======
+
+Filter docker containers in Docker Swarm (only for current machine):
+
+* connect to unix socket
+* url-encode escapable characters
+* ``-G|--get`` means use GET instead of POST (default with ``--data-urlencode``) request
+
+.. code-block:: sh
+
     curl -Gv \
         --unix-socket /var/run/docker.sock \
         'http://localhost/containers/json' \
         --data-urlencode 'filters={"label":["com.docker.swarm.service.name=traefik_whoami"]}' |jq
 
-    # Drop all default headers
-    # (dropping Host leads to invalid http request)
-    curl -v -H 'User-Agent:' -H 'Accept:' -H 'Host:' 'http://example.org/'
+ClickHouse
+==========
+* https://cloud.yandex.ru/docs/managed-clickhouse/operations/connect#curl
+* https://clickhouse.com/docs/en/guides/sre/ssl-user-auth/#3-testing
+
+.. code-block:: sh
+
+    # Use a certificate
+    curl 'https://storage.yandexcloud.net/cloud-certs/CA.pem' -o YandexInternalRootCA.crt
+    curl \
+        --cacert YandexInternalRootCA.crt \
+        'https://rc1b-abcderfghijklmno.mdb.yandexcloud.net:8443/?user=admin&password=mYpAsSwOrD' \
+        -d'SELECT 1'
+
+    # Auth formats
+    curl ... \
+        'https://admin:mYpAsSwOrD@clickhouse-server:8443'
+    curl ... \
+        'https://clickhouse-server:8443/?user=admin&password=mYpAsSwOrD'
+    curl ... \
+        -H'X-ClickHouse-User: admin' -H'X-ClickHouse-Key: mYpAsSwOrD' \
+        'https://clickhouse-server:8443'
+
+    # Query Clickhouse
 
 ############
 Benchmarking
