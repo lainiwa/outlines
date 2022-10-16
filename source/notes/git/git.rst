@@ -199,6 +199,7 @@ Practices
 * https://habr.com/ru/post/519314/
 * `When it comes to git history, less is more <https://brennan.io/2021/06/15/git-less-is-more/>`_
 * `Things I wish Git had: Commit groups <https://blog.danieljanus.pl/2021/07/01/commit-groups/>`_
+* `Trunk Based Development <https://trunkbaseddevelopment.com/>`_
 
 Merge vs Rebase
 ===============
