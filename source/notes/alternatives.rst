@@ -158,6 +158,7 @@ Browser Extensions
 * :gh:`ext-saladict <crimx/ext-saladict>` []
 * :gh:`mozilla/multi-account-containers` []
 * `decentraleyes <https://git.synz.io/Synzvato/decentraleyes>`_
+
 + Tab Management
     * :gh:`Simple Tab Groups drive4ik/simple-tab-groups` []
     * :gh:`Vertical Tabs Reloaded Croydon/vertical-tabs-reloaded` []
