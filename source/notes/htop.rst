@@ -319,6 +319,15 @@ Internals
 * `htop explained <https://peteris.rocks/blog/htop/>`_
 
 
+###
+Top
+###
+* `top customized <https://pascalth.medium.com/top-customized-170653201ddd>`_
+* `How to Make Sense of Linux System Stats in Top <https://www.tutorialworks.com/linux-top-command-explained/>`_
+* `Linux top Command Tutorial for Beginners <https://www.howtoforge.com/linux-top-command/>`_
+* `A Guide to the Linux Top Command <https://www.booleanworld.com/guide-linux-top-command/>`_
+
+
 #####
 Iftop
 #####
