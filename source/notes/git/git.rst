@@ -42,6 +42,7 @@ Sources:
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * https://symflower.com/en/company/blog/2021/git-autofixup/
 * https://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html
+* https://github.blog/tag/git/
 
 
 .. image:: imgs/rant.png
@@ -273,6 +274,10 @@ Internals
 * `A Random Walk Through Git <https://bakkenbaeck.github.io/a-random-walk-through-git/>`_
 * `Git from the Bottom Up <https://jwiegley.github.io/git-from-the-bottom-up/>`_
 * `Some of git internals <https://yurichev.com/news/20201220_git/>`_
+* https://articles.foletta.org/post/git-under-the-hood/
+* https://github.blog/2022-09-13-scaling-gits-garbage-collection/
+* https://github.blog/2022-08-29-gits-database-internals-i-packed-object-store/
+* https://codewords.recurse.com/issues/two/git-from-the-inside-out
 
 .. code-block:: sh
 
