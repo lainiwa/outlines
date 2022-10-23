@@ -39,6 +39,8 @@ Uptime
 #########################
 Load (Average) Definition
 #########################
+* `UNIX Load Average Part 1: How It Works <https://www.helpsystems.com/resources/guides/unix-load-average-part-1-how-it-works>`_
+
 * Load: number of processes currently running.
 * Load average:
     - Simple definition: average Load during last 1, 5 and 15 minutes
@@ -327,6 +329,27 @@ Top
 * `Linux top Command Tutorial for Beginners <https://www.howtoforge.com/linux-top-command/>`_
 * `A Guide to the Linux Top Command <https://www.booleanworld.com/guide-linux-top-command/>`_
 
+
+#####
+Iotop
+#####
+
+------
+IOWAIT
+------
+Shown by ``top`` at ``wa%``: percentage of time that all CPUs are waiting for disk accesses before they can do useful work (e.g on 4 cores max ``wa%`` is ``400.0``).
+Doesn't tell much on it's own.
+
+-----
+Iotop
+-----
+
+Start ``iotop`` with:
+
+.. code-block:: sh
+
+    sudo iotop -oPa
+    # short for `sudo iotop --only --processes --accumulated`
 
 #####
 Iftop
