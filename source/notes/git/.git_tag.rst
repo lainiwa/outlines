@@ -2,6 +2,7 @@
 Tag
 ###
 * `Atlassian: git tag <https://www.atlassian.com/ru/git/tutorials/inspecting-a-repository/git-tag>`_
+* `Proper use of Git tags <https://blog.aloni.org/posts/proper-use-of-git-tags/>`_
 
 .. code-block:: sh
 
@@ -17,11 +18,35 @@ Tag
 
     # List tags
     git tag
-    git tag -l *-rc*
+    git tag -l '*-rc*'
 
     # Push tags
     git push origin v1.4
     git push --tags
 
     # Delete tag
-     git tag -d v1
+    git tag -d v1
+
+    # Describe commit relative to a tag
+    git describe
+    git describe HEAD~10
+    # Describe relative to a subcomponent tag (e.g. `subcomponent/v1.0.2`)
+    git describe --match='subcomponent/*'
+
+Tag push permissions
+--------------------
+``git tag log`` and ``mkdir log`` creates ambiguety when ``git log test``.
+Advice: configure Git server to accept tag pushes only from release managers.
+
+Naming
+------
+Advice: start tags with ``v``, e.g. ``v1.0``
+Shell completion will work with ``v<Tab>``,
+while ``1<Tab>`` will give you all commits with hash starting with 1.
+
+Use annotated tags
+------------------
+**Not** lightweight:
+
+* ``git describe`` does not require ``--tags``
+* can be PGP-signed
