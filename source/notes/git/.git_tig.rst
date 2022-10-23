@@ -1,0 +1,24 @@
+
+Tig TUI
+#######
+* `Tig cheatsheet <https://devhints.io/tig>`_
+* `tig and add interactive  <https://emmanuelbernard.com/blog/2017/08/02/tig-add-interactive/>`_
+
+Switching views
+---------------
+* ``[m]ain``
+* ``[s]tatus``
+* ``[t]ree``
+* ``[y] stash``
+* ``[g]rep``
+* ``[h]elp``
+
+Status view
+-----------
+* ``[u] Stage/unstage file or chunk``
+* ``[!] Revert file or chunk``
+* ``[C]ommit``
+* ``[M]erge``
+* ``[1] Stage line``
+* ``[[] / []]     Increase/decrease the diff context``
+* ````
