@@ -21,4 +21,3 @@ Status view
 * ``[M]erge``
 * ``[1] Stage line``
 * ``[[] / []]     Increase/decrease the diff context``
-* ````
