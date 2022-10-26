@@ -7,7 +7,8 @@ Load Averages
 * `Linux Load Averages: Solving the Mystery <https://www.brendangregg.com/blog/2017-08-08/linux-load-averages.html>`_
 * `High System Load with Low CPU Utilization on Linux? <https://tanelpoder.com/posts/high-system-load-low-cpu-utilization-on-linux/>`_
 * `Where Linux's load average comes from in the kernel <https://utcc.utoronto.ca/~cks/space/blog/linux/LoadAverageWhereFrom>`_
-* ` Linux load average - the definitive summary  <http://blog.angulosolido.pt/2015/04/linux-load-average-definitive-summary.html>`_
+* `Linux load average - the definitive summary  <http://blog.angulosolido.pt/2015/04/linux-load-average-definitive-summary.html>`_
+* `SO: Understanding top and load average <https://unix.stackexchange.com/questions/9465/understanding-top-and-load-average>`_
 
 
 ######
@@ -42,13 +43,37 @@ Uptime
      \__________/
         \_ load avg for 1m, 5m and 15m
 
+
+############
+Instant Load
+############
+Instantaneous load of a system:
+the number of tasks (processes and threads)
+that are willing to run at a given time t.
+
+Willing to run:
+means in state R (running/runnable)
+or D (waiting uninterruptably; blocked on some resource, usually IO):
+
+.. code-block:: sh
+
+    $ ps -eL h -o state | egrep "R|D" | wc -l
+    2
+
+Note:
+Same can be parsed from
+``/proc/loadavg`` (4th field) or
+``/proc/stat`` (``procs_running``, ``procs_blocked``) but:
+
+* ``/proc/loadavg`` doesn't seem to count processes in state D
+* both do not include threads, even though they are taken into account in the load average numbers exposed by the kernel
+
 #########################
 Load (Average) Definition
 #########################
-* **Load**: number of processes currently running (state R) or waiting for disk IO uninterruptibly (state D).
-* **Load average**:
-    - Simple definition: average **Load** during last 1, 5 and 15 minutes
-    - Correct definition: exponentially-damped/decaying moving average of the **Load** number
+* Exponentially-damped/decaying moving average of the **Load** number
+* Average length of run queue
+* Number of running tasks
 
 From Wikipedia::
 
@@ -82,7 +107,11 @@ Important::
      * great pains to make it work on big machines and tickless kernels.
      */
 
-**Tick rate**: has a frequency of HZ hertz and a period of 1/HZ seconds.
+
+#########
+Tick Rate
+#########
+Tick rate has a frequency of HZ hertz and a period of 1/HZ seconds.
 If HZ is defined as 1000 that means that maximum amount of time that a process can take a CPU to run its instructions is 1/1000 of a second, after this period the interrupt will occur and internal Linux timer will take over a control on this CPU.
 
 .. code-block:: text
@@ -92,6 +121,9 @@ If HZ is defined as 1000 that means that maximum amount of time that a process c
 
 Find current ``HZ`` with ``grep 'CONFIG_HZ=' /boot/config-$(uname -r)``.
 
+#####
+Jiffs
+#####
 Show current jiffs: ``sudo grep -E "^cpu|^jiff" /proc/timer_list``
 
 The load average consists of measurements (samples) taken every 5 seconds:
