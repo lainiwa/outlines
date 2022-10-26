@@ -9,6 +9,7 @@ Load Averages
 * `Where Linux's load average comes from in the kernel <https://utcc.utoronto.ca/~cks/space/blog/linux/LoadAverageWhereFrom>`_
 * `Linux load average - the definitive summary  <http://blog.angulosolido.pt/2015/04/linux-load-average-definitive-summary.html>`_
 * `SO: Understanding top and load average <https://unix.stackexchange.com/questions/9465/understanding-top-and-load-average>`_
+* `Load average explained <https://wiki.nix-pro.com/view/Load_average_explained>`_
 
 
 ######
@@ -68,12 +69,23 @@ Same can be parsed from
 * ``/proc/loadavg`` doesn't seem to count processes in state D
 * both do not include threads, even though they are taken into account in the load average numbers exposed by the kernel
 
+
 #########################
 Load (Average) Definition
 #########################
 * Exponentially-damped/decaying moving average of the **Load** number
 * Average length of run queue
 * Number of running tasks
+
+Load average formula::
+
+    a(t,A) = a(t-1) * exp(-5/60A)
+           + l(t) * (1-exp(-5/60A))
+    where:
+      A = 1, 5 or 15
+      l(t) = instantaneous load
+
+     The load average values are calculated by the kernel every 5 seconds using a(t,A).
 
 From Wikipedia::
 
@@ -108,6 +120,45 @@ Important::
      */
 
 
+#######################################
+CPU Load Average to System Load Average
+#######################################
+The change (the swapping state was later removed from Linux)::
+
+    From: Matthias Urlichs <urlichs@smurf.sub.org>
+    Subject: Load average broken ?
+    Date: Fri, 29 Oct 1993 11:37:23 +0200
+
+    The kernel only counts "runnable" processes when computing the load average.
+    I don't like that; the problem is that processes which are swapping or
+    waiting on "fast", i.e. noninterruptible, I/O, also consume resources.
+
+    It seems somewhat nonintuitive that the load average goes down when you
+    replace your fast swap disk with a slow swap disk...
+
+    Anyway, the following patch seems to make the load average much more
+    consistent WRT the subjective speed of the system. And, most important, the
+    load is still zero when nobody is doing anything. ;-)
+
+    --- kernel/sched.c.orig Fri Oct 29 10:31:11 1993
+    +++ kernel/sched.c  Fri Oct 29 10:32:51 1993
+    @@ -414,7 +414,9 @@
+        unsigned long nr = 0;
+
+        for(p = &LAST_TASK; p > &FIRST_TASK; --p)
+    -       if (*p && (*p)->state == TASK_RUNNING)
+    +       if (*p && ((*p)->state == TASK_RUNNING) ||
+    +                  (*p)->state == TASK_UNINTERRUPTIBLE) ||
+    +                  (*p)->state == TASK_SWAPPING))
+                nr += FIXED_1;
+        return nr;
+     }
+    --
+    Matthias Urlichs        \ XLink-POP N|rnberg   | EMail: urlichs@smurf.sub.org
+    Schleiermacherstra_e 12  \  Unix+Linux+Mac     | Phone: ...please use email.
+    90491 N|rnberg (Germany)  \   Consulting+Networking+Programming+etc'ing
+
+
 #########
 Tick Rate
 #########
@@ -120,6 +171,7 @@ If HZ is defined as 1000 that means that maximum amount of time that a process c
     #define HZ 1000        /* internal kernel time frequency */
 
 Find current ``HZ`` with ``grep 'CONFIG_HZ=' /boot/config-$(uname -r)``.
+
 
 #####
 Jiffs
@@ -134,6 +186,48 @@ The load average consists of measurements (samples) taken every 5 seconds:
     #define LOAD_FREQ       (5*HZ+1)        /* 5 sec intervals */
 
 
+########################
+Load Average is Relative
+########################
+The number of tasks willing to run depends on:
+
+* the architecture of the software (single process? multiple processes? do they depend on each other?)
+* the CPU and IO throughput requested by the software that is running
+* the CPU and IO performance of that system
+* the number of available cores
+
+The acceptable load average is empirically discovered.
+
+Furthermore:
+
+* For same requested IO an implementation with more tasks (processes and threads) will generate higher load
+* software setting all CPU cores to 100% will genrate higher LA on system with with smaller number of (or slower) cores
+
+
+#################################
+Load Average and CPU Usage Values
+#################################
+Expressed in % of CPU time:
+
+* ``%usr``: Time spent running non-kernel code. (user time, including nice time)
+* ``%sys``: Time spent running kernel code. (system time)
+* ``%wait``: Time spent waiting for IO. Note: ``%iowait`` is not an indication of the amount of IO going on, it is only an indication of the extra %usr time that the system would show if IO transfers weren't delaying code execution.
+* ``%idle``: Time spent idle.
+
+Summary:
+
+* if %sys+%usr=100 for all cores, then the Instant Load (IL) >= ``nproc``
+* the inverse might not be true, since many processes may be I/O waiting (state D)
+* if IL > ``nproc`` then system can't be mostly idle
+* system can be slow even if IL < ``nproc``, because IO-intensive tasks might be a bottleneck
+* if IO is negligible (no state D) and ``%idle > 0`` then ``IL = ((100 - %idle)/100) * nproc``. Example: 4 cores, ``%sys+%usr=90`` the IL would be ``((100-10)/100)*4 = 3.6`` Can be tested with ``stress -c X``, where ``X < nproc``, otherwise it will cause ``%idle=0``.
+
+It is more complicated with Hyperthreading.
+
+
+######
+mpstat
+######
 There are tools like mpstat that can show the instantaneous CPU utilization:
 
 .. code-block:: sh
@@ -145,6 +239,7 @@ There are tools like mpstat that can show the instantaneous CPU utilization:
     10:16:20 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
     10:16:21 PM  all    0.00    0.00  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
     10:16:22 PM  all    0.00    0.00  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+
 
 ###############
 Files in procfs
@@ -192,6 +287,7 @@ Procfs can have links:
 So this is how htop, top, ps and other diagnostic utilities
 get their information about the details of a process:
 they read it from ``/proc/<pid>/<file>``.
+
 
 #############
 Process State
