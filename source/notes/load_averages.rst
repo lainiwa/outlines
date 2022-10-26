@@ -225,6 +225,32 @@ Summary:
 It is more complicated with Hyperthreading.
 
 
+####################
+TASK_UNINTERRUPTIBLE
+####################
+Possible cases might be:
+
+* disk IO
+* waiting for NFS
+* uninterruptible lock
+
+Lock acquisition code that's using ``TASK_UNINTERRUPTIBLE``:
+
+.. code-block:: c
+
+    /* wait to be given the lock */
+    while (true) {
+        set_task_state(tsk, TASK_UNINTERRUPTIBLE);
+        if (!waiter.task)
+            break;
+        schedule();
+    }
+
+Linux has uninterruptible and interruptible versions of mutex acquire functions
+(eg, ``mutex_lock()`` vs ``mutex_lock_interruptible()``,
+and ``down()`` and ``down_interruptible()`` for semaphores):
+
+
 ######
 mpstat
 ######
