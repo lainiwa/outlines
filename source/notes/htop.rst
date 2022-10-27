@@ -4,38 +4,6 @@ Tops
 ====
 * `TOP'ай сюда <https://habr.com/ru/post/114082/>`_
 
-######
-Uptime
-######
-* https://peteris.rocks/blog/htop/
-
-.. code-block:: sh
-
-    $ uptime
-     02:52:30 up 17 days,  6:47,  4 users,  load average: 1.68, 1.59, 1.47
-
-    $ strace uptime 2>&1 |grep open
-    ...
-    openat(AT_FDCWD, "/proc/uptime", O_RDONLY) = 3
-    openat(AT_FDCWD, "/var/run/utmp", O_RDONLY|O_CLOEXEC) = 4
-    openat(AT_FDCWD, "/proc/loadavg", O_RDONLY) = 4
-
-.. code-block:: text
-    :caption: /proc/uptime
-
-    1493239.36 4687326.28
-                \_ time spent in idle state [seconds]
-     \_ total time the machine is up [seconds]
-
-.. code-block:: text
-    :caption: /proc/loadavg
-
-                       # of processes (currently running (R) or
-                     _ #               waiting for disk IO (D) / all)
-                    /
-    1.68 1.59 1.47 2/887 41591 <-- last PID used
-     \__________/
-        \_ load avg for 1m, 5m and 15m
 
 ####
 Htop
