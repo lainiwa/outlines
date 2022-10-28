@@ -8,6 +8,7 @@ Logging
 #######
 * `Structured Logging in a Shell Script with jq <https://medium.com/@jesse.riddle/structured-logging-in-a-shell-script-with-jq-f7542a94a1f6>`_
 * `COLODEBUG: a simple way to improve bash script debugging <https://johannes.truschnigg.info/writing/2021-12_colodebug/>`_
+* `Shell Scripting: Expert Recipes for Linux, Bash, and More: logger <https://www.oreilly.com/library/view/shell-scripting-expert/9781118166321/c14-anchor-6.xhtml>`_
 
 Structured logging with jq:
 
@@ -41,9 +42,20 @@ Print with a colon:
     : :: note this line
     : ::NOTICE::
 
+    # This is an example comment
+    : This is a colon comment
+    : :: This is a more verbose colon comment
+
     # Example usage:
     # COLODEBUG=1 ./myscript.sh
 
+Write logs to syslog/journald:
+
+.. code-block:: sh
+
+    logger -t checkfs -s -p user.err "Filesystem $filesystem is at $usage"
+    # or, with long options:
+    logger --tag checkfs --stderr --priority user.err "Filesystem $filesystem is at $usage"
 
 #######
 Locking
