@@ -1,0 +1,18 @@
+
+Locking
+#######
+* `Bash: execute a script only when no other instance of the script is running. <https://lovethepenguin.com/bash-execute-a-script-only-when-no-other-instance-of-the-script-is-running-283e7d726547>`_
+
+Run only one instance of the script:
+
+.. code-block:: sh
+
+    # inside the script
+    [ "$(pidof -x $(basename $0))" != $$ ] && exit
+
+    # or, controlling outside the script:
+    # -w 0: wait for the lock release for 0s (exit immediately)
+    flock \
+        -w 0 /tmp/test.lock \
+        -c 'echo "sleeping" && sleep 60' ||
+    echo "cannot be executed an instance already runs"

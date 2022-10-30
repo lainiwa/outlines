@@ -1,0 +1,18 @@
+
+Functions
+#########
+* `SO: difference between function foo and foo" <https://unix.stackexchange.com/a/73854>`_
+* `Bash functions are better than I thought <https://cuddly-octo-palm-tree.com/posts/2021-10-31-better-bash-functions/>`_
+
+In bash/zsh keyword ``function`` intruduced for historical reasons. Use more portable ``f() ...``
+
+Local variables are dinamically scoped (seen by functions down the call stack):
+
+.. code-block:: sh
+
+    f1() { local a; a=1 f3; }
+    f2() { local a; a=2 f3; }
+    f3() { echo $a; }
+
+    f1  # prints 1
+    f2  # prints 2

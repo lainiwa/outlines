@@ -1,10 +1,4 @@
 
-===============
-Shell Scripting
-===============
-
-
-#####################
 Logging and Debugging
 #####################
 * `Structured Logging in a Shell Script with jq <https://medium.com/@jesse.riddle/structured-logging-in-a-shell-script-with-jq-f7542a94a1f6>`_
@@ -87,43 +81,3 @@ Alternatives:
 
 * `selivan/bash-debug <https://github.com/selivan/bash-debug>`_
 * `bashdb <http://bashdb.sourceforge.net/>`_
-
-
-#######
-Locking
-#######
-* `Bash: execute a script only when no other instance of the script is running. <https://lovethepenguin.com/bash-execute-a-script-only-when-no-other-instance-of-the-script-is-running-283e7d726547>`_
-
-Run only one instance of the script:
-
-.. code-block:: sh
-
-    # inside the script
-    [ "$(pidof -x $(basename $0))" != $$ ] && exit
-
-    # or, controlling outside the script:
-    # -w 0: wait for the lock release for 0s (exit immediately)
-    flock \
-        -w 0 /tmp/test.lock \
-        -c 'echo "sleeping" && sleep 60' ||
-    echo "cannot be executed an instance already runs"
-
-
-#########
-Functions
-#########
-* `SO: difference between function foo and foo" <https://unix.stackexchange.com/a/73854>`_
-* `Bash functions are better than I thought <https://cuddly-octo-palm-tree.com/posts/2021-10-31-better-bash-functions/>`_
-
-In bash/zsh keyword ``function`` intruduced for historical reasons. Use more portable ``f() ...``
-
-Local variables are dinamically scoped (seen by functions down the call stack):
-
-.. code-block:: sh
-
-    f1() { local a; a=1 f3; }
-    f2() { local a; a=2 f3; }
-    f3() { echo $a; }
-
-    f1  # prints 1
-    f2  # prints 2
