@@ -6,6 +6,7 @@ Curl
 * https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/
 * https://www.arp242.net/curl-to-sh.html
 * https://gms.tf/when-curl-sends-100-continue.html
+* https://curl.github.io/curl-cheat-sheet/http-sheet.html
 
 ########
 Snippets

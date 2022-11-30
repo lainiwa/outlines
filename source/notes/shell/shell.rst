@@ -17,7 +17,6 @@ Script Template
 .. literalinclude:: template.sh
   :caption: template.sh
   :language: shell
-  :linenos:
 
 Testing
 #######
@@ -27,3 +26,8 @@ Exit Codes
 ##########
 * `Bash command line exit codes demystified <https://www.redhat.com/sysadmin/exit-codes-demystified>`_
 * ` <https://www.freebsd.org/cgi/man.cgi?query=sysexits>`_
+
+Redirections
+############
+* `Bash One-Liners Explained, Part III: All about redirections <https://catonmat.net/bash-one-liners-explained-part-three>`_
+* `Bash Redirections Cheat Sheet <https://catonmat.net/ftp/bash-redirections-cheat-sheet.pdf>`_
