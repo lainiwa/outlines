@@ -79,6 +79,9 @@ Snippets
     # Modify specific commit
     git rebase --interactive 'bbc643cd^'  # -> `e`
 
+    # Clone github wiki (e.g. wiki of https://github.com/swaywm/sway/wiki)
+    git clone https://github.com/swaywm/sway.wiki
+
     # Accept pull request
     curl -sL https://github.com/nodejs/node/pull/37544.patch | git am
 
@@ -105,6 +108,67 @@ Worktree
 * https://dev.to/yankee/practical-guide-to-git-worktree-58o0
 * https://dzone.com/articles/a-2016-git-retrospective-worktrees
 * https://stackoverflow.com/questions/42457470/storage-efficient-of-a-git-clone
+* https://peppe.rs/posts/curing_a_case_of_git-UX/
+* https://dev-notes.eu/2022/06/Branch-Management-With-Git-Worktree/
+
+.. code-block:: sh
+
+    git clone https://github.com/cmus/cmus && cd cmus
+
+    # Add worktree ../cmus-hotfix, and create branch cmus-hotfix
+    git worktree add ../cmus-hotfix
+
+    # or: add worktree, and create branch hotfix
+    git worktree add -b hotfix ../cmus-hotfix
+
+
+Notes
+#####
+* https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/
+* https://initialcommit.com/blog/git-notes
+* https://gist.github.com/topheman/ec8cde7c54e24a785e52
+
+.. code-block:: sh
+
+    # Simple example
+    git notes add -m 'Acked-by: lainiwa'
+    git log  # will show Notes after the comment
+    git notes remove [commit-id]
+
+    # Add and append
+    git notes add -m "message" [commit-id]
+    git notes append -m "message" [commit-id]
+
+    # Use with Gerrit reviewnotes plugin
+    git fetch origin refs/notes/review:refs/notes/review
+    git log --notes=review
+
+    # Namespaces (default namespace is `commits`)
+    git notes --ref jenkins add "build pass"
+    git notes --ref jenkins show HEAD
+    git log --show-notes=jenkins
+    git log --show-notes="*"
+
+    # Copy notes to between commits
+    git notes copy commitA commitB
+
+    # Viewing
+    git log --notes=review
+    git notes show
+
+    # Pushing and pulling
+    git push origin refs/notes/commits
+    git push origin "refs/notes/*"
+    git fetch origin refs/notes/commits:refs/notes/commits
+    git fetch origin "refs/notes/*:refs/notes/*"
+
+Use cases:
+
+* Code review and tests results
+* Time tracking
+* Linking to external resources
+
+
 
 PGP
 ###
@@ -268,6 +332,18 @@ Git DVC
 
     dvc remote add -d myremote /tmp/dvcstore
 
+Git Bug
+=======
+* https://github.com/MichaelMure/git-bug
+
+::
+
+    git bug user create
+    git bug add
+    git bug ls
+    git bug push
+    git bug termui
+    git bug webui
 
 Internals
 #########

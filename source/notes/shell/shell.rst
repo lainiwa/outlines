@@ -4,6 +4,10 @@ Shell Scripting
 ===============
 * https://mywiki.wooledge.org/BashPitfalls
 * https://raimonster.com/scripting-field-guide/
+* https://github.com/dylanaraps/pure-sh-bible
+* https://github.com/dylanaraps/pure-bash-bible
+* https://www.oreilly.com/library/view/bash-cookbook/0596526784/ch05s02.html
+* https://google.github.io/styleguide/shellguide.html
 
 .. include:: .help.rst
 .. include:: .logging_debugging.rst
