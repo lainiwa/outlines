@@ -1,0 +1,68 @@
+
+.. .. plot::
+
+..    import matplotlib.pyplot as plt
+..    import numpy as np
+..    x = np.random.randn(1000)
+..    plt.hist( x, 20)
+..    plt.grid()
+..    plt.title(r'Normal: $\mu=%.2f, \sigma=%.2f$'%(x.mean(), x.std()))
+..    plt.show()
+
+
+.. .. sourcecode:: ipython
+
+..     In [69]: lines = plot([1,2,3])
+
+..     In [70]: setp(lines)
+..       alpha: float
+..       animated: [True | False]
+..       antialiased or aa: [True | False]
+..       ...snip
+
+Basics
+######
+* `YT: What are p-values?? Seriously <https://youtu.be/4XfTpkGe1Kc>`_
+* https://en.wikipedia.org/wiki/Binomial_distribution
+* https://en.wikipedia.org/wiki/Null_hypothesis
+* https://en.wikipedia.org/wiki/One-_and_two-tailed_tests
+* https://en.wikipedia.org/wiki/P-value
+* https://en.wikipedia.org/wiki/Skewness
+* https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/what-is-a-z-score-what-is-a-p-value.htm#GUID-BE4CEEE3-3A0C-4BBF-AA3B-224054B846A2
+* https://stats.libretexts.org/Bookshelves/Applied_Statistics/Book%3A_An_Introduction_to_Psychological_Statistics_(Foster_et_al.)/07%3A__Introduction_to_Hypothesis_Testing/7.05%3A_Critical_values_p-values_and_significance_level
+* https://www.investopedia.com/terms/p/p-value.asp
+* https://www.investopedia.com/terms/n/null_hypothesis.asp
+
+
+Testing
+#######
+* **Null hypothesis** (:math:`H_0`) is the claim (conjecture) that no difference or relationship exists between two sets of data or variables being analyzed.
+* **Alternative hypothesis** (:math:`H_1` or :math:`H_a`) is what null hypothesis is tested against.
+* **Skewness** is a measure of the asymmetry of the probability distribution of a real-valued random variable about its mean.
+* **P-value** (significance) is probability that the observed pattern was created by randomness. Under the null hypothesis, the **p-value** is the probability of getting a sample *as or more* extreme than our own.
+* **Z-score** (standard score) is standard deviation.
+
+
+.. image:: imgs/skewness.png
+  :width: 600
+  :target: https://en.wikipedia.org/wiki/Skewness#Relationship_of_mean_and_median
+
+.. image:: imgs/p_and_z_scores.png
+  :width: 600
+  :target: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/what-is-a-z-score-what-is-a-p-value.htm#GUID-BE4CEEE3-3A0C-4BBF-AA3B-224054B846A2
+
+.. list-table:: Some examples
+   :header-rows: 1
+
+   * - z-score (Standard Deviations)
+     - p-value (Probability)
+     - Confidence level
+   * - < -1.65 or > +1.65
+     - < 0.10
+     - 90%
+   * - < -1.96 or > +1.96
+     - < 0.05
+     - 95%
+   * - < -2.58 or > +2.58
+     - < 0.01
+     - 99%

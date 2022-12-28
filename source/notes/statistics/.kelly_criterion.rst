@@ -1,0 +1,16 @@
+
+Kelly Criterion
+###############
+* `The Kelly criterion: How to size bets <https://explore.paulbutler.org/bet/>`_
+* `Wikipedia: Kelly criterion <https://en.wikipedia.org/wiki/Kelly_criterion>`_
+    - `HN <https://readhacker.news/c/4JNSx>`_
+
+
+`Quote from HN thread <https://news.ycombinator.com/item?id=18489727>`_::
+
+   Betting everything maximizes your mean wealth.
+   Using the Kelly Criterion maximizes your median wealth.
+   ...
+   Incidentally, the choice of maximizing the median is somewhat arbitrary.
+   You can also use a similar approach to maximize, say, the 25th percentile outcome,
+   at the expense of average and median outcomes.
