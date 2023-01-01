@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'outlines'
-copyright = '2020, Lain Iwakura'
+copyright = '2023, Lain Iwakura'
 author = 'Lain Iwakura'
 
 
@@ -29,6 +29,16 @@ author = 'Lain Iwakura'
 # ones.
 extensions = [
     'sphinx.ext.extlinks',
+    # 'IPython.sphinxext.ipython_console_highlighting',
+    # 'IPython.sphinxext.ipython_directive',
+    # 'matplotlib.sphinxext.only_directives',
+    # 'matplotlib.sphinxext.plot_directive',
+    # 'numpydoc',
+    # 'sphinx.ext.autodoc',
+    # 'sphinx.ext.doctest',
+    # 'sphinx.ext.graphviz',
+    # 'sphinx.ext.inheritance_diagram',
+    # 'sphinx.ext.mathjax',
 ]
 
 extlinks = {
