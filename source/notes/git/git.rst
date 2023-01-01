@@ -41,7 +41,6 @@ Sources:
 * https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * https://symflower.com/en/company/blog/2021/git-autofixup/
-* https://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html
 * https://github.blog/tag/git/
 
 
@@ -127,6 +126,8 @@ Notes
 * https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/
 * https://initialcommit.com/blog/git-notes
 * https://gist.github.com/topheman/ec8cde7c54e24a785e52
+* https://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html
+
 
 .. code-block:: sh
 
