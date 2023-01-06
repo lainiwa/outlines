@@ -12,3 +12,6 @@ Revert
     git commit -m "The commit message"
 
     git revert OLDER_COMMIT^..NEWER_COMMIT
+    # e.g. revert last two commits:
+    git revert --no-commit HEAD~2..HEAD
+    git revert --no-commit HEAD~2..      # same as above

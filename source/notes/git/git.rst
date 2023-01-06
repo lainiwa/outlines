@@ -84,6 +84,10 @@ Snippets
     # Accept pull request
     curl -sL https://github.com/nodejs/node/pull/37544.patch | git am
 
+    # Mirror repo to another server
+    git clone --bare https://github.com/exampleuser/old-repository.git
+    cd old-repository.git
+    git push --mirror https://github.com/exampleuser/new-repository.git
 
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
