@@ -10,6 +10,12 @@ Completions
 * https://zsh.sourceforge.io/Refcard/
     - rendered: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 
+###############
+Alternate Forms
+###############
+* https://zsh.sourceforge.io/Doc/Release/Shell-Grammar.html#Alternate-Forms-For-Complex-Commands
+* https://unix.stackexchange.com/questions/468582/examples-of-zsh-alternate-forms-of-complex-commands
+
 
 #########
 Expansion
