@@ -1,0 +1,19 @@
+
+Worktree
+########
+* https://gaurav5430.medium.com/git-using-git-worktree-to-run-2-versions-of-the-code-at-the-same-time-1b4586315a6c
+* https://dev.to/yankee/practical-guide-to-git-worktree-58o0
+* https://dzone.com/articles/a-2016-git-retrospective-worktrees
+* https://stackoverflow.com/questions/42457470/storage-efficient-of-a-git-clone
+* https://peppe.rs/posts/curing_a_case_of_git-UX/
+* https://dev-notes.eu/2022/06/Branch-Management-With-Git-Worktree/
+
+.. code-block:: sh
+
+    git clone https://github.com/cmus/cmus && cd cmus
+
+    # Add worktree ../cmus-hotfix, and create branch cmus-hotfix
+    git worktree add ../cmus-hotfix
+
+    # or: add worktree, and create branch hotfix
+    git worktree add -b hotfix ../cmus-hotfix
