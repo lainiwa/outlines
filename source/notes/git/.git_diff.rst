@@ -22,3 +22,7 @@ Diff
 
     # ... for a file
     git diff ... -- <path>
+
+    # Compare two current folders
+    git diff --no-index dir1 dir2
+    # can use non-git diff: diff -r dir1 dir2

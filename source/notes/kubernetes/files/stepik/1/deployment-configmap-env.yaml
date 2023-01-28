@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goapp-deployment
+  namespace: lesson16
+  labels:
+    app: goapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: goapp
+  template:
+    metadata:
+      labels:
+        app: goapp
+    spec:
+      containers:
+        - name: web
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: COLORGOOD
+              valueFrom:
+                configMapKeyRef:
+                  name: env-cm
+                  key: colorgood
+            - name: COLORBAD
+              valueFrom:
+                configMapKeyRef:
+                  name: env-cm
+                  key: colorbad
+          volumeMounts:
+            - name: cm-volume
+              mountPath: "/etc/ssl/certs/"
+              readOnly: true
+      volumes:
+        - name: cm-volume
+          configMap:
+            name: test-config
+# kubectl create cm test-config -n lesson16 --from-file=root-ca.pem

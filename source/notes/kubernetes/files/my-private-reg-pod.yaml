@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - name: private-reg-container
+    image: ghcr.io/quantor-lab/etl:stage
+    # command: ["dagster"]  # a-la entrypoint
+    args: [
+      "dagster", "api", "grpc",
+      "-h", "0.0.0.0",
+      "-p", "4000",
+      "-f", "/app/src/etl/dagster_repo.py"
+    ]
+  imagePullSecrets:
+  - name: regcred

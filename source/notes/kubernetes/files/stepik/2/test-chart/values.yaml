@@ -1,0 +1,5 @@
+image: nginx:latest
+replicas: 3
+secret:
+  name: load-secret
+  password: loadqwerty
