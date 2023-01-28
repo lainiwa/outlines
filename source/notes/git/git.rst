@@ -106,6 +106,7 @@ Snippets
 .. include:: .git_logs.rst
 .. include:: .git_submodule_subtree.rst
 .. include:: .git_tig.rst
+.. include:: .git_notes.rst
 
 
 Worktree
