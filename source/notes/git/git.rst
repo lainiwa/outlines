@@ -89,6 +89,9 @@ Snippets
     cd old-repository.git
     git push --mirror https://github.com/exampleuser/new-repository.git
 
+    # Delete remote branch
+    git push origin --delete old-branch
+
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
 .. include:: .git_checkout.rst
@@ -123,57 +126,6 @@ Worktree
 
     # or: add worktree, and create branch hotfix
     git worktree add -b hotfix ../cmus-hotfix
-
-
-Notes
-#####
-* https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/
-* https://initialcommit.com/blog/git-notes
-* https://gist.github.com/topheman/ec8cde7c54e24a785e52
-* https://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html
-
-
-.. code-block:: sh
-
-    # Simple example
-    git notes add -m 'Acked-by: lainiwa'
-    git log  # will show Notes after the comment
-    git notes remove [commit-id]
-
-    # Add and append
-    git notes add -m "message" [commit-id]
-    git notes append -m "message" [commit-id]
-
-    # Use with Gerrit reviewnotes plugin
-    git fetch origin refs/notes/review:refs/notes/review
-    git log --notes=review
-
-    # Namespaces (default namespace is `commits`)
-    git notes --ref jenkins add "build pass"
-    git notes --ref jenkins show HEAD
-    git log --show-notes=jenkins
-    git log --show-notes="*"
-
-    # Copy notes to between commits
-    git notes copy commitA commitB
-
-    # Viewing
-    git log --notes=review
-    git notes show
-
-    # Pushing and pulling
-    git push origin refs/notes/commits
-    git push origin "refs/notes/*"
-    git fetch origin refs/notes/commits:refs/notes/commits
-    git fetch origin "refs/notes/*:refs/notes/*"
-
-Use cases:
-
-* Code review and tests results
-* Time tracking
-* Linking to external resources
-
-
 
 PGP
 ###
