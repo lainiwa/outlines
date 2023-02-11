@@ -7,6 +7,8 @@ Todo:
 
 * `Arch Wiki: OpenSSH <https://wiki.archlinux.org/index.php/OpenSSH#Two-factor_authentication_and_public_keys>`_
 * `Arch Wiki: Google_Authenticator <https://wiki.archlinux.org/index.php/Google_Authenticator_(Русский)>`_
+* https://blog.zsec.uk/locking-down-ssh-the-right-way/
+* https://highon.coffee/blog/ssh-lateral-movement-cheat-sheet/
 
 Run commands on every login: ``~/.ssh/rc``.
 

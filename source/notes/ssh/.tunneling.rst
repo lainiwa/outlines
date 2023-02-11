@@ -5,8 +5,11 @@ Tunneling
 * A visual guide to SSH tunnels
     - `Article <https://robotmoon.com/ssh-tunnels/>`__
     - `HN <https://news.ycombinator.com/item?id=26053323>`__
+* https://ittavern.com/visual-guide-to-ssh-tunneling-and-port-forwarding/
+* https://iximiuz.com/en/posts/ssh-tunnels/
 * https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Tunnels
 * https://posts.specterops.io/offensive-security-guide-to-ssh-tunnels-and-proxies-b525cbd4d4c6
+* https://medium.com/maverislabs/proxyjump-the-ssh-option-you-probably-never-heard-of-2d7e41d43464
 
 Local Port Forwarding
 =====================
