@@ -26,3 +26,6 @@ Diff
     # Compare two current folders
     git diff --no-index dir1 dir2
     # can use non-git diff: diff -r dir1 dir2
+
+    # List files that differ
+    git diff --name-only origin/master..origin/mybranch
