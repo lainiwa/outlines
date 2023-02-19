@@ -92,6 +92,11 @@ Snippets
     # Delete remote branch
     git push origin --delete old-branch
 
+    # Add empty commit
+    # Use cases: Initial commit (easier rebase) and to trigger CI/CD build
+    git commit --allow-empty -m "Initial commit"
+    git commit --allow-empty -m "Zero diff"
+
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
 .. include:: .git_checkout.rst
