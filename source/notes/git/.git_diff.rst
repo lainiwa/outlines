@@ -4,6 +4,7 @@ Diff
 * `When to Use Each of the Git Diff Algorithms <https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/>`_
 * `How different are different diff algorithms in Git? <https://link.springer.com/article/10.1007/s10664-019-09772-z>`_
   - tl;dr: use ``--histogram`` for code changes
+* `How to compare files from two different branches <https://stackoverflow.com/questions/4099742/how-to-compare-files-from-two-different-branches>`_
 
 .. image:: imgs/diff.png
   :width: 600
@@ -29,3 +30,7 @@ Diff
 
     # List files that differ
     git diff --name-only origin/master..origin/mybranch
+
+    # Compare file/folder F1 from branch B1
+    # with F2 from branch B2
+    git diff origin/B1:path/to/F1 origin/B2:path/to/F2

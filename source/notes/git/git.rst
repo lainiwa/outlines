@@ -42,7 +42,13 @@ Sources:
 * Learning Git from Novice to Expert: https://news.ycombinator.com/item?id=23149700
 * https://symflower.com/en/company/blog/2021/git-autofixup/
 * https://github.blog/tag/git/
-
+* https://myme.no/posts/2023-01-22-git-commands-you-do-not-need.html
+    - https://news.ycombinator.com/item?id=34493236
+* TODO:
+    - reflog
+    - subrepo
+    - global ignore: https://news.ycombinator.com/item?id=34498580
+    - converting stash to a branch: https://news.ycombinator.com/item?id=34496395
 
 .. image:: imgs/rant.png
   :width: 49%
@@ -96,6 +102,12 @@ Snippets
     # Use cases: Initial commit (easier rebase) and to trigger CI/CD build
     git commit --allow-empty -m "Initial commit"
     git commit --allow-empty -m "Zero diff"
+
+    # Securely backup and restore a git repo
+    tar -cvf archive.tar .git/ && gpg -c archive.tar
+    <transfer file>
+    gpg -d archive.tar.gpg > archive.tar && tar -xvf archive.tar
+    git reset --hard master
 
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
