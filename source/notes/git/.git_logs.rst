@@ -53,3 +53,7 @@ Logs
 .. image:: imgs/log_range.svg
   :width: 70%
   :target: https://www.atlassian.com/git/tutorials/git-log#filtering-the-commit-history
+
+.. image:: imgs/log-dots.png
+  :width: 90%
+  :target: https://stackoverflow.com/a/7256391

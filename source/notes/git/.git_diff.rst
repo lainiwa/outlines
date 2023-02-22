@@ -34,3 +34,12 @@ Diff
     # Compare file/folder F1 from branch B1
     # with F2 from branch B2
     git diff origin/B1:path/to/F1 origin/B2:path/to/F2
+
+    # From common ancestor of A and B, to B commit
+    git diff A...B
+    # same as
+    git diff $(git merge-base A B) B
+
+.. image:: imgs/diff-dots.png
+  :width: 70%
+  :target: https://stackoverflow.com/a/7256391
