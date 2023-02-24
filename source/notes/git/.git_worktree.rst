@@ -17,3 +17,6 @@ Worktree
 
     # or: add worktree, and create branch hotfix
     git worktree add -b hotfix ../cmus-hotfix
+
+    # Add worktree for existing branch
+    git worktree add ../cmus-dev dev
