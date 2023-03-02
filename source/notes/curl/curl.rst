@@ -42,6 +42,17 @@ Certificates
 API examples
 ############
 
+WebDAV
+======
+* https://code.blogs.iiidefix.net/posts/webdav-with-curl/
+* https://www.qed42.com/insights/coe/drupal/using-curl-commands-webdav
+
+.. code-block:: sh
+
+    # Test auth
+    # --anyouth makes curl pick either --basic or --digest automatically
+    curl --user 'user:password' 'https://user.your-storagebox.de' --anyauth
+
 Docker
 ======
 
