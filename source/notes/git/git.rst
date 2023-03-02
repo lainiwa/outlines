@@ -269,6 +269,55 @@ Filer-repo
     git filter-branch -f --tree-filter "sed -e 's#shit#flower#g' -i *.txt" 685966d6..HEAD
 
 
+Git attributes
+##############
+* `SO: Git LFS: How to make .gitattributes catch multiple extension-less files with the same name, but in different folders, without files with extension <https://stackoverflow.com/questions/67369505/git-lfs-how-to-make-gitattributes-catch-multiple-extension-less-files-with-the>`_
+* `Be a Git ninja: the .gitattributes file <https://pablorsk.medium.com/be-a-git-ninja-the-gitattributes-file-e58c07c9e915>`_
+* `git-scm: gitattributes <https://git-scm.com/docs/gitattributes>`_
+
+.. code-block:: ini
+
+    # Override attribute to unspecified state
+    # (negative patterns are forbidden)
+    Foo*    attr1=value1 attr2=value2
+    *.meta  !attr1
+
+    # Ignore all test and documentation with "export-ignore"
+    # Omit this files when downloading ZIP on github
+    .gitattributes export-ignore
+    .gitignore     export-ignore
+    /docs          export-ignore
+    /tests         export-ignore
+
+    # Set files as either text or binary
+    # by extension
+    * text=auto
+    *.php text
+    *.png binary
+    *.jpg binary
+
+    # Conserve a CRLF-ending file
+    tests/newline/CRLF.php text eol=crl
+
+    # Set a default for when conflicts appear: default, ours, theirs
+    # I prefer -diff for mistakes prevention
+    yarn.lock         merge=ours
+    package-lock.json merge=ours
+
+    # Do not try merge these files
+    composer.lock          -diff
+    yarn.lock              -diff
+    public/build/js/*.js   -diff
+    public/build/css/*.css -diff
+    *.map                  -diff
+    rev-manifest.json      -diff
+
+    # Remove compiled assets from github statistics
+    public/build/css/*.css linguist-vendored
+    public/build/js/*      linguist-vendored
+    public/build/font/*    linguist-vendored
+
+
 Extensions
 ##########
 
@@ -292,7 +341,7 @@ Git Bug
 =======
 * https://github.com/MichaelMure/git-bug
 
-::
+.. code-block:: sh
 
     git bug user create
     git bug add
@@ -300,6 +349,63 @@ Git Bug
     git bug push
     git bug termui
     git bug webui
+
+Git annex
+=========
+* https://git-annex.branchable.com/special_remotes/webdav/
+* https://git-memo.readthedocs.io/en/latest/annex.html
+* https://docs.hetzner.com/robot/storage-box/access/access-webdav
+* https://github.com/emanuele/git-annex_tutorial
+* https://www.thomas-krenn.com/en/wiki/Git-annex_detailed_information
+* https://kdmurray.id.au/post/2022-01-12_difflines-git-annex/
+* https://git-annex.branchable.com/tips/centralized_git_repository_tutorial/
+* https://github.com/jhamrick/git-annex-tutorial/blob/master/Tutorial%20on%20git-annex.ipynb
+* https://interfect.github.io/#!/posts/005-Novaks-Teach-Other-People-git-annex-in-60-Minutes-Or-Less.md
+* https://habr.com/ru/post/570156/
+* https://git-annex.branchable.com/tips/peer_to_peer_network_with_tor/
+* https://surfer.nmr.mgh.harvard.edu/fswiki/GitAnnex
+* google: ``"git annex init" tutorial -"man page" -manpage -manpages -datalad``
+* https://git-annex.branchable.com/walkthrough/
+
+.. code-block:: sh
+
+    # Init local repo
+    git init
+    git annex init
+
+    # Add a special remote: WebDav on hetzner storage box
+    WEBDAV_USERNAME='u123456' \
+    WEBDAV_PASSWORD='passwordGoesHere' \
+    git annex initremote hetzner type=webdav \
+      url=https://u123456.your-storagebox.de/annex encryption=none
+
+    # Add a file
+    dd if=/dev/zero of=file_100M bs=1M count=100
+    git annex add file_100M
+
+    # Show remotes-x-files matrix (what where is being stored)
+    git annex list
+    # Sync files to remote
+    git annex sync hetzner --content
+
+Deleting files
+--------------
+* `deleting unwanted files <https://git-annex.branchable.com/tips/deleting_unwanted_files/>`_
+
+.. code-block:: sh
+
+    git rm file_100M file_1M
+
+    # Show locally unused files
+    git annex unused
+    # Drop locally unused files
+    git annex dropunused 1-2
+
+    # Same, but for remote
+    git annex unused --from hetzner
+    # Will fail unless --force is provided (because numcopies defaults to 1)
+    git annex dropunused --from hetzner 1-2
+
 
 Internals
 #########
