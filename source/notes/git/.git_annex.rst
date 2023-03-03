@@ -38,6 +38,7 @@ Adding remotes
 ==============
 * https://git-annex.branchable.com/special_remotes/
 * https://git-annex.branchable.com/special_remotes/webdav/
+* https://git-annex.branchable.com/special_remotes/rclone/
 
 .. code-block:: sh
 
@@ -49,11 +50,38 @@ Adding remotes
       encryption=none
 
     # Add a special remote: WebDav on hetzner storage box (encrypted)
+    # (30% slower than unencrypted WebDav sync)
     WEBDAV_USERNAME='u123456' \
     WEBDAV_PASSWORD='passwordGoesHere' \
     git annex initremote hetzner-secret type=webdav \
       url=https://u123456.your-storagebox.de/annex-encrypted \
       encryption=hybrid keyid=$GPG_KEY_OR_EMAIL
+
+    # Mounting sshfs is too slow
+    # Use git-annex-remote-rclone instead
+    # (30% slower than unencrypted WebDav sync)
+    git annex initremote hetzner-sftp type=external \
+        externaltype=rclone target=hetzner-sftp prefix=git-annex \
+        encryption=shared rclone_layout=lower
+
+Attributes
+==========
+* https://git-annex.branchable.com/walkthrough/backups/
+
+.. code-block:: sh
+
+    # Require at least two copies of each file
+    git annex numcopies 2
+    # and send each file to usbdrive
+    git annex copy . --to usbdrive
+
+    # Redefine numcopies for certain files
+    echo "*.ogg annex.numcopies=1" >> .gitattributes
+    echo "*.flac annex.numcopies=3" >> .gitattributes
+
+    # Same, but per folder approach
+    mkdir important_stuff
+    echo "* annex.numcopies=3" > important_stuff/.gitattributes
 
 Deleting files
 ==============
