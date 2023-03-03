@@ -8,7 +8,7 @@ DNS
 * `Anatomy of a Linux DNS Lookup – Part I <https://zwischenzugs.com/2018/06/08/anatomy-of-a-linux-dns-lookup-part-i/>`_
 
 Vocabulary
-==========
+##########
 * Records
     - **A**: Points to IP address
     - **AAAA**: Same as A, but for IPv6
@@ -21,7 +21,7 @@ Vocabulary
 
 
 Query
-=====
+#####
 ::
 
     Browser --asks--> ISP DNS
@@ -36,7 +36,7 @@ Root servers: ``{a..m}.root-servers.net.``
 
 
 NSSwitch
-========
+########
 
 Many programs use libc call `getaddrinfo <http://man7.org/linux/man-pages/man3/getaddrinfo.3.html>`_.
 
@@ -56,10 +56,10 @@ Example: ``ping`` uses nsswitch, while ``host`` doesn't (but both read ``resolv.
 
 
 Possible Issues
-===============
+###############
 
 WWW Problem
------------
+===========
 A record::
 
     A: www.example.com --> 123.123.123.123
@@ -72,13 +72,13 @@ CNAME record::
 
 
 Scripting
----------
+=========
 * use: ``getent hosts example.com`` (is `IPv6-first <https://unix.stackexchange.com/q/50365>`_ though)
 * don't: ``host example.com`` (doesn't respect nsswitch; not reliable output format)
 
 
 .. Root Servers
-.. ============
+.. ############
 
 
 ..     dig example.com +trace

@@ -9,7 +9,6 @@ Sources:
 * `Chalice Docs <https://aws.github.io/chalice/main.html>`_
 
 
-#####################
 AWS Credentials Setup
 #####################
 
@@ -41,7 +40,6 @@ Go to credentials menu:
 .. _`My Security Credentials`: https://console.aws.amazon.com/iam/home#security_credential
 
 
-############################
 Chalice Serverless Framework
 ############################
 

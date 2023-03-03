@@ -14,7 +14,6 @@ Load Averages
 .. * `The many load averages of Unix(es) <https://utcc.utoronto.ca/~cks/space/blog/unix/ManyLoadAveragesOfUnix>`_
 
 
-######
 Uptime
 ######
 
@@ -47,7 +46,6 @@ Uptime
         \_ load avg for 1m, 5m and 15m
 
 
-############
 Instant Load
 ############
 Instantaneous load of a system:
@@ -72,7 +70,6 @@ Same can be parsed from
 * both do not include threads, even though they are taken into account in the load average numbers exposed by the kernel
 
 
-#########################
 Load (Average) Definition
 #########################
 * Exponentially-damped/decaying moving average of the **Load** number
@@ -122,7 +119,6 @@ Important::
      */
 
 
-#######################################
 CPU Load Average to System Load Average
 #######################################
 The change (the swapping state was later removed from Linux)::
@@ -161,7 +157,6 @@ The change (the swapping state was later removed from Linux)::
     90491 N|rnberg (Germany)  \   Consulting+Networking+Programming+etc'ing
 
 
-#########
 Tick Rate
 #########
 Tick rate has a frequency of HZ hertz and a period of 1/HZ seconds.
@@ -175,7 +170,6 @@ If HZ is defined as 1000 that means that maximum amount of time that a process c
 Find current ``HZ`` with ``grep 'CONFIG_HZ=' /boot/config-$(uname -r)``.
 
 
-#####
 Jiffs
 #####
 Show current jiffs: ``sudo grep -E "^cpu|^jiff" /proc/timer_list``
@@ -188,7 +182,6 @@ The load average consists of measurements (samples) taken every 5 seconds:
     #define LOAD_FREQ       (5*HZ+1)        /* 5 sec intervals */
 
 
-########################
 Load Average is Relative
 ########################
 The number of tasks willing to run depends on:
@@ -206,7 +199,6 @@ Furthermore:
 * software setting all CPU cores to 100% will genrate higher LA on system with with smaller number of (or slower) cores
 
 
-#################################
 Load Average and CPU Usage Values
 #################################
 Expressed in % of CPU time:
@@ -227,7 +219,6 @@ Summary:
 It is more complicated with Hyperthreading.
 
 
-####################
 TASK_UNINTERRUPTIBLE
 ####################
 Possible cases might be:
@@ -253,7 +244,6 @@ Linux has uninterruptible and interruptible versions of mutex acquire functions
 and ``down()`` and ``down_interruptible()`` for semaphores):
 
 
-######
 mpstat
 ######
 There are tools like mpstat that can show the instantaneous CPU utilization:
@@ -269,7 +259,6 @@ There are tools like mpstat that can show the instantaneous CPU utilization:
     10:16:22 PM  all    0.00    0.00  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 
 
-###############
 Files in procfs
 ###############
 
@@ -317,7 +306,6 @@ get their information about the details of a process:
 they read it from ``/proc/<pid>/<file>``.
 
 
-#############
 Process State
 #############
 

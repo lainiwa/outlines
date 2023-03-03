@@ -8,7 +8,7 @@ Curl
 * https://gms.tf/when-curl-sends-100-continue.html
 * https://curl.github.io/curl-cheat-sheet/http-sheet.html
 
-########
+
 Snippets
 ########
 * https://www.dailysmarty.com/posts/escaping-hash-characters-and-other-symbols-in-curl
@@ -31,14 +31,12 @@ Snippets
     curl -v -H 'User-Agent:' -H 'Accept:' -H 'Host:' 'http://example.org/'
 
 
-############
 Certificates
 ############
 * https://support.kerioconnect.gfi.com/hc/en-us/articles/360015200119-Adding-Trusted-Root-Certificates-to-the-Server
 * https://github.com/gliderlabs/docker-alpine/issues/30
 
 
-############
 API examples
 ############
 
@@ -94,7 +92,6 @@ ClickHouse
 
     # Query Clickhouse
 
-############
 Benchmarking
 ############
 * https://speedtestdemon.com/a-guide-to-curls-performance-metrics-how-to-analyze-a-speed-test-result/
@@ -133,7 +130,7 @@ Legend:
 
 
 Measure bandwidth
------------------
+=================
 Approach: just download file of certain size and see how long it takes.
 Notice the ``Average Dload`` column.
 
@@ -185,7 +182,6 @@ Measure proxy latency:
         https://www.google.com
 
 
-#######################
 Converting to Languages
 #######################
 * https://curlconverter.com/
@@ -196,14 +192,12 @@ Converting to Languages
     curl https://httpbin.org/anything --libcurl main.c
 
 
-###########
 Other Tools
 ###########
 * https://github.com/lwthiker/curl-impersonate
 * https://hurl.dev/
 
 
-#########
 Exercises
 #########
 * https://jvns.ca/blog/2019/08/27/curl-exercises/

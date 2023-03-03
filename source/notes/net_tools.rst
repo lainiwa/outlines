@@ -9,7 +9,7 @@ Sources:
 
 
 Ping & Traceroute
------------------
+#################
 #. ``ping <host>`` - check node is available by sending ICMP packets
     * ``ping -[a]udible`` doesn't work
 #. ``traceroute <host>`` - ping every node on the way to ``<host>``
@@ -17,7 +17,7 @@ Ping & Traceroute
     * has gtk gui
 
 netstat
--------
+#######
 Print:
 
 * network connections
@@ -35,7 +35,7 @@ Usage::
             [-r|--route]      <-- routing table
 
 ss
----
+###
 Another utility to investigate sockets.
 
 Sources:
@@ -64,7 +64,7 @@ Examples:
     sudo ss -o state established '( dport = :https or sport = :https )'
 
 nslookup
---------
+########
 Query internet name servers.
 
 Usage::
@@ -78,7 +78,7 @@ Usage::
     nslookup -type=any microsoft.com  <-- all types (error: NOT IMPlemented in bind<9.3)
 
 vnstat
-------
+######
 Console-based network traffic monitor
 
 vnstati: png image output support for vnStat
@@ -105,15 +105,15 @@ Usage::
     vnstati -s -i docker0+enp0s3 -o summary.png    <-- cumulative output
 
 iptraf
-------
+######
 Interactive colorful IP LAN monitor
 
 ntop
-----
+####
 Display top network users (Web GUI)
 
 nmap
-----
+####
 
 tcpdump
--------
+#######

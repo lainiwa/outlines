@@ -13,7 +13,6 @@ Todo:
 Run commands on every login: ``~/.ssh/rc``.
 
 
-########
 Snippets
 ########
 * SSH quoting
@@ -31,7 +30,6 @@ Snippets
 .. include:: .signing.rst
 
 
-###############
 Authorized Keys
 ###############
 * `TIL authorized_keys files can contain more than just public keys <https://twitter.com/cyb3rops/status/1395009709787258882>`_
@@ -58,7 +56,6 @@ Options:
     command="echo go away"                              ssh-rsa AAAA...YZ== gary@example.net
 
 
-############
 Private Keys
 ############
 
@@ -102,7 +99,6 @@ Avoid ECDSA/DSA though.
     ssh -i ~/.ssh/your-key user@host
 
 
-##########################
 Multi Factor Authenticator
 ##########################
 * `Trying to get SSH with public key (no password) + google authenticator working <https://serverfault.com/a/740881>`_
@@ -138,7 +134,6 @@ Restart:
     sudo systemctl restart sshd.service
 
 
-#############
 Configuration
 #############
 
@@ -158,7 +153,6 @@ To disable login by password::
     ChallengeResponseAuthentication no
     PasswordAuthentication no
 
-#############
 SFTP security
 #############
 
@@ -189,7 +183,6 @@ Right
         PermitTTY no
 
 
-########################
 Authentification Methods
 ########################
 
@@ -201,7 +194,6 @@ Examples:
     ssh 192.168.0.123 -o PubkeyAuthentication=no
 
 
-######
 Attack
 ######
 * `SSH Pentesting Guide <https://community.turgensec.com/ssh-hacking-guide/>`_
@@ -216,7 +208,6 @@ Misconfigurations:
     - Can be bruteforced by: metasploit, hydra, medusa, ncrack
 
 
-#######
 Linters
 #######
 * `mozilla/ssh_scan <https://github.com/mozilla/ssh_scan>`_
@@ -227,7 +218,6 @@ Examples:
 
     docker run -it mozilla/ssh_scan -t 127.0.0.1 |jq
 
-#########
 ssh-agent
 #########
 * `Про SSH Agent <https://habr.com/ru/company/skillfactory/blog/503466/>`_

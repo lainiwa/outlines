@@ -11,12 +11,10 @@ Sources:
 * http://alexott.net/ru/writings/altlinux-emacs/
 * https://lordgrenville.github.io/posts/Emacs/
 
-##########
 Installing
 ##########
 * `Various ways <https://www.emacswiki.org/emacs/EmacsSnapshotAndDebian>`_ to install Emacs
 
-##############
 Remapping Keys
 ##############
 * ``Caps Lock`` as ``Ctrl``
@@ -29,7 +27,6 @@ Remapping Keys
 *  TODO: Buy simmetric keyboard
 
 
-############
 Config Files
 ############
 

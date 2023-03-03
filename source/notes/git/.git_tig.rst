@@ -5,7 +5,7 @@ Tig TUI
 * `tig and add interactive  <https://emmanuelbernard.com/blog/2017/08/02/tig-add-interactive/>`_
 
 Switching views
----------------
+===============
 * ``[m]ain``
 * ``[s]tatus``
 * ``[t]ree``
@@ -14,7 +14,7 @@ Switching views
 * ``[h]elp``
 
 Status view
------------
+===========
 * ``[u] Stage/unstage file or chunk``
 * ``[!] Revert file or chunk``
 * ``[C]ommit``

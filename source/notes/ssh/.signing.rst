@@ -1,5 +1,4 @@
 
-#####################
 Signing with SSH Keys
 #####################
 * `SSH is the new GPG <https://blog.sigstore.dev/ssh-is-the-new-gpg-74b3c6cc51c0>`_

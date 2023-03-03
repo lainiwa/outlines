@@ -3,28 +3,24 @@
 ZSH
 ===
 
-###########
 Completions
 ###########
 * https://blog.mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
 * https://zsh.sourceforge.io/Refcard/
     - rendered: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 
-###############
 Alternate Forms
 ###############
 * https://zsh.sourceforge.io/Doc/Release/Shell-Grammar.html#Alternate-Forms-For-Complex-Commands
 * https://unix.stackexchange.com/questions/468582/examples-of-zsh-alternate-forms-of-complex-commands
 
 
-#########
 Expansion
 #########
 * ``man 1 zshexpn``
 
----------
 Modifiers
----------
+=========
 * `Zshell path modifiers <https://www.tlbx.app/blog/zshell-path-modifiers>`_
 * `Modifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers>`_
 * ``LESS="$LESS+/^ *Modifiers$" man 1 zshexpn``
@@ -69,9 +65,8 @@ Modifiers
     echo ${STR:2}     # --> 23456789
 
 
--------------------
 Parameter Expansion
--------------------
+===================
 * `Zshell path modifiers <https://www.tlbx.app/blog/zshell-path-modifiers>`_
 * `Modifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags>`_
 * ``LESS="$LESS+/^ *Parameter Expansion Flags$" man 1 zshexpn``
@@ -90,9 +85,8 @@ Parameter Expansion
     string=${(F)array}      # $string == $STR
     string=${(pj/\n/)array}
 
----------------
 Glob Qualifiers
----------------
+===============
 * `Glob Qualifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers>`_
 * ``LESS="$LESS+/^ *Glob Qualifiers$" man 1 zshexpn``
 

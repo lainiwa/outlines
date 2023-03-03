@@ -34,7 +34,7 @@ Tag
     git describe --match='subcomponent/*'
 
 Tag push permissions
---------------------
+====================
 ``git tag log`` and ``mkdir log`` creates ambiguety when ``git log test``.
 Advice: configure Git server to accept tag pushes only from release managers.
 
@@ -45,7 +45,7 @@ Shell completion will work with ``v<Tab>``,
 while ``1<Tab>`` will give you all commits with hash starting with 1.
 
 Use annotated tags
-------------------
+==================
 **Not** lightweight:
 
 * ``git describe`` does not require ``--tags``
