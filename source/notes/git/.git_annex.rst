@@ -1,0 +1,74 @@
+
+Annex
+#####
+* https://git-annex.branchable.com/special_remotes/webdav/
+* https://git-memo.readthedocs.io/en/latest/annex.html
+* https://docs.hetzner.com/robot/storage-box/access/access-webdav
+* https://github.com/emanuele/git-annex_tutorial
+* https://www.thomas-krenn.com/en/wiki/Git-annex_detailed_information
+* https://kdmurray.id.au/post/2022-01-12_difflines-git-annex/
+* https://git-annex.branchable.com/tips/centralized_git_repository_tutorial/
+* https://github.com/jhamrick/git-annex-tutorial/blob/master/Tutorial%20on%20git-annex.ipynb
+* https://interfect.github.io/#!/posts/005-Novaks-Teach-Other-People-git-annex-in-60-Minutes-Or-Less.md
+* https://habr.com/ru/post/570156/
+* https://git-annex.branchable.com/tips/peer_to_peer_network_with_tor/
+* https://surfer.nmr.mgh.harvard.edu/fswiki/GitAnnex
+* google: ``"git annex init" tutorial -"man page" -manpage -manpages -datalad``
+* https://git-annex.branchable.com/walkthrough/
+
+Snippets
+========
+
+.. code-block:: sh
+
+    # Init local repo
+    git init
+    git annex init
+
+    # Add a file
+    dd if=/dev/zero of=file_100M bs=1M count=100
+    git annex add file_100M
+
+    # Show remotes-x-files matrix (what where is being stored)
+    git annex list
+    # Sync files to remote
+    git annex sync hetzner --content
+
+Adding remotes
+==============
+* https://git-annex.branchable.com/special_remotes/
+* https://git-annex.branchable.com/special_remotes/webdav/
+
+.. code-block:: sh
+
+    # Add a special remote: WebDav on hetzner storage box
+    WEBDAV_USERNAME='u123456' \
+    WEBDAV_PASSWORD='passwordGoesHere' \
+    git annex initremote hetzner type=webdav \
+      url=https://u123456.your-storagebox.de/annex \
+      encryption=none
+
+    # Add a special remote: WebDav on hetzner storage box (encrypted)
+    WEBDAV_USERNAME='u123456' \
+    WEBDAV_PASSWORD='passwordGoesHere' \
+    git annex initremote hetzner-secret type=webdav \
+      url=https://u123456.your-storagebox.de/annex-encrypted \
+      encryption=hybrid keyid=$GPG_KEY_OR_EMAIL
+
+Deleting files
+==============
+* https://git-annex.branchable.com/tips/deleting_unwanted_files/
+
+.. code-block:: sh
+
+    git rm file_100M file_1M
+
+    # Show locally unused files
+    git annex unused
+    # Drop locally unused files
+    git annex dropunused 1-2
+
+    # Same, but for remote
+    git annex unused --from hetzner
+    # Will fail unless --force is provided (because numcopies defaults to 1)
+    git annex dropunused --from hetzner 1-2
