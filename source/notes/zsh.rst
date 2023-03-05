@@ -106,6 +106,7 @@ Glob Qualifiers
     ls **/*(/^F)          # list empty directories
     ls /etc/*(@)          # symlinks only
     ls **/*(-@)           # list dangling symlinks
+    ls **/*(D.)           # list files, including hidden ones
 
     # .     - regular files
     # Lm-2  - files smaller than 2 MB
