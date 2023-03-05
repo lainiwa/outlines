@@ -34,6 +34,9 @@ Snippets
     # Sync files to remote
     git annex sync hetzner --content
 
+    # Annex might leave many git objects
+    git gc && git repack -Ad && git prune
+
 Adding remotes
 ==============
 * https://git-annex.branchable.com/special_remotes/
