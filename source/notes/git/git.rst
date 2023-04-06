@@ -49,6 +49,7 @@ Sources:
     - subrepo
     - global ignore: https://news.ycombinator.com/item?id=34498580
     - converting stash to a branch: https://news.ycombinator.com/item?id=34496395
+* https://git-send-email.io/
 
 .. image:: imgs/rant.png
   :width: 49%
@@ -124,6 +125,7 @@ Snippets
 .. include:: .git_submodule_subtree.rst
 .. include:: .git_tig.rst
 .. include:: .git_worktree.rst
+.. include:: .git_remote.rst
 .. include:: .git_notes.rst
 .. include:: .git_annex.rst
 
@@ -225,6 +227,9 @@ Practices
 * `Things I wish Git had: Commit groups <https://blog.danieljanus.pl/2021/07/01/commit-groups/>`_
 * `Trunk Based Development <https://trunkbaseddevelopment.com/>`_
 * https://medium.com/@kentbeck_7670/test-commit-revert-870bbd756864
+* `My unorthodox, branchless git workflow <https://drewdevault.com/2020/04/06/My-weird-branchless-git-workflow.html>`_
+    - Author uses ``git push origin HEAD~5:refs/heads/master`` to push changes
+    - Same as ``git push origin HEAD~5:master``
 
 Merge vs Rebase
 ===============

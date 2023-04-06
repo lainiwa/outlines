@@ -5,6 +5,7 @@ Logs
 * https://stackoverflow.com/questions/51009808/whats-the-difference-between-git-log-and-git-log-decorate
 * https://stackoverflow.com/a/7251377
 * https://elijahmanor.com/blog/git-log
+* https://tekin.co.uk/2020/11/patterns-for-searching-git-revision-histories
 
 .. code-block:: sh
 

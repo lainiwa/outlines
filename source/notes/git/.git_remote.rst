@@ -1,0 +1,8 @@
+Remote
+######
+* https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories
+
+.. code-block:: sh
+    
+    # Change remote url
+    git remote set-url origin https://github.com/OWNER/REPOSITORY.git

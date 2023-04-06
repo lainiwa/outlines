@@ -2,6 +2,8 @@
 Rebase and Cherry Pick
 ######################
 * https://womanonrails.com/git-rebase-onto
+* https://andrewlock.net/working-with-stacked-branches-in-git-is-easier-with-update-refs/
+* https://www.viget.com/articles/the-new-git-option-for-rebasing-multiple-branches-at-once/
 
 Rebase
 ======
@@ -63,6 +65,18 @@ Rebase
                                                      \
                                                       D---E---H---I (my-branch)
 
+::
+
+  git rebase master feature-2
+  git rebase --update-refs master feature-2
+
+  Before                    After (with --update-refs)      After (no --update-refs)
+  A---B---C (master)       A---B---C (master)             A---B---C (master)
+       \                            \                          \   \
+        D---E (feature-2)            D'---E' (feature-2)        D   D'---E' (feature-2)
+         \                            \                          \
+          (feature-1)                  (feature-1)                (feature-1)
+
 Cherry pick
 ===========
 
@@ -74,3 +88,15 @@ Cherry pick
 
     git cherry-pick 2c33a
     git cherry-pick -x 2c33a  # add "(cherry picked from commit ...)" message
+
+
+git-revise
+==========
+* https://git-revise.readthedocs.io/
+
+A better ``git rebase -i``
+
+.. code-block:: sh
+
+    # Interactive revise non-published commits in current branch
+    git revise -i

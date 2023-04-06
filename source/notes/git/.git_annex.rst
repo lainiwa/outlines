@@ -1,20 +1,44 @@
 
 Annex
 #####
-* https://git-annex.branchable.com/special_remotes/webdav/
-* https://git-memo.readthedocs.io/en/latest/annex.html
-* https://docs.hetzner.com/robot/storage-box/access/access-webdav
-* https://github.com/emanuele/git-annex_tutorial
-* https://www.thomas-krenn.com/en/wiki/Git-annex_detailed_information
-* https://kdmurray.id.au/post/2022-01-12_difflines-git-annex/
-* https://git-annex.branchable.com/tips/centralized_git_repository_tutorial/
-* https://github.com/jhamrick/git-annex-tutorial/blob/master/Tutorial%20on%20git-annex.ipynb
-* https://interfect.github.io/#!/posts/005-Novaks-Teach-Other-People-git-annex-in-60-Minutes-Or-Less.md
-* https://habr.com/ru/post/570156/
-* https://git-annex.branchable.com/tips/peer_to_peer_network_with_tor/
-* https://surfer.nmr.mgh.harvard.edu/fswiki/GitAnnex
 * google: ``"git annex init" tutorial -"man page" -manpage -manpages -datalad``
+* https://docs.hetzner.com/robot/storage-box/access/access-webdav
+* https://git-annex.branchable.com/tips/centralized_git_repository_tutorial/
+* https://git-annex.branchable.com/tips/peer_to_peer_network_with_tor/
 * https://git-annex.branchable.com/walkthrough/
+* https://git-memo.readthedocs.io/en/latest/annex.html
+* https://github.com/emanuele/git-annex_tutorial
+* https://github.com/jhamrick/git-annex-tutorial/blob/master/Tutorial%20on%20git-annex.ipynb
+* https://habr.com/ru/post/570156/
+* https://kdmurray.id.au/post/2022-01-12_difflines-git-annex/
+* https://surfer.nmr.mgh.harvard.edu/fswiki/GitAnnex
+* https://www.thomas-krenn.com/en/wiki/Git-annex_detailed_information
+* https://gist.github.com/rmi1974/08ff06eeca729bbd0a8e3c4d8e1adafd
+* https://git-annex.branchable.com/forum/How_to_delete_a_remote__63__/
+* https://git-annex.branchable.com/tips/a_gui_for_metadata_operations/
+* https://git-annex.branchable.com/tips/antipatterns/
+* https://git-annex.branchable.com/tips/disabling_a_special_remote/
+* https://git-annex.branchable.com/tips/git-annex_extensions_for_ranger__44___the_file_manager/
+* https://git-annex.branchable.com/tips/Repositories_with_large_number_of_files/
+* https://git-annex.branchable.com/tips/using_signed_git_commits/
+* https://git-annex.branchable.com/tips/what_to_do_when_you_lose_a_repository/
+* https://git-annex.branchable.com/walkthrough/automatically_managing_content/
+* https://git-annex.branchable.com/walkthrough/fsck__58___verifying_your_data/
+* https://interfect.github.io/#!/posts/005-Novaks-Teach-Other-People-git-annex-in-60-Minutes-Or-Less.md
+* https://www.thomas-krenn.com/en/wiki/Git-annex_Repository_on_an_External_Hard_Drive
+
+* https://git-annex.branchable.com/git-annex-copy/
+    - ``--from=remote1 --to=remote2``
+
+https://cheatography.com/babobba/cheat-sheets/git-annex/
+https://scicomp.aalto.fi/scicomp/git-annex/
+https://swan.physics.wsu.edu/forbes/draft/git-annex/
+https://oldwiki.scinet.utoronto.ca/images/5/55/Snug-git-annex.pdf
+https://tylercipriani.com/blog/2015/05/13/git-annex/
+https://temofeev.ru/info/articles/organizatsiya-raspredelyennogo-khraneniya-faylov-s-pomoshchyu-git-annex/
+https://blog.debiania.in.ua/posts/2013-12-15-advertising-git-annex.html
+https://superuser.com/questions/564381/moving-two-existing-already-synced-directory-trees-to-git-annex
+https://anarc.at/hardware/phone/htc-one-s/
 
 Snippets
 ========
@@ -31,7 +55,7 @@ Snippets
 
     # Show remotes-x-files matrix (what where is being stored)
     git annex list
-    # Sync files to remote
+    # Sync files with remote
     git annex sync hetzner --content
 
     # Annex might leave many git objects
@@ -42,6 +66,14 @@ Adding remotes
 * https://git-annex.branchable.com/special_remotes/
 * https://git-annex.branchable.com/special_remotes/webdav/
 * https://git-annex.branchable.com/special_remotes/rclone/
+* Wasabi
+    - https://docs.wasabi.com/docs/what-are-the-service-urls-for-wasabis-different-storage-regions
+    - https://wasabi-support.zendesk.com/hc/en-us/articles/115001757791-How-do-I-use-s3cmd-with-Wasabi-
+    - https://git-annex.branchable.com/special_remotes/S3/
+    - https://wasabi-support.zendesk.com/hc/en-us/articles/5943664705179-How-can-I-check-if-my-bucket-is-private-
+    - https://console.wasabisys.com/#/file_manager/
+    - https://wasabi-support.zendesk.com/hc/en-us/articles/115001744651-How-do-I-use-S3FS-with-Wasabi-
+* https://git-annex.branchable.com/forum/Sync_files_from_remote_to_remote/
 
 .. code-block:: sh
 
@@ -66,6 +98,67 @@ Adding remotes
     git annex initremote hetzner-sftp type=external \
         externaltype=rclone target=hetzner-sftp prefix=git-annex \
         encryption=shared rclone_layout=lower
+
+    # Add a special remote: S3 on Wasabi (encrypted)
+    AWS_ACCESS_KEY_ID='123456789ABCDEFGHIJK' \
+    AWS_SECRET_ACCESS_KEY='123456789abcdefghijklmnopqrstuvwxyz01234' \
+    git annex initremote wasabi-secret type=S3 \
+      host=s3.eu-central-1.wasabisys.com \
+      encryption=hybrid keyid=$GPG_KEY_OR_EMAIL
+
+    AWS_ACCESS_KEY_ID='123456789ABCDEFGHIJK' \
+    AWS_SECRET_ACCESS_KEY='123456789abcdefghijklmnopqrstuvwxyz01234' \
+    git annex initremote wasabi-secret type=S3 \
+        host='s3.eu-central-1.wasabisys.com' bucket=lainiwa-annex \
+        encryption=hybrid keyid=$GPG_KEY_OR_EMAIL
+
+Config
+======
+* https://git-annex.branchable.com/git-annex-numcopies/
+* https://git-annex.branchable.com/git-annex-mincopies/
+
+.. code-block:: sh
+
+    # Open git annex config in text editor
+    git annex vicfg
+
+    # Set numcopies and mincopies
+    git annex numcopies 2
+    git annex numcopies 1  # excessive: defaults to 1 anyway
+
+Requred and Preferred Content
+=============================
+* https://git-annex.branchable.com/preferred_content/standard_groups/
+* https://git-annex.branchable.com/preferred_content/
+* https://git-annex.branchable.com/git-annex-preferred-content/
+* https://git-annex.branchable.com/git-annex-wanted/
+* https://git-annex.branchable.com/git-annex-groupwanted/
+    - important
+    - standard vs groupwanted ??
+* https://git-annex.branchable.com/git-annex-group/
+* https://git-annex.branchable.com/sync/
+* https://git-annex.branchable.com/git-annex-required/
+
+.. code-block:: sh
+
+    # Set wasabi remote to prefer to store everything
+    git annex group wasabi backup
+    git annex wanted wasabi groupwanted
+    # same for hetzner remote
+    git annex group hetzner backup
+    git annex wanted hetzner groupwanted
+
+    # Set `here` to store only some files
+    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*.txt or include=imgs/photos/*) and exclude=imgs/photos/*.mp4"
+
+    # Edit config file in $EDITOR
+    git annex vicfg
+
+    # When set, you can do these
+    git annex drop --auto
+    git annex get --auto
+    # or
+    git annex sync --content
 
 Attributes
 ==========
@@ -103,3 +196,20 @@ Deleting files
     git annex unused --from hetzner
     # Will fail unless --force is provided (because numcopies defaults to 1)
     git annex dropunused --from hetzner 1-2
+
+Matching and finding files
+==========================
+* https://git-annex.branchable.com/git-annex-matching-options/
+* https://git-annex.branchable.com/git-annex-find/
+
+.. code-block:: sh
+
+    # Find files that are one one remote but not on the other
+    git annex find --in=hetzner --and --not --in=wasabi \
+              --or --in=wasabi --and --not --in=hetzner
+
+    # Find files that are stored locally but not on remote
+    git annex find --in=here --and --not --in=hetzner
+
+Moving files around
+===================

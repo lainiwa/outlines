@@ -3,6 +3,7 @@ Stash
 #####
 * https://bluecast.tech/blog/git-stash/
 * https://www.atlassian.com/ru/git/tutorials/saving-changes/git-stash
+* `SO: How to resolve git stash conflict without commit? <https://stackoverflow.com/questions/7751555/how-to-resolve-git-stash-conflict-without-commit>`_
 
 .. image:: imgs/stash-options.svg
   :width: 600
@@ -47,6 +48,9 @@ Stash
     git restore -s 'stash@{0}' -SW sqlite-history.zsh
     # Create copy of stashed file under different name
     git show stash@{0}:stashed_file.rb > copy_of_stashed_file.rb
+
+    # In case of conflict
+    git restore --staged <conflicting-file>
 
     git stash list
     git stash show [-p|--patch] [<n>]
