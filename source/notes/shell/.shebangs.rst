@@ -1,0 +1,80 @@
+
+Shebangs
+########
+* `dotbot <https://github.com/anishathalye/dotbot/blob/master/bin/dotbot>`_
+* `SO: How to write a shebang line that will call either either python3 or python2 whichever is available <https://stackoverflow.com/questions/63360890/how-to-write-a-shebang-line-that-will-call-either-either-python3-or-python2-whic>`_
+* `What the #! shebang really does <https://dev.to/meleu/what-the-shebang-really-does-and-why-it-s-so-important-in-your-shell-scripts-2755>`_
+* https://nix.dev/tutorials/reproducible-scripts
+
+Pick python version before running:
+
+From dotbot:
+
+.. code-block:: sh
+
+    #!/usr/bin/env sh
+
+    # This is a valid shell script and also a valid Python script. When this file
+    # is executed as a shell script, it finds a python binary and executes this
+    # file as a Python script, passing along all of the command line arguments.
+    # When this file is executed as a Python script, it loads and runs Dotbot. This
+    # is useful because we don't know the name of the python binary.
+
+    ''':' # begin python string; this line is interpreted by the shell as `:`
+    command -v python  >/dev/null 2>&1 && exec python  "$0" "$@"
+    command -v python3 >/dev/null 2>&1 && exec python3 "$0" "$@"
+    command -v python2 >/dev/null 2>&1 && exec python2 "$0" "$@"
+    >&2 echo "error: cannot find python"
+    exit 1
+    '''
+    # python code
+    import sys, os
+
+    ...
+
+Version from SO:
+
+.. code-block:: sh
+
+    #!/bin/bash
+    '''':
+    for interpreter in python3 python2 python
+    do
+        which $interpreter >/dev/null 2>&1 && exec $interpreter "$0" "$@"
+    done
+    echo "$0: No python could be found" >&2
+    exit 1
+    # '''
+
+
+    import sys
+    print(sys.version)
+
+My shebang for running things in nix-shell and failing back to bash if no nix-shell is available:
+
+.. code-block:: sh
+
+    #!/usr/bin/env sh
+
+    MYSCRIPT="$(mktemp)"
+    trap 'rm -f -- "${MYSCRIPT}"' EXIT
+
+    to_print=
+    while IFS= read -r line; do
+        [ "${line}" = '#!/usr/bin/env nix-shell' ] && to_print=yes
+        [ -n "${to_print}" ] && printf '%s\n' "${line}"
+    done < "$0" >"${MYSCRIPT}"
+    # or, use sed instead of the above:
+    # sed -n '/^#!\/usr\/bin\/env nix-shell$/,$p' "$0" >"${MYSCRIPT}"
+
+    command -v nix-shell >/dev/null 2>&1 && exec nix-shell "${MYSCRIPT}" "$@"
+    command -v bash      >/dev/null 2>&1 && exec bash      "${MYSCRIPT}" "$@"
+    >&2 echo "error: cannot find nix-shell or bash"
+    exit 1
+
+    #!/usr/bin/env nix-shell
+    #!nix-shell -i bash --pure
+    #!nix-shell -p bash cacert curl jq python3Packages.xmljson
+    #!nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
+
+    curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .

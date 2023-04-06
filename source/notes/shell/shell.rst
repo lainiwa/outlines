@@ -13,6 +13,7 @@ Shell Scripting
 .. include:: .logging_debugging.rst
 .. include:: .locking.rst
 .. include:: .functions.rst
+.. include:: .shebangs.rst
 
 Script Template
 ###############
