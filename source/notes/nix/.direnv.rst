@@ -1,0 +1,32 @@
+
+Direnv
+######
+* https://stackabuse.com/managing-python-environments-with-direnv-and-pyenv/
+* https://github.com/nix-community/nix-direnv
+* https://cyberchris.xyz/posts/nix-python-pyright/
+* https://direnv.net/
+* https://direnv.net/docs/ruby.html
+* https://direnv.net/man/direnv-stdlib.1.md
+
+.. code-block:: sh
+
+    echo 'use nix' > .envrc
+    direnv allow
+
+.. code-block:: nix
+    :caption: flake.nix
+
+    { pkgs ? import <nixpkgs> { } }:
+
+    let
+      my-python = pkgs.python310;
+      python-with-my-packages = my-python.withPackages
+        (p: with p; [ numpy pytorch matplotlib requests python-dotenv ]);
+    in pkgs.mkShell {
+      buildInputs = [
+        python-with-my-packages
+      ];
+      shellHook = ''
+        PYTHONPATH=${python-with-my-packages}/${python-with-my-packages.sitePackages}
+      '';
+    }

@@ -1,0 +1,136 @@
+
+Flakes
+######
+* https://nixos.wiki/wiki/Flakes
+* https://www.tweag.io/blog/2020-05-25-flakes/
+
+Enable Flakes
+=============
+
+.. code-block:: nix
+    :caption: ~/.config/nix/nix.conf
+
+    experimental-features = nix-command flakes
+    # or use `nix --experimental-features='nix-command flakes' ...`
+
+Use Flakes
+==========
+
+.. code-block:: sh
+
+    # This repo is a flake, because it contains a flake.nix file
+    $ nix shell github:edolstra/dwarffs --command dwarffs --version
+    dwarffs 0.1.20200406.cd7955a
+
+    # More reproducible example
+    $ nix shell github:edolstra/dwarffs/0056c32d1d2bfb76ca412286348dac3b24d3aeee ...
+
+    # Notice that nixpkgs (and nix) flake is locked to specific revision
+    # Recorded in flake.lock
+    $ nix flake metadata github:edolstra/dwarffs
+    ...
+    Inputs:
+    ├───nix: github:NixOS/nix/586fa707fca207dbd12e49800691390249bdcd03
+    │   └───nixpkgs: github:NixOS/nixpkgs/2fa57ed190fd6c7c746319444f34b5917666e5c1
+    └───nixpkgs follows input 'nix/nixpkgs'
+
+Flake outputs
+=============
+
+.. code-block:: sh
+
+    # Flakes can provide arbitrary Nix values (the outputs)
+    # (e.g packages, modules, library functions)
+    $ nix flake show github:edolstra/dwarffs
+    github:edolstra/dwarffs/1f850df9c932acb95da2f31b576a8f6c7c188376
+    ├───checks
+    ...
+    │   └───x86_64-linux
+    │       ├───build: derivation 'dwarffs-0.1.20220906.1f850df'
+    │       └───test: derivation 'vm-test-run-unnamed'
+    ├───defaultPackage
+    │   ├───aarch64-linux: package 'dwarffs-0.1.20220906.1f850df'
+    │   ├───i686-linux: package 'dwarffs-0.1.20220906.1f850df'
+    │   └───x86_64-linux: package 'dwarffs-0.1.20220906.1f850df'
+    ├───nixosModules
+    │   └───dwarffs: NixOS module
+    └───overlay: Nixpkgs overlay
+    # Some outputs have special meaning and must be of specific types
+    # e.g. `defaultPackage.<system>` must be a derivation
+    # It’s what `nix build` and `nix shell` will build
+    # unless you specify another output:
+    $ nix build github:edolstra/dwarffs#checks.aarch64-linux.build
+
+    # Standard `checks` output specifies derivations
+    # to be built by a CI (e.g Hydra)
+
+Flake registry
+==============
+
+``nixpkgs`` (and symbolic identifiers) is linked to actual locations in `flake registry <https://raw.githubusercontent.com/NixOS/flake-registry/master/flake-registry.json>`_:
+
+.. code-block:: sh
+
+    $ nix shell 'nixpkgs#cowsay' --command cowsay Hello
+    $ nix shell 'github:NixOS/nixpkgs#cowsay' --command cowsay Hello
+    $ nix shell 'git+https://github.com/NixOS/nixpkgs#cowsay' --command cowsay Hello
+
+    # Override registry
+    $ nix registry add nixpkgs ~/my-nixpkgs
+
+    # Pin registry to specific revision
+    $ nix registry add nixpkgs github:NixOS/nixpkgs/5272327b81ed355bbed5659b8d303cf2979b6953
+
+Writing a Flake
+===============
+
+.. code-block:: sh
+
+    # Create a boilerplate flake.nix
+    $ nix flake init
+
+.. code-block:: nix
+    :caption: flake.nix
+
+    {
+      # One line, shown in `nix flake metadata`
+      description = "A flake for building Hello World";
+
+      # Dependencies. Passed as inputs as args to `outputs` function
+      # Precise version is locked during `nix build`
+      inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-20.03;
+
+      # `self` - this flake
+      outputs = { self, nixpkgs }: {
+
+        defaultPackage.x86_64-linux =
+          # Explode to this namespace the result of
+          # importing and running `nixpkgs` function
+          with import nixpkgs { system = "x86_64-linux"; };
+
+          stdenv.mkDerivation {
+            name = "hello";
+            src = self;
+            buildPhase = "gcc -o hello ./hello.c";
+            installPhase = "mkdir -p $out/bin; install -t $out/bin hello";
+          };
+
+      };
+    }
+
+.. code-block:: sh
+
+    # Any file not tracked by git is ignored
+    $ git add --intent-to-add flake.nix hello.c
+    # Buil and run with any of these:
+    $ nix build           && ./result/bin/hello
+    $ nix build .         && ./result/bin/hello
+    $ nix build '.#hello' && ./result/bin/hello
+    $ nix shell           --command hello
+    $ nix shell .         --command hello
+    $ nix shell '.#hello' --command hello
+    Hello, world!
+
+    # Update lock file
+    $ nix flake lock --update-input nixpkgs
+    $ nix build

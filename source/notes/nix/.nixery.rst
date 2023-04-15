@@ -1,0 +1,13 @@
+
+Nixery
+######
+* https://nixery.dev/
+
+Debug with nixery:
+
+.. code-block:: sh
+
+    kubectl -n my-namespace run test -ti --rm --restart=Never --image='nixery.dev/shell/dig/htop/curl' --command -- bash
+
+    # bashInteractive becomes bashinteractive
+    docker run --rm -ti nixery.dev/coreutils-full/findutils/bashinteractive/python3/jupyter bash -c '/nix/store/*-python3.10-jupyter-core-*/bin/jupyter'
