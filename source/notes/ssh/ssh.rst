@@ -9,6 +9,7 @@ Todo:
 * `Arch Wiki: Google_Authenticator <https://wiki.archlinux.org/index.php/Google_Authenticator_(Русский)>`_
 * https://blog.zsec.uk/locking-down-ssh-the-right-way/
 * https://highon.coffee/blog/ssh-lateral-movement-cheat-sheet/
+* https://johannes.truschnigg.info/writing/2022-07_advanced_ssh_usage/
 
 Run commands on every login: ``~/.ssh/rc``.
 
@@ -24,6 +25,7 @@ Snippets
         + ``ssh server bash <script``
         + ``ssh server "echo $(cat script|base64 -w0) | base64 -d | bash"`` is same, but doesn't use stdin
         + ``echo command | tee | ssh bash -seux``
+    - Run a script with ``ssh server "$(< script.sh)"``
 
 
 .. include:: .tunneling.rst
@@ -218,8 +220,29 @@ Examples:
 
     docker run -it mozilla/ssh_scan -t 127.0.0.1 |jq
 
+SSH escape sequences
+####################
+* `Closing a stale SSH connection <https://davidisaksson.dev/posts/closing-stale-ssh-connections/>`_
+    - `HN <https://readhacker.news/c/5Cbzc>`__
+
+.. code-block:: text
+
+    user@host:~$ ~?
+    Supported escape sequences:
+     ~.   - terminate session
+     ~B   - send a BREAK to the remote system
+     ~R   - request rekey
+     ~#   - list forwarded connections
+     ~?   - this message
+     ~~   - send the escape character by typing it twice
+    (Note that escapes are only recognized immediately after newline.)
+
+
 ssh-agent
 #########
 * `Про SSH Agent <https://habr.com/ru/company/skillfactory/blog/503466/>`_
-
-
+* https://rabexc.org/posts/using-ssh-agent
+* https://rabexc.org/posts/pitfalls-of-ssh-agents
+    - https://news.ycombinator.com/item?id=28576617
+* https://smallstep.com/blog/ssh-agent-explained/
+    - https://news.ycombinator.com/item?id=23241934
