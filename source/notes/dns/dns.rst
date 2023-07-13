@@ -2,10 +2,25 @@
 ===
 DNS
 ===
+* `NsLookup Learning Center <https://www.nslookup.io/learning/>`_
 * `Troubleshooting DNS with dig <https://youtu.be/cFmy2wNw9RQ>`_
 * `DNS Root Servers <https://securitytrails.com/blog/dns-root-servers>`_
 * `The Sisyphean Task Of DNS Client Config on Linux <https://tailscale.com/blog/sisyphean-dns-client-linux/>`_
 * `Anatomy of a Linux DNS Lookup – Part I <https://zwischenzugs.com/2018/06/08/anatomy-of-a-linux-dns-lookup-part-i/>`_
+    - https://zwischenzugs.com/2018/06/08/anatomy-of-a-linux-dns-lookup-part-i/
+    - https://zwischenzugs.com/2018/06/18/anatomy-of-a-linux-dns-lookup-part-ii/
+    - https://zwischenzugs.com/2018/07/06/anatomy-of-a-linux-dns-lookup-part-iii/
+    - https://zwischenzugs.com/2018/08/06/anatomy-of-a-linux-dns-lookup-part-iv/
+    - https://zwischenzugs.com/2018/09/13/anatomy-of-a-linux-dns-lookup-part-v-two-debug-nightmares/
+* https://sookocheff.com/post/networking/how-does-dns-work/
+* https://doc.powerdns.com/authoritative/appendices/types.html
+
+Online DNS Check Tools
+######################
+* `Zonemaster <https://zonemaster.net/en/run-test>`_
+* `Cloudflare Radar <https://radar.cloudflare.com/scan>`_
+* `DNS Spy <https://dnsspy.io/>`_
+
 
 Vocabulary
 ##########
@@ -57,6 +72,7 @@ Example: ``ping`` uses nsswitch, while ``host`` doesn't (but both read ``resolv.
 
 Possible Issues
 ###############
+* `Why a domain’s root can’t be a CNAME — and other tidbits about the DNS <https://www.freecodecamp.org/news/why-cant-a-domain-s-root-be-a-cname-8cbab38e5f5c/>`_
 
 WWW Problem
 ===========
@@ -75,6 +91,60 @@ Scripting
 =========
 * use: ``getent hosts example.com`` (is `IPv6-first <https://unix.stackexchange.com/q/50365>`_ though)
 * don't: ``host example.com`` (doesn't respect nsswitch; not reliable output format)
+
+
+Using ``dig``
+#############
+* `Useful Linux Dig Examples for the Network Admin <https://adamtheautomator.com/linux-dig/>`_
+* `JEvans: How to use dig <https://jvns.ca/blog/2021/12/04/how-to-use-dig/>`_
+    - `HN <https://news.ycombinator.com/item?id=29441333>`__
+
+DNS Query Options
+=================
+
+1. **name**: e.g ``jvns.ca``. Default is ``.``
+2. **query type**: e.g. ``A`` or ``CNAME``. Default is ``A``
+3. **DNS server**: e.g. ``@8.8.8.8``. Default is whatever is in ``/etc/resolv.conf``
+
+Examples:
+
+* ``dig @8.8.8.8 jvns.ca``
+* ``dig ns jvns.ca``
+
+Reverse DNS Lookup
+==================
+
+.. code-block:: sh
+
+    $ dig -x 172.217.13.174
+    174.13.217.172.in-addr.arpa. 72888 IN   PTR yul03s04-in-f14.1e100.net.
+
+    # `-x 172.217.13.174` is a shortcut for
+    $ dig ptr 174.13.217.172.in-addr.arpa.
+
+Formatting response
+===================
+
+.. code-block:: sh
+
+    $ dig +noall +answer ns google.com
+    google.com.     158564  IN  NS  ns4.google.com.
+    ...
+
+    $ dig +short ns google.com
+    ns2.google.com.
+    ...
+
+    $ # Return behavior by default (if non-empty ~/.digrc)
+    $ dig +all jvns.ca
+
+digrc
+=====
+
+.. code-block:: sh
+    :caption: ~/.digrc
+
+    +noall +answer
 
 
 .. Root Servers
