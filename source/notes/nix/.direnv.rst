@@ -14,7 +14,7 @@ Direnv
     direnv allow
 
 .. code-block:: nix
-    :caption: flake.nix
+    :caption: shell.nix
 
     { pkgs ? import <nixpkgs> { } }:
 

@@ -3,6 +3,7 @@ Flakes
 ######
 * https://nixos.wiki/wiki/Flakes
 * https://www.tweag.io/blog/2020-05-25-flakes/
+* https://www.tweag.io/blog/2020-06-25-eval-cache/
 
 Enable Flakes
 =============
@@ -88,6 +89,12 @@ Writing a Flake
 
     # Create a boilerplate flake.nix
     $ nix flake init
+
+    # Or, list available templates and pick one
+    $ nix flake show templates
+    ...
+    $ nix flake init -t 'templates#python'
+    wrote: /home/lain/tmp/keks/flake.nix
 
 .. code-block:: nix
     :caption: flake.nix
