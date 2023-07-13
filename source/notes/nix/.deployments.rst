@@ -1,0 +1,6 @@
+
+Deployments
+###########
+* `Gabriella Gonzalez: Announcing nixos-rebuild: a "new" deployment tool for NixOS <https://www.haskellforall.com/2023/01/announcing-nixos-rebuild-new-deployment.html>`_
+* `Reddit: The best solution for deploying flakes <https://www.reddit.com/r/NixOS/comments/r5vq3y/the_best_solution_for_deploying_flakes/>`_
+* `Xe: Using Morph for Deploying to NixOS <https://xeiaso.net/blog/morph-setup-2021-04-25>`_

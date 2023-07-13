@@ -1,0 +1,48 @@
+
+Nix Shells
+##########
+* https://www.reddit.com/r/NixOS/comments/r15hx4/nix_shell_vs_nix_develop/
+* https://blog.ysndr.de/posts/guides/2021-12-01-nix-shells/
+
+``nix-shell`` was broken up to:
+
+* ``nix shell``
+* ``nix develop``
+* ``nix run``
+
+
+``nix develop``
+===============
+Recreates build environments for single packages.
+E.g. ``nix develop 'nixpkgs#hello'`` to enter nix builder environment for ``hello``.
+
+Loads ``buildInputs`` and env variables, executes ``shellHooks``.
+Lets
+
+This allows to run phases:
+
+.. code-block:: shell
+
+    # in shell
+    $ unpackPhase
+    $ cd hello-2.12.1
+    $ configurePhase
+    $ buildPhase
+
+    # or directly
+    nix develop --<PHASE>
+    nix develop --phase PHASE  # for non-standard phases
+
+or run an arbitrary commands:
+
+.. code-block:: shell
+
+    nix develop --command <COMMAND> [ARGS...]
+
+
+``nix shell``
+=============
+
+
+``nix run``
+===========
