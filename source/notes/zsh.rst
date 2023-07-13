@@ -2,6 +2,7 @@
 ===
 ZSH
 ===
+* http://www.stargrave.org/ZSH-proscons.html
 
 Completions
 ###########
@@ -89,6 +90,7 @@ Glob Qualifiers
 ===============
 * `Glob Qualifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers>`_
 * ``LESS="$LESS+/^ *Glob Qualifiers$" man 1 zshexpn``
+* https://thevaluable.dev/zsh-expansion-guide-example/
 
 .. code-block:: bash
 
@@ -98,6 +100,7 @@ Glob Qualifiers
     ls -l    **/*(Lk+3)     # show files greater than 3 KB
     print -l **/*(mh-1)     # show files modified in the last hour
     ls -l    **/*(om[1,3])  # sort files from most to least recently modified and show the last 3
+    print -l **/*([1])      # 1'st match
 
     ls *.^c(.)            # all files excluding c files
     ls -l *.(png|jpg|gif) # images only
