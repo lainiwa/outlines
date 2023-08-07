@@ -8,12 +8,15 @@ Shell Scripting
 * https://github.com/dylanaraps/pure-bash-bible
 * https://www.oreilly.com/library/view/bash-cookbook/0596526784/ch05s02.html
 * https://google.github.io/styleguide/shellguide.html
+* https://news.ycombinator.com/item?id=36605869
 
 .. include:: .help.rst
 .. include:: .logging_debugging.rst
 .. include:: .locking.rst
 .. include:: .functions.rst
 .. include:: .shebangs.rst
+.. include:: .traps.rst
+.. include:: .self_extracting.rst
 
 Script Template
 ###############

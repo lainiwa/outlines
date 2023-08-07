@@ -50,7 +50,8 @@ Version from SO:
     import sys
     print(sys.version)
 
-My shebang for running things in nix-shell and failing back to bash if no nix-shell is available:
+My shebang for running things in nix-shell
+and failing back to bash if no nix-shell is available:
 
 .. code-block:: sh
 
@@ -63,7 +64,7 @@ My shebang for running things in nix-shell and failing back to bash if no nix-sh
     while IFS= read -r line; do
         [ "${line}" = '#!/usr/bin/env nix-shell' ] && to_print=yes
         [ -n "${to_print}" ] && printf '%s\n' "${line}"
-    done < "$0" >"${MYSCRIPT}"
+    done <"$0" >"${MYSCRIPT}"
     # or, use sed instead of the above:
     # sed -n '/^#!\/usr\/bin\/env nix-shell$/,$p' "$0" >"${MYSCRIPT}"
 

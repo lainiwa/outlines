@@ -1,0 +1,126 @@
+
+Self Extracting Scripts
+#######################
+* https://news.ycombinator.com/item?id=36605869
+* https://www.xmodulo.com/embed-binary-file-bash-script.html
+* Shar - a shell archive
+    - https://en.wikipedia.org/wiki/Shar
+    - https://makeself.io/
+    - https://manpages.debian.org/bookworm/sharutils/shar.1.en.html
+
+
+Approaches for embedding data:
+
+* By techinque of embedding
+    - At the end of the script
+        + doesn't work with ``curl |bash``
+    - Using a heredoc
+        + doesn't work with binary
+        + hard to automatically substitute for text with newlines
+    - Using a string variable
+        + doesn't work with binary
+* By data type
+    - Text
+    - Binary
+        + raw
+        + gzipped
+        + base64-encoded (text)
+        + gzipped and base64-encoded (text)
+
+
+You can add data to the end of the script.
+
+
+Single file static web page
+===========================
+
+Served by netcat.
+
+Mind that template ``static_web_template.sh`` should end with newline:
+
+.. code-block:: sh
+    :caption: static_web_template.sh
+
+    #!/env/bin/env bash
+
+    trap 'rm -f "$TMPFILE"' EXIT
+    TMPFILE=$(mktemp) || exit 1
+
+    sed -e '1,/^exit  # exit before data section$/d' "${0}" > "$TMPFILE"
+
+    while :; do
+    {
+        echo -ne "HTTP/1.0 200 OK\r\nContent-Length: $(wc -c <"$TMPFILE")\r\n\r\n"
+        cat "$TMPFILE"
+    } | nc -l -p 8000 -q 1
+    done
+
+    exit  # exit before data section
+
+Creating the target script:
+
+.. code-block:: sh
+
+    { cat static_web_template.sh
+      curl -sL example.com
+    } > static_web.sh
+
+
+Adding binary data to the script
+================================
+
+Template file for opening an image in ``sxiv``:
+
+.. code-block:: sh
+    :caption: img_viewer_template.sh
+
+    #!/env/bin/env bash
+
+    trap 'rm -f "$TMPFILE"' EXIT
+    TMPFILE=$(mktemp) || exit 1
+
+    sed -e '1,/^exit  # exit before data section$/d' "${0}" > "$TMPFILE"
+
+    sxiv "$TMPFILE"
+
+    exit  # exit before data section
+
+Creating the script:
+
+.. code-block:: sh
+
+    { cat img_viewer_template.sh
+      curl -sSL https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg
+    } > img_viewer.sh
+
+
+Archive in a string variable
+============================
+
+Script template (unpacks icons collection and lets you view them in browser at http://localhost:8000):
+
+.. code-block:: sh
+    :caption: icon_viewer_template.sh
+
+    #!/env/bin/env bash
+
+    trap 'rm -f "$TMPDIR"' EXIT
+    TMPDIR=$(mktemp -d) || exit 1
+
+    ARCHIVE_BASE64=''
+
+    printf "%s" "${ARCHIVE_BASE64}" |base64 -d |
+    tar -xz -C "${TMPDIR}" --strip-components=2 simple-icons-9.9.0/icons
+
+    python3 -m http.server --directory "${TMPDIR}"
+
+Creating the script:
+
+.. code-block:: sh
+
+    { sed "/^    ARCHIVE_BASE64=''\$/Q" icon_viewer_template.sh
+      printf "    ARCHIVE_BASE64='"
+      curl -sSL https://github.com/simple-icons/simple-icons/archive/refs/tags/9.9.0.tar.gz |base64 --wrap=0
+      printf "'\n"
+      sed -e "1,/^    ARCHIVE_BASE64='.*'\$/d" icon_viewer_template.sh
+    } > icon_viewer.sh

@@ -1,0 +1,80 @@
+
+Traps
+#####
+* http://redsymbol.net/articles/bash-exit-traps/
+    - https://news.ycombinator.com/item?id=36400465
+
+Snippets
+========
+
+Removing temporary files:
+
+.. code-block:: sh
+
+    trap 'rm -f "$TMPFILE"' EXIT
+    TMPFILE=$(mktemp) || exit 1
+
+    scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
+    finish() {
+      rm -rf "$scratch"
+    }
+    trap finish EXIT
+
+Bringing service back up after maintanence:
+
+.. code-block:: sh
+
+    finish() {
+        # re-start service
+        sudo service mongdb start
+    }
+    trap finish EXIT
+    # Stop the mongod instance
+    sudo service mongdb stop
+    # (If mongod is configured to fork, e.g. as part of a replica set, you
+    # may instead need to do "sudo killall --wait /usr/bin/mongod".)
+
+Debugging a bash script:
+
+.. code-block:: sh
+
+    failure() {
+      echo "Failed at ${1}: ${2}"
+    }
+    trap 'failure "$LINENO" "BASH_COMMAND"' ERR
+
+
+Shell Specific
+==============
+
+POSIX Shell:
+
+Signal terminations are not caught by EXIT.
+It only catches normal exits.
+Unfortunately, the EXIT condition is not well-defined by POSIX,
+so it's left to interpretation.
+
+Dash calls ``trap EXIT`` only on normal exit.
+
+.. code-block:: sh
+
+    trap 'eval $(ssh-agent -k)' EXIT INT ABRT KILL TERM
+    # or: trap 'eval $(ssh-agent -k)' EXIT SIGINT SIGABRT SIGKILL SIGTERM
+
+Bash:
+
+Unlike dash, bash calls ``trap EXIT`` for all signals.
+Also, bash has ``ERR`` to catch when a script fails (non-POSIX feature).
+
+Zsh:
+
+In Zsh, ``EXIT`` and ``ERR`` behaves similar to bash.
+
+.. code-block:: sh
+
+    {
+        echo lol
+    } always {
+        # Ensure *all* temporary files are cleaned up.
+        nohup rm -rf / &
+    }

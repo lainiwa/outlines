@@ -77,6 +77,14 @@ The last one allows to create a simple debugger inside a bash script:
 
     trap '_trap_DEBUG' DEBUG
 
+You can change the ``set -x`` output format:
+
+.. code-block:: sh
+
+    # Enable verbose logging of the bash script
+    PS4='+ ${BASH_SOURCE:-}:${FUNCNAME[0]:-}:L${LINENO:-}:   '
+    set -x
+
 Alternatives:
 
 * `selivan/bash-debug <https://github.com/selivan/bash-debug>`_
