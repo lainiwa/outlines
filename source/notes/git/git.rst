@@ -30,6 +30,7 @@ Sources:
     - https://www.kenneth-truyers.net/2016/10/13/git-nosql-database/
 * Alternatives
     - https://monorepo.tools/
+    - https://www.bitquabit.com/post/unorthodocs-abandon-your-dvcs-and-return-to-sanity/
 * Others, used:
 * `GitLab Tutorial <http://dept.cs.williams.edu/~freund/cs434/GitLab.html>`_
 * https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1
@@ -109,6 +110,15 @@ Snippets
     <transfer file>
     gpg -d archive.tar.gpg > archive.tar && tar -xvf archive.tar
     git reset --hard master
+
+    # Cat file contents
+    git show b3d85ad:./file.txt
+    git show origin/master:dir/f.txt > g.txt
+    git show branchA~10:fileA branchB^^:fileB
+
+    # Find to which branches the commit belongs
+    git branch -r --contains <commit>
+    git branch -a --contains <commit>
 
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
@@ -230,6 +240,7 @@ Practices
 * `My unorthodox, branchless git workflow <https://drewdevault.com/2020/04/06/My-weird-branchless-git-workflow.html>`_
     - Author uses ``git push origin HEAD~5:refs/heads/master`` to push changes
     - Same as ``git push origin HEAD~5:master``
+* https://fjtc.substack.com/p/10-the-ultimate-commit
 
 Merge vs Rebase
 ===============
