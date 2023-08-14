@@ -17,6 +17,7 @@ Shell Scripting
 .. include:: .shebangs.rst
 .. include:: .traps.rst
 .. include:: .self_extracting.rst
+.. include:: .argparse.rst
 
 Script Template
 ###############
