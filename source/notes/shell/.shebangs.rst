@@ -10,7 +10,7 @@ Pick python version before running:
 
 From dotbot:
 
-.. code-block:: sh
+.. code-block:: py
 
     #!/usr/bin/env sh
 
@@ -34,7 +34,7 @@ From dotbot:
 
 Version from SO:
 
-.. code-block:: sh
+.. code-block:: py
 
     #!/bin/bash
     '''':
