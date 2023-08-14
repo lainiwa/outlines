@@ -104,7 +104,7 @@ Script template (unpacks icons collection and lets you view them in browser at h
 
     #!/env/bin/env bash
 
-    trap 'rm -f "$TMPDIR"' EXIT
+    trap 'rm -rf "$TMPDIR"' EXIT
     TMPDIR=$(mktemp -d) || exit 1
 
     ARCHIVE_BASE64=''
