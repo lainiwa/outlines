@@ -8,6 +8,7 @@ Averages
 - **Population (arithmetic) mean/average**: :math:`\mu = \frac{\sum_{i=1}^{n} x_i}{n}`
 - **Sample mean**: :math:`\bar{x}`
 - **Median**:
+
   .. math::
 
     \tilde{x} = \begin{cases}
@@ -18,6 +19,7 @@ Averages
 * **Mode** is the value that appears most often in a set.
 
 * **Variance**: measures dispersion around the mean.
+
   .. math::
 
       \begin{array}{cc}
