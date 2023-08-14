@@ -4,6 +4,7 @@ Statistics
 ==========
 .. http://www.pythondoc.com/sphinx/ext/math.html
 .. https://chiplicity.readthedocs.io/en/latest/Using_Sphinx/UsingMathEquationsInSphinx.html
+
 * https://byjus.com/maths/probability-and-statistics-symbols/
 * https://web.mit.edu/~csvoss/Public/usabo/stats_handout.pdf
 * https://byjus.com/maths/probability-and-statistics-symbols/
