@@ -68,8 +68,7 @@ Modifiers
 
 Parameter Expansion
 ===================
-* `Zshell path modifiers <https://www.tlbx.app/blog/zshell-path-modifiers>`_
-* `Modifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags>`_
+* `Parameter expansion flags <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags>`_
 * ``LESS="$LESS+/^ *Parameter Expansion Flags$" man 1 zshexpn``
 
 .. code-block:: bash
