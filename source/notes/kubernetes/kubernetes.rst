@@ -502,7 +502,7 @@ Chart structure::
   └── values.yaml
 
 .. code-block:: yaml
-    :caption: Chart.yaml
+  :caption: Chart.yaml
 
   apiVersion: v2
   name: test-chart
