@@ -18,6 +18,7 @@ Shell Scripting
 .. include:: .traps.rst
 .. include:: .self_extracting.rst
 .. include:: .argparse.rst
+.. include:: .zsh.rst
 
 Script Template
 ###############
