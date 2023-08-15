@@ -53,7 +53,7 @@ Information on processes
 * **COMMAND:** The name of the command that started the process
 
 The difference between VIRT, RES and SHR
----------------------
+----------------------------------------
 * **VIRT:** virtual size of a process; a sum of memory it is actually using, memory it has mapped into itself (for instance the video card's RAM for the X server), files on disk that have been mapped into it (most notably shared libraries), and memory shared with other processes. VIRT represents how much memory the program is able to access at the present moment.
 * **RES:** resident size; actual physical memory a process is consuming. Corresponds directly to the %MEM column
 * **SHR** indicates how much of the VIRT size is actually sharable memory or libraries. In the case of libraries, it does not necessarily mean that the entire library is resident. For example, if a program only uses a few functions in a library, the whole library is mapped and will be counted in VIRT and SHR, but only the parts of the library file containing the functions being used will actually be loaded in and be counted under RES.
