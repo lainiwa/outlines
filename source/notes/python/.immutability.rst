@@ -31,7 +31,7 @@ Immutable versions of standard types:
   # 4
 
 For dataclasses we can set ``frozen=True, slots=True``.
-Refer to :ref:`Dataclasses` for details and gotchas.
+Refer to `Dataclasses section <#dataclasses>`_ for details and gotchas.
 
 3rd party libraries:
 
