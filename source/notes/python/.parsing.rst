@@ -1,0 +1,6 @@
+
+Parsing
+##########
+* `Faster, more memory-efficient Python JSON parsing with msgspec <https://pythonspeed.com/articles/faster-python-json-parsing/>`_
+  - For large files `use ijson <https://pythonspeed.com/articles/json-memory-streaming/>`__
+  - Msgspec is used by `litestar <https://litestar.dev/>`_ web framework (src: `HN <https://news.ycombinator.com/item?id=36640128>`__)

@@ -1,0 +1,50 @@
+
+Immutability
+############
+
+Immutable structures
+====================
+* `Python etc 666 <https://t.me/pythonetc/666>`_
+* `How to Make an Immutable Dict in Python <https://adamj.eu/tech/2022/01/05/how-to-make-immutable-dict-in-python/>`_
+* `SO: What does frozen mean for dataclasses? <https://stackoverflow.com/questions/66194804/what-does-frozen-mean-for-dataclasses>`_
+
+Immutable versions of standard types:
+
+* Immutable ``list`` is ``tuple``.
+* Immutable ``set`` is ``frozenset``.
+* Immutable ``bytearray`` is ``bytes``.
+* ``dict`` doesn't have an immutable version
+  but it has ``types.MappingProxyType`` wrapper that makes it immutable
+
+.. code-block:: py
+
+  from types import MappingProxyType
+
+  orig = {1: 2}
+  immut = MappingProxyType(orig)
+
+  immut[3] = 4
+  # TypeError: 'mappingproxy' object does not support item assignment
+
+  orig[3] = 4
+  immut[3]
+  # 4
+
+For dataclasses we can set ``frozen=True, slots=True``.
+Refer to :ref:`Dataclasses` for details and gotchas.
+
+3rd party libraries:
+
+* `immutables <https://github.com/MagicStack/immutables>`_
+* `pyrsistent <https://github.com/tobgu/pyrsistent>`_
+
+Final type
+==========
+* `docs: Final type <https://docs.python.org/3/library/typing.html#typing.Final>`_
+* `PEP 591 – Adding a final qualifier to typing <https://peps.python.org/pep-0591/>`_
+* `SO: final annotation and decorator in python3.8 <https://stackoverflow.com/questions/57596086/final-annotation-and-decorator-in-python3-8>`_
+
+.. code-block:: py
+
+  MAX_SIZE: Final = 9000
+  MAX_SIZE += 1  # Error reported by type checker

@@ -1,0 +1,38 @@
+
+Dataclasses
+###########
+* https://realpython.com/python-data-classes/
+* https://docs.python.org/3/library/dataclasses.html
+
+For dataclasses we can set ``frozen=True, slots=True``:
+
+.. code-block:: py
+
+  from dataclasses import dataclass
+
+  @dataclass(frozen=True, slots=True)
+  class Frozen:
+      x: int
+      y: int
+      l: list[int]  # <-- still mutable, use tuples instead
+
+Set defaults:
+
+.. code-block:: py
+
+  from dataclasses import dataclass, field
+  class A:
+      x: int = 0
+      y: int = field(default=0)  # same as x
+
+Validation:
+
+Approaches:
+
+* Use ``__post_init__``
+  - Adding all logic to ``__init__``: `example <https://www.slingacademy.com/article/python-how-to-validate-data-in-dataclass/>`__
+  - Defining ``validate_*`` functions and calling them in a loop in ``__post_init__``: `src <https://gist.github.com/rochacbruno/978405e4839142e409f8402eece505e8>`__
+  - Instead of ``validate_*`` functions you can use metadata, like this ``age: int = field(metadata={"validate": lambda value: value > 0})``
+  - Type checking `is somewhat tricky <https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses>`__ (`here <https://ricardoanderegg.com/posts/python-validate-dataclass-types/>`__ is a simpler non-recursive type-checking version), use 3rd party libraries instead
+* For mutable dataclasses also define ``__setattr__``
+* Use 3rd party libs like ``pydantic``, ``msgspec``

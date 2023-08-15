@@ -1,0 +1,79 @@
+
+Decorators
+##########
+* `Primer on Python Decorators <https://realpython.com/primer-on-python-decorators/>`_
+  - multiple examples, but no info on typing decorators
+* `Functools Wraps Made Simple: What You Need to Know <https://www.pythonpool.com/functools-wraps/>`_
+* `SO: What does functools.wraps do? <https://stackoverflow.com/questions/308999/what-does-functools-wraps-do>`_
+* Python etc `729 <https://t.me/pythonetc/729>`__ and `730 <https://t.me/pythonetc/730>`__
+  - ``ParamSpec`` + ``TypeVar`` + ``Concatenate``
+* `Fully-typed Python decorator with optional arguments <https://lemonfold.io/posts/2022/dbc/typed_decorator/>`_
+* `Python ParamSpec guide <https://sobolevn.me/2021/12/paramspec-guide>`_
+
+Typing a decorator:
+
+.. code-block:: py
+
+  from functools import wraps
+  from typing import Callable, TypeVar, ParamSpec
+  from typing import reveal_type
+
+  ParamsTs = ParamSpec('ParamsTs')
+  ReturnT = TypeVar('ReturnT')
+
+  def debug(
+    f: Callable[ParamsTs, ReturnT],
+  ) -> Callable[ParamsTs, ReturnT]:
+    @wraps(f)
+    def inner(
+      *args: ParamsTs.args,
+      **kwargs: ParamsTs.kwargs,
+    ) -> ReturnT:
+      ...
+      return f(*args, **kwargs)
+    return inner
+
+  @debug
+  def concat(a: str, b: str) -> str:
+    """Concatenate two strings."""
+    return a + b
+
+
+  reveal_type(concat)
+  # Revealed type is "def (a: str, b: str) -> str"
+
+  print(concat.__doc__)
+  # Will print: "Concatenate two strings."
+
+Decorator having more or less arguments than decorated function:
+
+.. code-block:: py
+
+  from functools import wraps
+  from typing import Callable, Concatenate, ParamSpec, TypeVar
+
+  ParamsTs = ParamSpec('ParamsTs')
+  ReturnT = TypeVar('ReturnT')
+
+  class User: ...
+  class Request: ...
+  class Response: ...
+
+  def with_user(
+    f: Callable[Concatenate[User, ParamsTs], ReturnT],
+  ) -> Callable[P, ReturnT]:
+    @wraps(f)
+    def inner(*args: ParamsTs.args, **kwargs: ParamsTs.kwargs) -> ReturnT:
+      user = User()
+      return f(user, *args, **kwargs)
+    return inner
+
+  @with_user
+  def handle_request(
+    user: User,
+    request: Request,
+  ) -> Response:
+    ...
+
+  request = Request()
+  response = handle_request(request)
