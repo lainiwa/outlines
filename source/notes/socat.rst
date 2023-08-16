@@ -52,6 +52,7 @@ Socket forwarding
 -----------------
 * `Can anyone explain docker.sock <https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock>`_
 * `Docker Tips: about /var/run/docker.sock <https://betterprogramming.pub/about-var-run-docker-sock-3bfd276e12fd>`_
+* `SO: Is it possible to access a Unix socket over the network? <https://unix.stackexchange.com/questions/683688/is-it-possible-to-access-a-unix-socket-over-the-network>`_
 
 .. code-block:: sh
 
@@ -67,6 +68,12 @@ Socket forwarding
     curl -XPOST --unix-socket /var/run/docker.sock -d '{"Image":"nginx"}' -H 'Content-Type: application/json' http://localhost:3307/containers/create
     docker ps -a
     # docker rm ...
+
+    # Mounting a remote unix socket
+    # on the server:
+    socat TCP-LISTEN:6644,reuseaddr,fork UNIX-CONNECT:/path/to/socket/file
+    # on the client:
+    socat UNIX-LISTEN:/tmp/remote_socket,fork,reuseaddr,unlink-early,user=file_owner,group=file_group,mode=770 TCP:1.2.3.4:6644
 
 MITM
 ----
