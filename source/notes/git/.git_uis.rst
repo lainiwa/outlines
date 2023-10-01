@@ -1,11 +1,35 @@
 
-Tig TUI
+Git UIs
 #######
+
+GitWeb
+======
+* `scm: GitWeb <https://git-scm.com/book/en/v2/Git-on-the-Server-GitWeb>`_
+
+An 8к Perl CGI script.
+
+Configure to bind to localhost, and be served with python:
+
+.. code-block:: ini
+
+    [instaweb]
+        local = true
+        httpd = python
+
+Run:
+
+.. code-block:: sh
+
+    git instaweb         # runs on http://localhost:1234
+    git instaweb --stop
+
+Tig TUI
+=======
 * `Tig cheatsheet <https://devhints.io/tig>`_
 * `tig and add interactive  <https://emmanuelbernard.com/blog/2017/08/02/tig-add-interactive/>`_
 
 Switching views
-===============
+---------------
 * ``[m]ain``
 * ``[s]tatus``
 * ``[t]ree``
@@ -14,7 +38,7 @@ Switching views
 * ``[h]elp``
 
 Status view
-===========
+-----------
 * ``[u] Stage/unstage file or chunk``
 * ``[!] Revert file or chunk``
 * ``[C]ommit``

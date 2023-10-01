@@ -133,7 +133,7 @@ Snippets
 .. include:: .git_stacked.rst
 .. include:: .git_logs.rst
 .. include:: .git_submodule_subtree.rst
-.. include:: .git_tig.rst
+.. include:: .git_uis.rst
 .. include:: .git_worktree.rst
 .. include:: .git_remote.rst
 .. include:: .git_notes.rst
