@@ -41,3 +41,17 @@ Redirections
 ############
 * `Bash One-Liners Explained, Part III: All about redirections <https://catonmat.net/bash-one-liners-explained-part-three>`_
 * `Bash Redirections Cheat Sheet <https://catonmat.net/ftp/bash-redirections-cheat-sheet.pdf>`_
+
+Parallelization
+###############
+
+ZSH Zargs
+=========
+* `zsh-builtin xargs <https://neg-serg.github.io/2017/03/zargs-howto/>`_
+
+Xargs
+=====
+* https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
+
+GNU Parallel
+============

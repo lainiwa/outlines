@@ -22,7 +22,7 @@ Expansion
 Modifiers
 ---------
 * `Zshell path modifiers <https://www.tlbx.app/blog/zshell-path-modifiers>`_
-* `Modifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers>`_
+* `zsh docs (14.1.4): Modifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers>`_
 * ``LESS="$LESS+/^ *Modifiers$" man 1 zshexpn``
 
 .. code-block:: bash
@@ -67,7 +67,7 @@ Modifiers
 
 Parameter Expansion
 -------------------
-* `Parameter expansion flags <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags>`_
+* `zsh docs (14.3.1): Parameter expansion flags <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags>`_
 * ``LESS="$LESS+/^ *Parameter Expansion Flags$" man 1 zshexpn``
 
 .. code-block:: bash
@@ -86,7 +86,7 @@ Parameter Expansion
 
 Glob Qualifiers
 ---------------
-* `Glob Qualifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers>`_
+* `zsh docs (14.8.7): Glob Qualifiers <http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers>`_
 * ``LESS="$LESS+/^ *Glob Qualifiers$" man 1 zshexpn``
 * https://thevaluable.dev/zsh-expansion-guide-example/
 

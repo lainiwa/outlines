@@ -2,6 +2,10 @@
 Help Message
 ############
 * `gist: kovetskiy/samizdat-shell-help.bash <https://gist.github.com/kovetskiy/a4bb510595b3a6b17bfd1bd9ac8bb4a5>`_
+* `HN: Please don't print –-help to stderr in your CLI tools <https://news.ycombinator.com/item?id=37682859>`_
+    - ``--help`` goes to stdout
+    - ``--invalid-option`` that prints help message goes to stderr,
+      and returns non-zero exit code. Best would be the ``EX_USAGE  (64)``
 
 .. code-block:: sh
 
