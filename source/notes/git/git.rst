@@ -175,6 +175,27 @@ Clean
     #
     git clean ... [-n|--dry-run]
 
+Refs
+####
+* `Demystifying Git references aka refs <https://towardsdatascience.com/demystifying-git-references-aka-refs-bdd09029d072>`_
+* `SO: How do I "undo" a --single-branch clone? <How do I "undo" a --single-branch clone?>`_
+
+Local branches are storead in ``.git/refs/heads/``.
+Remote branches - in ``.git/refs/remotes/origin``
+(the remote, as created by ``git clone``, default name is ``origin``).
+
+Example config, as created by ``git clone`` (without the ``--single-branch`` flag):
+
+.. code-block:: sh
+
+    $ git config --local --list
+
+    remote.origin.url=https://github.com/<git_username>/my_repo.git
+    remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+    branch.master.remote=origin
+    branch.master.merge=refs/heads/master
+
+
 Reflog
 ######
 
