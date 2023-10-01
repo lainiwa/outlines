@@ -4,7 +4,7 @@ Kelly Criterion
 * `The Kelly criterion: How to size bets <https://explore.paulbutler.org/bet/>`_
 * `Wikipedia: Kelly criterion <https://en.wikipedia.org/wiki/Kelly_criterion>`_
     - `HN <https://readhacker.news/c/4JNSx>`_
-
+* https://habr.com/ru/amp/publications/750890/
 
 `Quote from HN thread <https://news.ycombinator.com/item?id=18489727>`_::
 

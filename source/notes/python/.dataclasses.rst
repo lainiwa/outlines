@@ -25,9 +25,7 @@ Set defaults:
       x: int = 0
       y: int = field(default=0)  # same as x
 
-Validation:
-
-Approaches:
+Validation approaches:
 
 * Use ``__post_init__``
   - Adding all logic to ``__init__``: `example <https://www.slingacademy.com/article/python-how-to-validate-data-in-dataclass/>`__

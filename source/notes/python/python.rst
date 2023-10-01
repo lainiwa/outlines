@@ -8,6 +8,9 @@ Python
 .. include:: .immutability.rst
 .. include:: .parsing.rst
 
+* https://peps.python.org/pep-0570/
+* https://stackoverflow.com/questions/22500267/type-classes-in-dynamic-languages
+
 Pattern Matching
 ################
 * https://mathspp.gumroad.com/l/cheatsheet_match_statement
@@ -18,3 +21,7 @@ Pattern Matching
 
 Memoization and Caching
 #######################
+
+TODO
+####
+* https://adamj.eu/tech/2021/05/11/python-type-hints-args-and-kwargs/
