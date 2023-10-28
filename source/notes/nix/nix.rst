@@ -4,9 +4,16 @@ Nix
 ===
 * https://search.nixos.org/packages
 
+.. include:: .deployments.rst
 .. include:: .flakes.rst
 .. include:: .direnv.rst
 .. include:: .nixery.rst
+
+
+Web resources
+#############
+* https://mynixos.com/nixpkgs/options/security.acme.defaults
+* https://search.nixos.org/options?show=services.openssh.ports&query=services.openssh.ports&from=0&size=15&sort=alpha_asc&channel=unstable
 
 
 https://nix.dev/tutorials/ad-hoc-developer-environments

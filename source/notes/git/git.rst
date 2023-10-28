@@ -51,6 +51,9 @@ Sources:
     - global ignore: https://news.ycombinator.com/item?id=34498580
     - converting stash to a branch: https://news.ycombinator.com/item?id=34496395
 * https://git-send-email.io/
+* https://drewdevault.com/2018/07/02/Email-driven-git.html
+* https://lobste.rs/s/fubpta/learn_use_email_with_git#c_ot9brp
+    - ``Fun fact! Early versions of git rebase were essentially git format-patch | git am``
 
 .. image:: imgs/rant.png
   :width: 49%
@@ -120,6 +123,13 @@ Snippets
     git branch -r --contains <commit>
     git branch -a --contains <commit>
 
+    # Fix broken link
+    # src: https://stackoverflow.com/a/69639136
+    cp -r .git /tmp/.git_bak
+    git stash clear
+    git reflog expire --expire-unreachable=now --all
+    git gc --prune=now
+
 .. include:: .git_diff.rst
 .. include:: .git_tag.rst
 .. include:: .git_checkout.rst
@@ -139,14 +149,15 @@ Snippets
 .. include:: .git_notes.rst
 .. include:: .git_annex.rst
 
-PGP
-###
+PGP & SSH
+#########
 * https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html
 * https://people.kernel.org/monsieuricon/what-does-a-pgp-signature-on-a-git-commit-prove
 * https://people.kernel.org/monsieuricon/signed-git-pushes
 * https://github.com/pstadler/keybase-gpg-github
 * https://github.com/jayphelps/git-blame-someone-else
 * https://github.com/lfit/itpol/blob/master/protecting-code-integrity.md
+* https://blog.dbrgn.ch/2021/11/16/git-ssh-signatures/
 
 .. code-block:: sh
 
@@ -161,6 +172,13 @@ PGP
     # Verify tag
     git verify-tag    v5.8-rc7
     git verify-commit v5.8-rc7
+
+
+Hooks
+#####
+* https://dataswamp.org/~solene/2022-09-08-git-hook-prevent-branch.html
+* https://pre-commit.com
+
 
 Clean
 #####

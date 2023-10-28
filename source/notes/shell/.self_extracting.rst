@@ -118,9 +118,64 @@ Creating the script:
 
 .. code-block:: sh
 
-    { sed "/^    ARCHIVE_BASE64=''\$/Q" icon_viewer_template.sh
-      printf "    ARCHIVE_BASE64='"
+    { sed "/^ARCHIVE_BASE64=''\$/Q" icon_viewer_template.sh
+      printf "ARCHIVE_BASE64='"
       curl -sSL https://github.com/simple-icons/simple-icons/archive/refs/tags/9.9.0.tar.gz |base64 --wrap=0
       printf "'\n"
-      sed -e "1,/^    ARCHIVE_BASE64='.*'\$/d" icon_viewer_template.sh
+      sed -e "1,/^ARCHIVE_BASE64='.*'\$/d" icon_viewer_template.sh
     } > icon_viewer.sh
+
+
+Sqlite database embedded in a mutable script
+============================================
+* `Base64 Encoding <https://www.microfocus.com/documentation/enterprise-developer/ed60/ES-WIN/BKCJCJDEFNS009.html>`_
+* `Can I modify a bash script (.sh) file while it is running? <https://stackoverflow.com/questions/15520796/scripts-for-listing-all-the-distinct-characters-in-a-text-file>`_
+* `Self-update for your bash script <https://www.reddit.com/r/commandline/comments/qzerdc/selfupdate_for_your_bash_script/>`_
+* `Non-interactive SQLite3 usage from bash script <https://stackoverflow.com/questions/42245816/non-interactive-sqlite3-usage-from-bash-script>`_
+
+.. code-block:: sh
+
+    #!/env/bin/env bash
+    set -euo pipefail
+
+    trap 'rm -rf "${TMP_ARCHIVE}" "${TMP_SCRIPT}"' EXIT
+    TMP_ARCHIVE=$(mktemp) || exit 1
+    TMP_SCRIPT=$(mktemp) || exit 1
+
+    ARCHIVE_BASE64=''
+
+    offload_archive() {
+        printf "%s" "${ARCHIVE_BASE64}" |base64 -d >"${TMP_ARCHIVE}"
+    }
+
+    init_archive_if_empty() {
+        if [[ ! -s "${TMP_ARCHIVE}" ]]; then
+            sqlite3 "${TMP_ARCHIVE}" "create table app (id INTEGER PRIMARY KEY, event TEXT);"
+        fi
+    }
+
+    load_archive_and_exit() {
+        {
+            sed "/^ARCHIVE_BASE64='[A-Za-z0-9+\/=]*'\$/Q" "${0}"
+            printf "ARCHIVE_BASE64='"
+            base64 --wrap=0 "${TMP_ARCHIVE}"
+            printf "'\n"
+            sed -e "1,/^ARCHIVE_BASE64='[A-Za-z0-9+\/=]*'\$/d" "${0}"
+        } > "${TMP_SCRIPT}"
+        cp -f "${TMP_SCRIPT}" "${0}"
+        exit
+    }
+
+    business_logic() {
+        sqlite3 "${TMP_ARCHIVE}" "insert into app (event) values ('${1} $(date --utc --iso-8601=seconds)');"
+        sqlite3 "${TMP_ARCHIVE}" "select * from app;"
+    }
+
+    main() {
+        offload_archive
+        init_archive_if_empty
+        business_logic "${1}"
+        load_archive_and_exit
+    }
+
+    main "Your mom at"

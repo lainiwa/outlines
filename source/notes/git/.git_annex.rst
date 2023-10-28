@@ -61,6 +61,19 @@ Snippets
     # Annex might leave many git objects
     git gc && git repack -Ad && git prune
 
+Internals
+=========
+* `git-annex: internals <https://git-annex.branchable.com/internals/>`_
+* https://git-annex.branchable.com/internals/hashing/
+* https://git-annex.branchable.com/internals/lockdown/
+
+.. code-block:: sh
+
+    # List files in `git-annex` brach
+    git ls-tree -r git-annex |grep -v '/SHA256E-'
+    # Cat those files' content
+    git show git-annex:remote.log
+
 Adding remotes
 ==============
 * https://git-annex.branchable.com/special_remotes/

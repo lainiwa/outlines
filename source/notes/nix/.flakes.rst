@@ -141,3 +141,15 @@ Writing a Flake
     # Update lock file
     $ nix flake lock --update-input nixpkgs
     $ nix build
+
+Debugging a flake
+=================
+* https://discourse.nixos.org/t/debugging-nix-build-from-flake-solved/28330/2
+* https://discourse.nixos.org/t/debugging-a-flake/14898
+
+Remote flake build
+==================
+* https://docs.nixbuild.net/remote-builds/
+* https://nixos.org/manual/nix/stable/advanced-topics/distributed-builds.html
+* https://nixos.wiki/wiki/Distributed_build
+* https://fnordig.de/til/nix/remote-builds.html

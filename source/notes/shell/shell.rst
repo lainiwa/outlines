@@ -35,12 +35,31 @@ Testing
 Exit Codes
 ##########
 * `Bash command line exit codes demystified <https://www.redhat.com/sysadmin/exit-codes-demystified>`_
-* ` <https://www.freebsd.org/cgi/man.cgi?query=sysexits>`_
+* `Man SYSEXITS(3) <https://www.freebsd.org/cgi/man.cgi?query=sysexits>`_
 
 Redirections
 ############
 * `Bash One-Liners Explained, Part III: All about redirections <https://catonmat.net/bash-one-liners-explained-part-three>`_
 * `Bash Redirections Cheat Sheet <https://catonmat.net/ftp/bash-redirections-cheat-sheet.pdf>`_
+
+Working with JSON
+#################
+* `shell tip: print json with printf <https://j3s.sh/thought/shell-tip-print-json-with-printf.html>`_
+  - `lobste.rs <https://lobste.rs/s/4wiwig/shell_tip_print_json_with_printf>`__
+
+.. code-block:: bash
+
+  $ printf '{"name": "%s", "sign": "%s"}' "$name" "$sign"
+  {"name": "jes", "sign": "aquarius"}
+
+  $ jo hostname=$(hostname) meta=$(jo user=$USER term=$TERM)
+  {"hostname":"localhost","meta":{"user":"root","term":"xterm-256color"}}
+
+  $ jq --null-input --arg username jdoe --arg password '$ec\ret"' '{"username":$username, "password":$password}'
+  {
+    "username": "jdoe",
+    "password": "$ec\\ret\""
+  }
 
 Parallelization
 ###############
