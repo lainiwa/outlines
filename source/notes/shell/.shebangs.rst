@@ -5,6 +5,7 @@ Shebangs
 * `SO: How to write a shebang line that will call either either python3 or python2 whichever is available <https://stackoverflow.com/questions/63360890/how-to-write-a-shebang-line-that-will-call-either-either-python3-or-python2-whic>`_
 * `What the #! shebang really does <https://dev.to/meleu/what-the-shebang-really-does-and-why-it-s-so-important-in-your-shell-scripts-2755>`_
 * https://nix.dev/tutorials/reproducible-scripts
+* `SQLite as a Shell Script <https://twosixtech.com/blog/sqlite-as-a-shell-script/>`_
 
 Pick python version before running:
 
@@ -79,3 +80,23 @@ and failing back to bash if no nix-shell is available:
     #!nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
     curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
+
+Executable sqlite3 files:
+
+.. code-block:: sh
+
+    # Create database
+    sqlite3 db.sqlite3 <<EOF
+    create table echo
+    (echo none primary key)
+    without rowid;
+    insert into echo values ("
+    ls /
+    ")
+    EOF
+
+    # Inspect it
+    sqlite3 db.sqlite3 '.schema'
+    xxd db.sqlite3 |grep -v ': [0 ]*  '
+
+    busybox ash db.sqlite3
