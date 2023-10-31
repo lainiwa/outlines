@@ -29,6 +29,7 @@ author = 'Lain Iwakura'
 # ones.
 extensions = [
     'sphinx.ext.extlinks',
+    'sphinx_copybutton',
     # 'sphinx.ext.autosectionlabel',
     # 'IPython.sphinxext.ipython_console_highlighting',
     # 'IPython.sphinxext.ipython_directive',
