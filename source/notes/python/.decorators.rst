@@ -22,15 +22,15 @@ Typing a decorator:
   ReturnT = TypeVar('ReturnT')
 
   def debug(
-    f: Callable[ParamsTs, ReturnT],
+    fun: Callable[ParamsTs, ReturnT],
   ) -> Callable[ParamsTs, ReturnT]:
-    @wraps(f)
+    @wraps(fun)
     def inner(
       *args: ParamsTs.args,
       **kwargs: ParamsTs.kwargs,
     ) -> ReturnT:
       ...
-      return f(*args, **kwargs)
+      return fun(*args, **kwargs)
     return inner
 
   @debug
@@ -60,12 +60,12 @@ Decorator having more or less arguments than decorated function:
   class Response: ...
 
   def with_user(
-    f: Callable[Concatenate[User, ParamsTs], ReturnT],
+    fun: Callable[Concatenate[User, ParamsTs], ReturnT],
   ) -> Callable[P, ReturnT]:
-    @wraps(f)
+    @wraps(fun)
     def inner(*args: ParamsTs.args, **kwargs: ParamsTs.kwargs) -> ReturnT:
       user = User()
-      return f(user, *args, **kwargs)
+      return fun(user, *args, **kwargs)
     return inner
 
   @with_user

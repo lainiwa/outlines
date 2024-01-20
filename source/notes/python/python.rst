@@ -25,3 +25,5 @@ Memoization and Caching
 TODO
 ####
 * https://adamj.eu/tech/2021/05/11/python-type-hints-args-and-kwargs/
+* https://rednafi.com/python/annotate_args_and_kwargs/
+* https://rednafi.com/python/statically_enforcing_frozen_dataclasses/
