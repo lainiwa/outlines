@@ -34,3 +34,17 @@ Userscripts
 * https://www.userscript.zone
 * https://news.ycombinator.com/item?id=26053547
 * https://news.ycombinator.com/item?id=26062925
+
+Adblocking
+##########
+* `uBlock Origin <https://github.com/gorhill/uBlock>`_
+    - `wiki <https://github.com/gorhill/uBlock/wiki>`__
+    - Lists:
+        + `Hide YouTube Shorts List <https://github.com/gijsdev/ublock-hide-yt-shorts>`__
+        + `uBlock-Origin-dev-filter <https://github.com/quenhus/uBlock-Origin-dev-filter>`__
+        + `EasyList <https://github.com/easylist/easylist>`__
+        + `letsblockit <https://github.com/letsblockit/letsblockit>`__
+* `uBlacklist <https://github.com/iorate/uBlacklist>`__
+    - `awesome-ublacklist <https://github.com/rjaus/awesome-ublacklist>`__
+    - `ublacklist-github-translation <https://github.com/arosh/ublacklist-github-translation>`__
+    - `ublacklist-stackoverflow-translation <https://github.com/arosh/ublacklist-stackoverflow-translation>`__
