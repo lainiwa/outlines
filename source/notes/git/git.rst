@@ -149,6 +149,12 @@ Snippets
 .. include:: .git_notes.rst
 .. include:: .git_annex.rst
 
+Bundle
+######
+* https://www.gibbard.me/using_git_offline/
+    - https://news.ycombinator.com/item?id=38924159
+
+
 PGP & SSH
 #########
 * https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html
@@ -158,6 +164,8 @@ PGP & SSH
 * https://github.com/jayphelps/git-blame-someone-else
 * https://github.com/lfit/itpol/blob/master/protecting-code-integrity.md
 * https://blog.dbrgn.ch/2021/11/16/git-ssh-signatures/
+* https://docs.gitlab.com/ee/user/project/repository/signed_commits/ssh.html
+* https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification
 
 .. code-block:: sh
 
@@ -280,6 +288,7 @@ Practices
     - Author uses ``git push origin HEAD~5:refs/heads/master`` to push changes
     - Same as ``git push origin HEAD~5:master``
 * https://fjtc.substack.com/p/10-the-ultimate-commit
+* https://matklad.github.io/2023/12/31/git-things.html
 
 Merge vs Rebase
 ===============

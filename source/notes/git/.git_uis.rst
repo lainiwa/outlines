@@ -45,3 +45,7 @@ Status view
 * ``[M]erge``
 * ``[1] Stage line``
 * ``[[] / []]     Increase/decrease the diff context``
+
+Tig
+===
+* https://www.olafalders.com/2024/01/17/tig-git-browser/

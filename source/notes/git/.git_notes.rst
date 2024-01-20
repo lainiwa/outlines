@@ -2,6 +2,7 @@
 Notes
 #####
 * https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/
+    - https://lobste.rs/s/vmrnyd/git_notes_git_s_coolest_most_unloved
 * https://initialcommit.com/blog/git-notes
 * https://gist.github.com/topheman/ec8cde7c54e24a785e52
 * https://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html

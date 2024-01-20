@@ -162,7 +162,7 @@ Requred and Preferred Content
     git annex wanted hetzner groupwanted
 
     # Set `here` to store only some files
-    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*.txt or include=imgs/photos/*) and exclude=imgs/photos/*.mp4"
+    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*.txt or include=imgs/photos/*) and exclude=imgs/photos/*.mp4 and exclude=documents/medical/*/*.tar.xz"
 
     # Edit config file in $EDITOR
     git annex vicfg
@@ -226,3 +226,15 @@ Matching and finding files
 
 Moving files around
 ===================
+
+Alternatives
+============
+* https://github.com/arxanas/git-branchless/wiki/Related-tools
+* https://changelog.complete.org/archives/10535-backing-up-and-archiving-to-removable-media-dar-vs-git-annex
+    - https://github.com/Edrusb/DAR
+* https://news.ycombinator.com/item?id=29942796
+    - https://github.com/kevin-hanselman/dud
+    - Seems to focus on building data pipelines
+    - Instead of "sparse index" it can fetch files related to a "pipeline"
+* https://github.com/bup/bup
+* https://news.ycombinator.com/item?id=29188863
