@@ -124,4 +124,3 @@ Laziness
 * http://james-iry.blogspot.com/2011/05/why-eager-languages-dont-have-products.html
 * https://www.quora.com/What-is-meant-by-lazy-languages-dont-have-real-sums-and-eager-languages-dont-have-real-products
 * https://www.reddit.com/r/types/comments/72djqu/eager_languages_dont_have_product_and_lazy/
-
