@@ -41,7 +41,7 @@ Adding keys to accepted:
 
 .. code-block:: sh
 
-    cat lainiwa_id_rsa_key.pub >> ~/.ssh/authorized_keys
+    cat lainiwa_id_ed25519_key.pub >> ~/.ssh/authorized_keys
     # or, downloading from Github
     curl -q https://github.com/lainiwa.keys >> ~/.ssh/authorized_keys
     # or, same as above
@@ -83,20 +83,20 @@ Generate Keys and Install
 =========================
 * `SSH algos comparison <https://goteleport.com/blog/comparing-ssh-keys/>`_
 
-Use either RSA-4096 for legacy and AWS
-or Ed25519 (EdDSA) for speed.
+Use either Ed25519 (EdDSA)
+or RSA-4096 for legacy and AWS.
 Avoid ECDSA/DSA though.
 
 .. code-block:: sh
 
     # Generate key
-    ssh-keygen [-b 4096 -t rsa | -t ed25519] \
-               -f ~/.ssh/id_rsa_aws_$(date +%Y-%m-%d) \
+    ssh-keygen [-t ed25519 | -b 4096 -t rsa] \
+               -f ~/.ssh/id_ed25519_aws_$(date +%Y-%m-%d) \
                -C "Login to production cluster at xyz corp"
     # Install key
     ssh-copy-id [-i ~/.ssh/your-key] user@host
     # or
-    # cat ~/.ssh/id_rsa.pub | ssh user@host 'cat >> .ssh/authorized_keys && echo "Key copied"'
+    # cat ~/.ssh/id_ed25519.pub | ssh user@host 'cat >> .ssh/authorized_keys && echo "Key copied"'
     # Test
     ssh -i ~/.ssh/your-key user@host
 

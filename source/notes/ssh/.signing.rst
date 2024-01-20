@@ -8,9 +8,9 @@ Sign:
 
 .. code-block:: sh
 
-    ssh-keygen -Y sign -n file -f ~/.ssh/id_rsa     <FILE-TO-SIGN>
+    ssh-keygen -Y sign -n file -f ~/.ssh/id_ed25519     <FILE-TO-SIGN>
     # or (private part being taken from ssh-agent)
-    ssh-keygen -Y sign -n file -f ~/.ssh/id_rsa.pub <FILE-TO-SIGN>
+    ssh-keygen -Y sign -n file -f ~/.ssh/id_ed25519.pub <FILE-TO-SIGN>
 
 
 Create allowed signers file:
