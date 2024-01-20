@@ -5,6 +5,7 @@ Logging and Debugging
 * `COLODEBUG: a simple way to improve bash script debugging <https://johannes.truschnigg.info/writing/2021-12_colodebug/>`_
 * `Shell Scripting: Expert Recipes for Linux, Bash, and More: logger <https://www.oreilly.com/library/view/shell-scripting-expert/9781118166321/c14-anchor-6.xhtml>`_
 * `Simple bash debugger using trap DEBUG <https://selivan.github.io/2022/05/21/bash-debug.html>`_
+* https://medium.com/picus-security-engineering/structured-logging-in-shell-scripting-dd657970cd5d
 
 Structured logging with jq:
 

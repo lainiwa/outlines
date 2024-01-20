@@ -1,11 +1,14 @@
 
 Shebangs
 ########
+* `What the #! shebang really does <https://dev.to/meleu/what-the-shebang-really-does-and-why-it-s-so-important-in-your-shell-scripts-2755>`_
+* https://linuskarlsson.se/blog/shebang-shenanigans/
+
+
+Python
+======
 * `dotbot <https://github.com/anishathalye/dotbot/blob/master/bin/dotbot>`_
 * `SO: How to write a shebang line that will call either either python3 or python2 whichever is available <https://stackoverflow.com/questions/63360890/how-to-write-a-shebang-line-that-will-call-either-either-python3-or-python2-whic>`_
-* `What the #! shebang really does <https://dev.to/meleu/what-the-shebang-really-does-and-why-it-s-so-important-in-your-shell-scripts-2755>`_
-* https://nix.dev/tutorials/reproducible-scripts
-* `SQLite as a Shell Script <https://twosixtech.com/blog/sqlite-as-a-shell-script/>`_
 
 Pick python version before running:
 
@@ -51,6 +54,11 @@ Version from SO:
     import sys
     print(sys.version)
 
+
+nix-shell
+=========
+* https://nix.dev/tutorials/reproducible-scripts
+
 My shebang for running things in nix-shell
 and failing back to bash if no nix-shell is available:
 
@@ -81,6 +89,11 @@ and failing back to bash if no nix-shell is available:
 
     curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 
+
+Executable sqlite3
+==================
+* `SQLite as a Shell Script <https://twosixtech.com/blog/sqlite-as-a-shell-script/>`_
+
 Executable sqlite3 files:
 
 .. code-block:: sh
@@ -100,3 +113,53 @@ Executable sqlite3 files:
     xxd db.sqlite3 |grep -v ': [0 ]*  '
 
     busybox ash db.sqlite3
+
+Executable Dockerfile
+=====================
+* `adtac/Dockerfile <https://gist.github.com/adtac/595b5823ef73b329167b815757bbce9f>`_
+    - The ``env -S / --split-string`` is a rather recent GNU Coreutils addition
+        + `SO provides some alternatives to the -S flag <https://unix.stackexchange.com/questions/399690/multiple-arguments-in-shebang/477651>`__
+    - need to add ``|tail -n1`` to get only required image hash
+
+.. code-block:: sh
+
+    #!/usr/bin/env -S bash -c "docker run -p 8080:8080 -it --rm \$(docker build --progress plain -f \$0 . 2>&1 |tee /dev/stderr |grep -oP 'sha256:[0-9a-f]*' |tail -n1)"
+
+    # syntax = docker/dockerfile:1.4.0
+
+    FROM node:20
+    ...
+
+Executable Makefile
+===================
+* `How to "make" a shell script <https://www.humprog.org/~stephen/blog/2024/01/02/#make-shell>`_
+    - mind that Makefile requires tabs and not spaces
+
+.. code-block:: sh
+
+    #!/usr/bin/env bash
+
+    dummy=; define () { true; }
+    define dummy
+    echo "Hello from shell; PATH is ${PATH}"
+    return 0 2>/dev/null || exit 0
+    endef
+
+    .PHONY: say-hello
+    say-hello:
+        @echo "Hello from make; makevar PATH is $(PATH), envvar PATH is $${PATH}"
+
+Other
+=====
+* `geon/shebang-abuse <https://github.com/geon/shebang-abuse>`_
+
+Examples:
+
+* delete.sh: ``#!/bin/rm``
+* diary.sh: ``#!/usr/bin/nano +99999``
+* disable.sh: ``#!/bin/chmod a-x``
+* empties.sh: ``#!/bin/cp /dev/null``
+* grow_a_tree_from_roots.sh: ``#!/bin/sudo``
+* notebook.sh: ``#!/bin/tee -a``
+* quine.sh: ``#!/bin/cat``
+* selfls.sh: ``#!/bin/ls -l``

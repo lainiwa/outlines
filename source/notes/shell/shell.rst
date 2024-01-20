@@ -30,7 +30,7 @@ Script Template
 
 Testing
 #######
-* ` Writing Unit-Tests and Mocks for UNIX Shells <https://poisel.info/posts/2022-05-10-shell-unit-tests/>`_
+* `Writing Unit-Tests and Mocks for UNIX Shells <https://poisel.info/posts/2022-05-10-shell-unit-tests/>`_
 
 Exit Codes
 ##########
@@ -61,6 +61,10 @@ Working with JSON
     "password": "$ec\\ret\""
   }
 
+Network
+#######
+* https://unix.stackexchange.com/a/421403
+
 Parallelization
 ###############
 
@@ -71,6 +75,7 @@ ZSH Zargs
 Xargs
 =====
 * https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
+* https://www.pixelstech.net/article/1700239426-How-to-use-xargs-command-in-Linux
 
 GNU Parallel
 ============
