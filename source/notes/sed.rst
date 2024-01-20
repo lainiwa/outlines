@@ -2,8 +2,6 @@
 ===
 Sed
 ===
-* ` <>`_
-
 
 In-place editing and backups:
 
