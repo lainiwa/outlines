@@ -2,6 +2,9 @@
 =====
 Socat
 =====
+* https://gist.github.com/mario21ic/c09f0a648130ad6a91abdde41cb011c8
+* http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html
+* http://www.dest-unreach.org/socat/doc/socat-tun.html
 
 Snippets
 ########
@@ -78,7 +81,7 @@ Socket forwarding
 MITM
 ----
 * https://stackoverflow.com/questions/46050238/socat-how-to-listen-on-non-ssl-tcp-and-forward-to-ssl-tcp-endpoint
-* https://pcarleton.com/2021/03/12/how-to-mitm-yourself-with-socat-on-linux/
+* https://funoverip.net/2011/01/reverse-ssl-backdoor-with-socat-and-metasploit/
 
 .. code-block:: sh
 
@@ -89,6 +92,44 @@ MITM
     # Check it's working:
     echo 'SHOW DATABASES' |
         curl 'http://localhost:8443/?user=admin&password=NimdaLol' --data-binary @-
+
+Encrypted TLS-authenticated bind shell
+--------------------------------------
+* `ncat doesn't allow client authentication <https://github.com/nmap/nmap/issues/1898>`_
+* https://book.hacktricks.xyz/generic-methodologies-and-resources/tunneling-and-port-forwarding#bind-shell
+
+.. code-block:: sh
+
+    mkdir -p certs
+
+    # Generate CA
+    openssl req -new -x509 -days 365 -nodes -keyout certs/ca.key -out certs/ca.crt \
+        -subj "/CN=My CA"
+
+    # Generate Server Key and Certificate
+    openssl req -newkey rsa:4096 -nodes -keyout certs/server.key -out certs/server.csr \
+        -subj "/CN=lainiwa.duckdns.org"
+    openssl x509 -req -in certs/server.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial \
+        -out certs/server.crt -days 365
+
+    # Combine server certificate and key for socat
+    cat certs/server.crt certs/server.key > certs/server.pem
+
+    # Generate Client Key and Certificate
+    openssl req -newkey rsa:4096 -nodes -keyout certs/client.key -out certs/client.csr \
+        -subj "/CN=Client"
+    openssl x509 -req -in certs/client.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial \
+        -out certs/client.crt -days 365
+
+    # Combine client certificate and key for socat
+    cat certs/client.crt certs/client.key > certs/client.pem
+
+    # Start socat with SSL, requiring and verifying client certificates, and execute a shell upon connection
+    # socat OPENSSL-LISTEN:8888,cert=certs/server.pem,cafile=certs/ca.crt,verify=1,reuseaddr,fork EXEC:"/bin/bash",pty,stderr,setsid,sigint,sane
+
+    # Client command to connect to the bind shell (commented out)
+    # Replace 'lainiwa.duckdns.org' with the server's address if not running locally.
+    # socat - OPENSSL:lainiwa.duckdns.org:8888,cert=certs/client.pem,cafile=certs/ca.crt,verify=1
 
 Other examples
 --------------
