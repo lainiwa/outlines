@@ -61,6 +61,9 @@ Snippets
     # Annex might leave many git objects
     git gc && git repack -Ad && git prune
 
+    # Ncdu the local repo
+    ncdu --exclude .git --follow-symlinks
+
 Internals
 =========
 * `git-annex: internals <https://git-annex.branchable.com/internals/>`_
@@ -125,6 +128,20 @@ Adding remotes
         host='s3.eu-central-1.wasabisys.com' bucket=lainiwa-annex \
         encryption=hybrid keyid=$GPG_KEY_OR_EMAIL
 
+Cloning Repository
+==================
+
+.. code-block:: sh
+
+    git clone <repo>
+    git annex init "temporary folder"
+
+    WEBDAV_USERNAME='u123456' \
+    WEBDAV_PASSWORD='passwordGoesHere' \
+    git annex enableremote hetzner
+
+    git annex get -- <file>
+
 Config
 ======
 * https://git-annex.branchable.com/git-annex-numcopies/
@@ -162,7 +179,7 @@ Requred and Preferred Content
     git annex wanted hetzner groupwanted
 
     # Set `here` to store only some files
-    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*.txt or include=imgs/photos/*) and exclude=imgs/photos/*.mp4 and exclude=documents/medical/*/*.tar.xz"
+    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*_2024.* or include=imgs/screenshots/*.txt or include=imgs/photos/IMG_2023* or include=imgs/photos/IMG_2024*) and exclude=imgs/photos/*.mp4 and exclude=documents/medical/*/*.tar.xz"
 
     # Edit config file in $EDITOR
     git annex vicfg
