@@ -4,3 +4,9 @@ Parsing
 * `Faster, more memory-efficient Python JSON parsing with msgspec <https://pythonspeed.com/articles/faster-python-json-parsing/>`_
   - For large files `use ijson <https://pythonspeed.com/articles/json-memory-streaming/>`__
   - Msgspec is used by `litestar <https://litestar.dev/>`_ web framework (src: `HN <https://news.ycombinator.com/item?id=36640128>`__)
+
+Dataclasses vs Attrs vs Pydantic
+================================
+* https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html
+* https://mpkocher.github.io/2019/05/22/Dataclasses-in-Python-3-7/
+* `DataClasses.ipynb <https://gist.github.com/mpkocher/4482e9315c64241f442b1e5f8783316d>`_

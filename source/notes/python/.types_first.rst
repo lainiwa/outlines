@@ -1,0 +1,91 @@
+
+Types-first (type-driven) development
+#####################################
+* https://kobzol.github.io/rust/python/2023/05/20/writing-python-like-its-rust.html
+
+Type hints
+Dataclasses instead of tuples or dictionaries
+Algebraic data types
+
+.. code-block:: py
+
+    import typing
+    import serde
+
+    @dataclass
+    class Header:
+      protocol: Protocol
+      size: int
+
+    @dataclass
+    class Payload:
+      data: str
+
+    @dataclass
+    class Trailer:
+      data: str
+      checksum: int
+
+    Packet = Header | Payload | Trailer
+    PacketWithData = Payload | Trailer
+
+    def handle_pattern_matching(packet: Packet):
+        match packet:
+            case Header(protocol, size): print(f"header {protocol} {size}")
+            case Payload(data): print("payload {data}")
+            case Trailer(data, checksum): print(f"trailer {checksum} {data}")
+            case _ as unreachable: typing.assert_never(unreachable)
+
+    @dataclass
+    class Data:
+        packet: Packet
+
+    serialized = serde.to_dict(Data(packet=Trailer(data="foo", checksum=42)))
+    # {'packet': {'Trailer': {'data': 'foo', 'checksum': 42}}}
+
+    deserialized = serde.from_dict(Data, serialized)
+    # Data(packet=Trailer(data='foo', checksum=42))
+
+
+Using newtypes
+
+.. code-block:: py
+
+    from typing import NewType
+
+    # Define a new type called "CarId", which is internally an `int`
+    CarId = NewType("CarId", int)
+    # Ditto for "DriverId"
+    DriverId = NewType("DriverId", int)
+
+    class Database:
+      def get_car_id(self, brand: str) -> CarId:
+      def get_driver_id(self, name: str) -> DriverId:
+      def get_ride_info(self, car_id: CarId, driver_id: DriverId) -> RideInfo:
+
+Using construction functions
+
+.. code-block:: py
+
+    class Rectangle:
+        @staticmethod
+        def from_x1x2y1y2(x1: float, ...) -> "Rectangle":
+
+        @staticmethod
+        def from_tl_and_size(top: float, left: float, width: float, height: float) -> "Rectangle":
+
+Encoding invariants using types (state machines)
+
+.. code-block:: py
+
+    def connect(address: str) -> Optional[ConnectedClient]:
+      pass
+
+    class ConnectedClient:
+      def authenticate(...) -> Optional["AuthenticatedClient"]:
+      def send_message(...):
+      def close(...):
+
+    class AuthenticatedClient:
+      def send_message(...):
+      def close(...):
