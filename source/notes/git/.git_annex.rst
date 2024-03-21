@@ -179,7 +179,7 @@ Requred and Preferred Content
     git annex wanted hetzner groupwanted
 
     # Set `here` to store only some files
-    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*_2024.* or include=imgs/screenshots/*.txt or include=imgs/photos/IMG_2023* or include=imgs/photos/IMG_2024*) and exclude=imgs/photos/*.mp4 and exclude=documents/medical/*/*.tar.xz"
+    git annex wanted . "(include=documents/* or include=imgs/screenshots/*_2023.* or include=imgs/screenshots/*_2024.* or include=imgs/screenshots/*.txt or include=imgs/photos/IMG_2023* or include=imgs/photos/IMG_2024*) and exclude=imgs/photos/*.mp4 and exclude=documents/medical/*/*.tar.xz and exclude=documents/medical/*/*"
 
     # Edit config file in $EDITOR
     git annex vicfg
