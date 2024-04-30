@@ -51,6 +51,13 @@ WebDAV
     # --anyouth makes curl pick either --basic or --digest automatically
     curl --user 'user:password' 'https://user.your-storagebox.de' --anyauth
 
+    # List dirs/files in Hetzner WebDAV
+    curl -s -u u123456:password https://u123456.your-storagebox.de       -X PROPFIND -H "Depth: 1" |grep '<D:href>'
+    curl -s -u u123456:password https://u123456.your-storagebox.de/.ssh/ -X PROPFIND -H "Depth: 1" |grep '<D:href>'
+    curl -s -u u123456:password https://u123456.your-storagebox.de/.ssh/authorized_keys
+    # Cat a file
+    curl -s https://u123456:password@u123456.your-storagebox.de/.ssh/authorized_keys
+
 Docker
 ======
 
