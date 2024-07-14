@@ -3,6 +3,8 @@ Dataclasses
 ###########
 * https://realpython.com/python-data-classes/
 * https://docs.python.org/3/library/dataclasses.html
+* https://stackoverflow.com/questions/55307017/pickle-a-frozen-dataclass-that-has-slots
+* https://rednafi.com/python/statically_enforcing_frozen_dataclasses/
 
 For dataclasses we can set ``frozen=True, slots=True``:
 
@@ -21,6 +23,8 @@ Set defaults:
 .. code-block:: py
 
   from dataclasses import dataclass, field
+
+  @dataclass
   class A:
       x: int = 0
       y: int = field(default=0)  # same as x

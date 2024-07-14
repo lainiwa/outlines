@@ -20,6 +20,7 @@ Shell Scripting
 .. include:: .argparse.rst
 .. include:: .zsh.rst
 
+
 Script Template
 ###############
 * `My Minimal, Safe Bash Script Template <https://link.medium.com/ARddINhvUcb>`_
@@ -28,14 +29,17 @@ Script Template
   :caption: template.sh
   :language: shell
 
+
 Testing
 #######
 * `Writing Unit-Tests and Mocks for UNIX Shells <https://poisel.info/posts/2022-05-10-shell-unit-tests/>`_
+
 
 Exit Codes
 ##########
 * `Bash command line exit codes demystified <https://www.redhat.com/sysadmin/exit-codes-demystified>`_
 * `Man SYSEXITS(3) <https://www.freebsd.org/cgi/man.cgi?query=sysexits>`_
+
 
 Redirections
 ############
@@ -61,9 +65,42 @@ Working with JSON
     "password": "$ec\\ret\""
   }
 
+
 Network
 #######
 * https://unix.stackexchange.com/a/421403
+
+
+(Core)utils
+###########
+
+Find
+====
+* https://t.me/bashdays/375
+
+- ``exec`` - run util and pass args (``-exec command {} suffix``)
+  + ``command`` - the util
+  + ``{}`` - unfolds to the "files found"
+  + ``;`` - suffix, run a command for each file (either armour ``\;`` or quote ``';'``)
+  + ``+`` - suffix, run a command for a group of files
+- ``execdir`` - ``cd`` to the dir with the file, before running
+
+Test ``+`` and ``\;`` with:
+
+.. code-block:: sh
+
+  find ~/ -type f -exec sh -c 'echo $$' {} \;  # many pids
+  find ~/ -type f -exec sh -c 'echo $$' {} +   # less pids
+
+  find ~/ -type f -print0 | xargs -0 -n4 -P2 sh -c 'echo $$'
+
+- ``0`` - args are separated by NUL ASCII. Special chars (e.g. ``\`` and ``'``) treated as regular chars
+- ``n`` - max num of arguments passed at once
+- ``P`` - max num of processes running simultaneously, 0 for unlimited
+- ``command`` - external command. If not specified, displays the argument groups
+
+``xargs`` accepts ``SIGUSR1``/``SIGUSR2`` to increase/reduce the number of simultaneously running processes
+
 
 Parallelization
 ###############
