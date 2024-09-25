@@ -97,7 +97,10 @@ ClickHouse
         -H'X-ClickHouse-User: admin' -H'X-ClickHouse-Key: mYpAsSwOrD' \
         'https://clickhouse-server:8443'
 
-    # Query Clickhouse
+    # Pass settings
+    curl -G \
+        'http://admin:mYpAsSwOrD@clickhouse-server:8123/?allow_experimental_analyzer=1' \
+        --data-urlencode "query=SELECT 1"
 
 Benchmarking
 ############

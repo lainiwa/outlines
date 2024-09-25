@@ -3,6 +3,60 @@
 Kubernetes
 ##########
 
+=======
+Critics
+=======
+* `A skeptic's first contact with Kubernetes <https://blog.davidv.dev/posts/first-contact-with-k8s/>`_
+  - `tg dicussion <https://t.me/manandthemachine/828>`__
+    + No enums in yaml: responsible for validation are either a controller or a validation admission webhook
+    + Kube-proxy and iptables: many CNI have their own kube-proxy implementations, working with eBPF. Kube-proxy is not a necessary component anymore
+  - `HN dicussion <https://news.ycombinator.com/item?id=41093197>`__
+* `Why the fuck are we templating yaml? <https://leebriggs.co.uk/blog/2019/02/07/why-are-we-templating-yaml>`_
+  - recommends Jsonnet in place of Helm
+  - `HN <https://news.ycombinator.com/item?id=39101828>`__
+    + Other suckers: Github Actions (+ don't support anchors), Ansible
+    + Other options:
+      - json5, toml (gets ugly when nested)
+      - nix, dhall ("JSON + functions + types + imports", but lacks type inference. slow)
+      - Jsonnet, Ksonnet, Nu, or CUELang
+      - Starlark/ytt
+      - Nickel (Like cuelang, but with functions; `RATIONALE.md <https://github.com/tweag/nickel/blob/master/RATIONALE.md>`__)
+      - HCL, Pulumi
+      - https://github.com/grafana/tanka
+      - https://github.com/cdk8s-team/cdk8s
+    + https://github.com/shipmight/helm-playground
+    + ``YAML is the Bradford Pear of serialization formats. It looks good at first, but as your project ages, and the YAML grows it collapses under the weight of it's own branches.``
+    + Use ``envsubst`` instead of ``sed -e s/$FOO/foo/g``
+    + IMHO: ``string interpolation should not be used to generate machine-readable code, and template languages (string template languages) are just fancy string interpolation``
+* `The good, the bad and the ugly of templating YAML in Kubernetes <https://levelup.gitconnected.com/the-good-the-bad-and-the-ugly-of-templating-yaml-in-kubernetes-82fc5ce43fec>`_
+  - Logical/Arithmetical operations without operators
+    + Go templates: no infix operators: functions.
+      - No: ``{{ if a and b }}``. Yes: ``{{ if and a b }}``
+      - No: ``{{ if a and(b orc) }}``. Yes: ``{{ if and a (or b c) }}``
+    + Deeply nested variables: ``.Values.prometheus.ingress.enabled``
+    + Accessing items
+      - No: ``{{ $myList[0] }}``. Yes: ``{{ index $myList 0 }}``
+      - Example: ``{{ index $myMap (index $myList 0) }}``
+  - Whitespaces
+      - ::
+
+          {{- with .Values.startupapicheck.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          # <--- no real reason to avoid leaving a blank line here for readability
+          {{- with .Values.startupapicheck.affinity }}
+          affinity:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+
+      - People try to make a good-looking YAML, but that's too complicated
+      - The only reason for readability is you cannot pass ``helm template ... |yq`` is templating fails
+  - Go template contexts
+    + Current context = ``.``, e.g. ``{{ with .Values.something }}{{ .MemberOfSomething }}{{ end }}``
+    + Initial/global context = ``$``: ``{{ $.Some.Member }}``
+    + "Contexts" feels odd, normal template languages have nested "scopes" instead
+
 ===
 k0s
 ===
@@ -239,6 +293,33 @@ Configs and Secrets
 
     kubectl create cm test-config -n lesson16 --from-file=root-ca.pem
 
+Types of secrets:
+
+* arbitrary data
+* service account tokens
+* docker configs
+* basic auth
+* ssh auth
+* tls data
+* bootstrap tokens
+
+ENV variables don't support hot reloading, use volume mount for that.
+
+Secrets are stored at ETCD.
+If you want to store them encrypted: provide a key to kube-apiserver.
+
+External secret providers:
+
+* hashicorp's vault
+  - create ``kind: SecretProviderClass`` with ``spec.provider: vault``
+  - then in target pod's spec: ``serviceAccountName: my-sa``
+  - then can reference provided secrets in ``secretKeyRef``
+  - mount secrets in ``volumeMounts`` to ``/mnt/secrets``
+  - in ``volumes`` add ``csi: ...``
+* cyberark
+* can use CSI to retrieve secrets from the storage
+
+Typical set: using a sidecar to inject secrets into the pod.
 
 .. code-block:: yaml
 
@@ -276,6 +357,52 @@ Configs and Secrets
       - name: cm-volume
         configMap:
           name: test-config
+
+
+Certificate management
+======================
+
+Certificate Authorities:
+
+* digicert
+* cloudflare
+* aws
+* google cloud
+* Let's Encrypt
+* Vault (own certificate authority)
+
+.. code-block:: yaml
+
+  kind: certificate
+  metadata:
+    name: example-com
+  spec:
+    secretName: example-com-tls
+    duration: 2160h  # 90 days
+    renewBefore: 360h  # 15 days
+    dnsNames:
+      - mail.example.com
+      - login.example.net
+    ipAddresses:
+      - 192.168.50.19
+
+For automation: cert-manager. Can be integrated with Ingress Controller. CRDs:
+
+* Certificate Requests
+* Certificates
+* Issuers, Cluster Issuers
+* Orders
+* Challenges
+
+``kubectl get certs``
+
+
+Operators
+=========
+* Custom **Controller** (from "control loop" in robotics, e.g. cruise control)
+* and **Resources**
+
+e.g. Prometheus Operator
 
 
 Volumes
@@ -368,6 +495,16 @@ Types of services:
 * NodePort
     - every node redirects the request to given port
     - only 30000–32767 ports available
+
+Also:
+
+* ExternalName
+  - local "alias" for an outside enpodint
+  - not port-forward'able, port-forward directs it's traffic to a single specific pod
+* Ingress
+  - tls termination, dns/url-based routing rules
+  - you gotta configure *Ingress Controller* - nginx/traefik etc: what is configured by ``kind: Ingress``. Also cloud provider can provide one.
+  - Istio uses ``kind: Gateway`` for ingress
 
 .. code-block:: yaml
 
@@ -716,6 +853,12 @@ Volumes
         storage: 1Gi
 
 
+There's ``Ephemeral Storage`` (what's within the container),
+``HostPath`` (path on the current node: wouldn't survive a restart on the other node),
+and ``PV``.
+
+Use ``StorageClass`` to allow users to define storage requirements similar to CPU/RAM.
+
 Other things
 ============
 
@@ -807,3 +950,98 @@ K3s Hetzner Integration
 =======================
 * `How to set up K3S, GlusterFS and Hetzner's cloud load balancer <https://community.hetzner.com/tutorials/k3s-glusterfs-loadbalancer>`_
 * `How to integrate k3s with a cloud controller <https://itnext.io/how-to-integrate-k3s-with-the-cloud-controller-36bd5020b8f7>`_
+
+
+Contaners
+=========
+* https://kube.academy/courses/containers-101/
+
+.. code-block:: sh
+
+  docker run -d --rm --hostname c1 --name test nicolaka/netshoot:latest sleep 50000
+
+  docker exec -ti test bash
+  $ ip a
+
+  docker container inspect test |grep -i pid
+  sudo nsenter --target 640805 --uts
+  $ ip a  # host's networking stack
+  $ hostname  # c1
+
+  sudo nsenter --target 640805 --net --mount
+  $ ip a  # in container
+  $ hostname  # desktop hostname
+  $ ls /home  # no desktop users
+
+  cat /proc/640805/cgroup
+  cat /sys/fs/cgroup/system.slice/docker-9dd4def410e43aa629115927c2116e67342afdd58bf7579542acd030ba5257aa.scope/memory.peak
+
+  docker rm -f test
+  docker run -d --rm --memory 6m --hostname c1 --name test nicolaka/netshoot:latest sleep 50000
+  find /sys/fs/cgroup/ -name '*memory*' |grep eaebb88 |grep peak
+  cat /sys/fs/cgroup/system.slice/docker-eaebb888a6c9fbf81d878ce3c5e4cbc05f8dc00ad2e02a6086fef36fa6d79c83.scope/memory.peak
+  # 4022272 == 3.8 * 1024^2
+
+  wget https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.20.0-x86_64.tar.gz
+  cat <<'EOF' >Dockerfile
+  # syntax=docker/dockerfile:1.3
+  FROM scratch
+  ADD alpine-minirootfs-3.20.0-x86_64.tar.gz /
+  CMD ["/bin/sh"]
+  EOF
+
+
+============================
+Kubernetes Platform Security
+============================
+
+Network Policies and CNI
+========================
+* Network Policy - requires a CNI
+* Policies for pods are label-based
+* Policies are additive, order doesn't matter
+* Policy rules can be applied in ingress and egress directions
+
+Example:
+
+.. code-block:: yaml
+
+  apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: demo-network-policy
+    namespace: default
+  spec:
+    podSelector:
+      matchLabels:
+        role: demo-app
+    policyTypes:
+    - Ingress
+    - Egress
+    ingress:
+    - from:
+      - ipBlock:
+          cidr: 172.17.0.0/16
+          except:
+          - 172.17.1.0/24
+      - namespaceSelector:
+          matchLabels:
+            project: myproject
+      - podSelector:
+          matchLabels:
+            role: frontend
+      ports:
+      - protocol: TCP
+        port: 6379
+
+CNI:
+
+* An interface between container runtime and network implementation
+* A contract between container runtime and network
+* Responsible for net connectivity and removal of allocated resources once container is deleted
+
+
+
+
+
+
