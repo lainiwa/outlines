@@ -1,4 +1,3 @@
-
 ##########
 Kubernetes
 ##########
@@ -7,15 +6,19 @@ Kubernetes
 Critics
 =======
 * `A skeptic's first contact with Kubernetes <https://blog.davidv.dev/posts/first-contact-with-k8s/>`_
-  - `tg dicussion <https://t.me/manandthemachine/828>`__
-    + No enums in yaml: responsible for validation are either a controller or a validation admission webhook
-    + Kube-proxy and iptables: many CNI have their own kube-proxy implementations, working with eBPF. Kube-proxy is not a necessary component anymore
-  - `HN dicussion <https://news.ycombinator.com/item?id=41093197>`__
+  - `HN discussion <https://news.ycombinator.com/item?id=41093197>`__
+  - `tg discussion <https://t.me/manandthemachine/828>`__
+
+    + No enums in yaml: responsible for validation are either a controller or a validation admission webhook.
+    + Kube-proxy and iptables: many CNI have their own kube-proxy implementations, working with eBPF. Kube-proxy is not a necessary component anymore.
+
 * `Why the fuck are we templating yaml? <https://leebriggs.co.uk/blog/2019/02/07/why-are-we-templating-yaml>`_
-  - recommends Jsonnet in place of Helm
+  - Recommends Jsonnet in place of Helm.
   - `HN <https://news.ycombinator.com/item?id=39101828>`__
-    + Other suckers: Github Actions (+ don't support anchors), Ansible
+
+    + Other suckers: Github Actions (+ don't support anchors), Ansible.
     + Other options:
+
       - json5, toml (gets ugly when nested)
       - nix, dhall ("JSON + functions + types + imports", but lacks type inference. slow)
       - Jsonnet, Ksonnet, Nu, or CUELang
@@ -24,38 +27,45 @@ Critics
       - HCL, Pulumi
       - https://github.com/grafana/tanka
       - https://github.com/cdk8s-team/cdk8s
+
     + https://github.com/shipmight/helm-playground
-    + ``YAML is the Bradford Pear of serialization formats. It looks good at first, but as your project ages, and the YAML grows it collapses under the weight of it's own branches.``
+    + ``YAML is the Bradford Pear of serialization formats. It looks good at first, but as your project ages, and the YAML grows it collapses under the weight of its own branches.``
     + Use ``envsubst`` instead of ``sed -e s/$FOO/foo/g``
     + IMHO: ``string interpolation should not be used to generate machine-readable code, and template languages (string template languages) are just fancy string interpolation``
+
 * `The good, the bad and the ugly of templating YAML in Kubernetes <https://levelup.gitconnected.com/the-good-the-bad-and-the-ugly-of-templating-yaml-in-kubernetes-82fc5ce43fec>`_
-  - Logical/Arithmetical operations without operators
-    + Go templates: no infix operators: functions.
+  - Logical/Arithmetical operations without operators:
+
+    + Go templates: no infix operators, functions instead.
       - No: ``{{ if a and b }}``. Yes: ``{{ if and a b }}``
       - No: ``{{ if a and(b orc) }}``. Yes: ``{{ if and a (or b c) }}``
+
     + Deeply nested variables: ``.Values.prometheus.ingress.enabled``
-    + Accessing items
+    + Accessing items:
       - No: ``{{ $myList[0] }}``. Yes: ``{{ index $myList 0 }}``
       - Example: ``{{ index $myMap (index $myList 0) }}``
-  - Whitespaces
-      - ::
 
-          {{- with .Values.startupapicheck.nodeSelector }}
-          nodeSelector:
-            {{- toYaml . | nindent 8 }}
-          {{- end }}
-          # <--- no real reason to avoid leaving a blank line here for readability
-          {{- with .Values.startupapicheck.affinity }}
-          affinity:
-            {{- toYaml . | nindent 8 }}
-          {{- end }}
+  - Whitespaces::
 
-      - People try to make a good-looking YAML, but that's too complicated
-      - The only reason for readability is you cannot pass ``helm template ... |yq`` is templating fails
-  - Go template contexts
+      {{- with .Values.startupapicheck.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      # <--- no real reason to avoid leaving a blank line here for readability
+
+      {{- with .Values.startupapicheck.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+    - People try to make a good-looking YAML, but that's too complicated.
+    - The only reason for readability is that you cannot pass ``helm template ... | yq`` if templating fails.
+
+  - Go template contexts:
     + Current context = ``.``, e.g. ``{{ with .Values.something }}{{ .MemberOfSomething }}{{ end }}``
-    + Initial/global context = ``$``: ``{{ $.Some.Member }}``
-    + "Contexts" feels odd, normal template languages have nested "scopes" instead
+    + Initial/global context = ``$``, e.g. ``{{ $.Some.Member }}``
+    + "Contexts" feel odd, normal template languages have nested "scopes" instead.
 
 ===
 k0s
