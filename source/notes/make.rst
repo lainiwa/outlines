@@ -8,6 +8,7 @@ Changing defaults
 #################
 
 .. code-block:: make
+   :force:
 
    # Use strict mode Bash instead of /bin/sh
    SHELL := bash
@@ -38,6 +39,7 @@ Writing Makefile
 ################
 
 .. code-block:: make
+   :force:
 
    # Default rule
    .PHONY: build
