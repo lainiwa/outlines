@@ -1,0 +1,105 @@
+
+Causal Inference
+################
+* `gwern: Why Correlation Usually ≠ Causation (gwern) <https://gwern.net/causality>`_
+   - `gwern: Everything Is Correlated <https://gwern.net/everything>`_
+* `yt: Introduction to causal inference and directed acyclic graphs (UK Reproducibility Network) <https://youtu.be/Ts0hnNBRIWg>`_
+* `yt: Introduction to causal inference and directed acyclic graphs (The Ohio State University Libraries) <https://youtu.be/AnlVBLwC418>`_
+* `yt: Statistical Rethinking 2023 <https://www.youtube.com/watch?v=FdnMWdICdRs&list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus&pp=iAQB>`_
+* `gh: rmcelreath/stat_rethinking_2023 <https://github.com/rmcelreath/stat_rethinking_2023>`_
+* `tg: Иллюстрация парадокса Берксона (Berkson's Paradox) <https://t.me/avvablog/2123>`_
+   - Занятно, что если такое явление наблюдается при объединении маленьких выборок в большую, то это называется парадоксом Симпсона, а если маленькие выделяются из одной большой, то парадоксом Берксона - хотя суть та же.
+   - NOTE: Я не уверен, что суть одна и так же.
+   - Парадокс Симпсона - парадокс объединения `src <https://ru.wikipedia.org/wiki/Парадокс_Симпсона>`__
+   - Парадокс Берксона - ошибка коллайдера `src <https://ru.wikipedia.org/wiki/Парадокс_Берксона>`__
+* `Learn about DAGs and DAGitty <https://dagitty.net/learn>`_
+* `Spurious Correlations <https://www.tylervigen.com/spurious-correlations>`_
+
+DAGs
+====
+* DAGs are directed, because causality is: ``X -> Y`` means "Y listens to X" or "if we wiggle X, then Y will also wiggle"; or: changing ``X`` modifies the probability of ``Y``
+* Instead of "two-way causality" (e.g. ``anxiety <--> sleep``) you need to represent it as a chain of nodes causing each other (in day 1, day 2, etc)
+
+Kinship Terminology
+-------------------
+* ``A -> B -> C``
+* ``A`` is a parent of ``B``, ``B`` is a child of ``A``
+* ``A`` and ``B`` are ancestors of ``C``, ``C`` is a descendant of ``A`` and ``B``
+
+Roles of Covariates
+-------------------
+* Variables of interest:
+   1. The **exposure** (independent variable; a cause)
+   2. The **outcome** (dependent variable)
+* Other variables (measured or not) are **covariates**
+
+Types of covariates:
+
+* Confounders
+* Mediators
+* Proxy confounders
+* Competing exposures
+
+
+Paths types:
+
+* Paths can be "open" (d-connected; d for "directional") or "closed" (d-separated)
+   - Open paths transmit associations (aka correlations or dependencies): ``X -> opened -> Y``
+   - Closed paths don't: ``X -- closed -- Y``
+* Types of paths:
+   - Causal path (aka directed path): ``A -> C``
+   - Confounding path (aka backdoor path): ``C <- A -> F``
+      + Without conditioning (on ``A``), confounding paths are open (variations in ``A`` would appear as covariations in ``C`` and ``F``)
+      + But if we condition on ``A`` (aka clamp down on ``A`` or control/adjust for it), then we prevent that variation, and thus ``C`` and ``F`` would no longer be associated
+   - Collider path: ``A -> F <- E``
+      + Without conditioning (on ``F``), collider paths are closed (not transmitting dependencies between ``A`` and ``E``)
+      + Conditioning on ``F`` opens the path (if we wiggle ``A``, it will wiggle ``E``)
+
+Conditioning (adjusting/controlling/truncating):
+
+* Restriction
+  - Estimating the effect in a sample with similar values of one or more
+    other variables.
+    - e.g., Non-smokers only
+* Stratification
+  - Estimating the effect in strata with similar values of one or more
+    other variables.
+    - e.g., Non-smokers, Ex-smokers, Current-smokers
+* Covariate adjustment
+  - Estimating the effect while controlling for values of one or more
+    other variables.
+    - e.g., Including smoking as a covariate in a regression model
+* Matching
+  - Estimating the effect in clusters with similar values of one or more
+    other variables.
+    - e.g., Participants are matched on smoking status at recruitment
+
+Conditioning could be good (if conditioning for a confounder),
+or bad (if conditioning for a collider).
+
+Causal Effect Identification
+============================
+1. Estimand: e.g. the true difference in Y do to exposure X
+2. Estimator: e.g. your regression model
+3. Estimate: e.g. the estimated difference in Y from model coefficient
+
+Estimation is different from testing:
+
+* Testing: focusses on a binary question of whether a "significant" effect is observed. Encourages bad practices (e.g. p-hacking).
+* Interval estimation: focus on obtaining most accurate estimate and uncertainty interval.
+
+Structural Equation Modeling
+============================
+SEM is a parametric DAG.
+
+Variables
+---------
+* Observed: directly measured (e.g responses to a questionnaire).
+* Latent: inferred from observed variables (e.g. the level of intelligence).
+* Endogenous: dependent variables (e.g. in ``y = x1 + x2 + x3``, ``y`` is the endogenous variable).
+* Exogenous: independent variables (e.g. an athlete's sleep time is independent of the type of racing bike).
+
+Models
+------
+* Measurement model: measures the relationships between latent constructs and observed variables. The confirmatory factor analysis framework tests the underlying hypothesis of the measurement model.
+* Structural model: This model investigates causal relationships between latent constructs. It is diagrammatically represented using path analysis.

@@ -31,3 +31,4 @@ Statistics
 .. include:: .averages.rst
 .. include:: .distributions.rst
 .. include:: .kelly_criterion.rst
+.. include:: .causal_inference.rst
