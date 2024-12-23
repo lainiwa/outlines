@@ -1,0 +1,60 @@
+
+Pitfalls
+########
+* https://mywiki.wooledge.org/BashPitfalls
+
+String-to-int arbitrary code execution
+======================================
+* https://github.com/koalaman/shellcheck/issues/3088
+* https://www.vidarholen.net/contents/blog/?p=716
+* https://yossarian.net/til/post/some-surprising-code-execution-sources-in-bash/
+* https://github.com/oils-for-unix/blog-code/blob/main/crazy-old-bug
+* https://lobste.rs/s/mla0ns/til_some_surprising_code_execution
+
+.. code-block:: sh
+    :caption: script.sh
+
+    #!/bin/bash
+    num="${1}"
+    echo $(( $1 + 1 ))
+    echo
+    echo $(( num + 1 ))
+    echo
+    [[ "${num}" -eq 42 ]] && echo "Correct (int)" || echo "Wrong (int)"
+    echo
+    [[ "${num}" = 42 ]] && echo "Correct (str)" || echo "Wrong (str)"
+    echo
+    declare -i num="${1}"
+
+This script can execute arbitrary code::
+
+    ./script.sh 'a[$(echo Gotcha >&2)]+42'
+    Gotcha
+    43
+
+    Gotcha
+    43
+
+    Gotcha
+    Correct (int)
+
+    Wrong (str)
+
+    Gotcha
+
+Explanation:
+
+* It has to execute the string to convert (try ``[[ 0xFF -eq 255 ]]``) it to a number (``-eq``)
+* However ``=`` comparison is for strings, so we are safe in that case
+``x[y]`` would be treated as ``0``
+* Possible attack vector: ``num="$(curl -s https://api.coolsite.com/v1/number_of_people_who_think_im_cool)"
+``
+
+Similar issue with array indexing:
+
+.. code-block:: sh
+
+    $ myarray=(7 8 9 10 11)
+    $ echo "${myarray[$(echo Gotcha >&2; echo 2)]}"
+    Gotcha
+    9

@@ -87,6 +87,17 @@ String Formatting
     print(f"3: {positive: .2f}   {negative: .2f}")  # 3:  1.23   -1.23
 
 
+Profiling
+#########
+* `plasma-umass/scalene <https://github.com/plasma-umass/scalene>`_
+    - has comparison with other profilers: `img <https://raw.githubusercontent.com/plasma-umass/scalene/master/docs/images/profiler-comparison.png>`__
+* `bloomberg/memray <https://github.com/bloomberg/memray>`_
+    - has pytest plugin
+* `benfred/py-spy <https://github.com/benfred/py-spy>`_
+* `joerick/pyinstrument <https://github.com/joerick/pyinstrument>`_
+    - can integrate with FastAPI, call stack is available when ``?profile=true`` is added to the url
+
+
 TODO
 ####
 * https://adamj.eu/tech/2021/05/11/python-type-hints-args-and-kwargs/

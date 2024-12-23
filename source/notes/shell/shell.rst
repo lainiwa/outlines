@@ -19,6 +19,7 @@ Shell Scripting
 .. include:: .self_extracting.rst
 .. include:: .argparse.rst
 .. include:: .zsh.rst
+.. include:: .pitfalls.rst
 
 
 Script Template
