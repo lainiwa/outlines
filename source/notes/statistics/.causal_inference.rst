@@ -14,6 +14,8 @@ Causal Inference
    - Парадокс Берксона - ошибка коллайдера `src <https://ru.wikipedia.org/wiki/Парадокс_Берксона>`__
 * `Learn about DAGs and DAGitty <https://dagitty.net/learn>`_
 * `Spurious Correlations <https://www.tylervigen.com/spurious-correlations>`_
+* `Eight basic rules for causal inference <https://pedermisager.org/blog/seven_basic_rules_for_causal_inference/>`_
+  - Counter-intuitive: ``Rule 8: Controlling for a causal descendant (partially) controls for the ancestor``
 
 DAGs
 ====
@@ -103,3 +105,17 @@ Models
 ------
 * Measurement model: measures the relationships between latent constructs and observed variables. The confirmatory factor analysis framework tests the underlying hypothesis of the measurement model.
 * Structural model: This model investigates causal relationships between latent constructs. It is diagrammatically represented using path analysis.
+
+
+The only rule of Bayesian Model
+===============================
+Probability of each node is conditional probability of it's own given the probability of its parents.
+
+1. ``A -> B -> C -> D``
+  - ``P(A,B,C,D) = P(A) P(B|A) P(C|B) P(D|C)``
+2. ``A->C->D``, ``A->B->D``
+  - ``P(A,B,C,D) = P(A) P(B∣A) P(C∣A) P(D∣B,C)``
+3. ``B->C->D->E``, ``A->D``
+  - ``P(A,B,C,D,E) = P(A) P(B) P(C∣B) P(D∣A,C) P(E∣D)``
+
+
