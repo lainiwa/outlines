@@ -43,3 +43,9 @@ Diff
 .. image:: imgs/diff-dots.png
   :width: 70%
   :target: https://stackoverflow.com/a/7256391
+
+Diff Highlighters
+=================
+* `delta <https://github.com/dandavison/delta>`_
+* `difftastic <https://github.com/Wilfred/difftastic>`_
+* `diffr <https://github.com/mookid/diffr>`_
