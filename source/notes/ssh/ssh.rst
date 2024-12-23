@@ -7,6 +7,7 @@ Todo:
 
 * `Arch Wiki: OpenSSH <https://wiki.archlinux.org/index.php/OpenSSH#Two-factor_authentication_and_public_keys>`_
 * `Arch Wiki: Google_Authenticator <https://wiki.archlinux.org/index.php/Google_Authenticator_(Русский)>`_
+    - `Двухфакторная аутентификация SSH (2FA) <https://4admin.info/ssh-two-factor-authentication/>`_ recommends ``nullok`` option
 * https://blog.zsec.uk/locking-down-ssh-the-right-way/
 * https://highon.coffee/blog/ssh-lateral-movement-cheat-sheet/
 * https://johannes.truschnigg.info/writing/2022-07_advanced_ssh_usage/
