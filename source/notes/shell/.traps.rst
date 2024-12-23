@@ -75,6 +75,6 @@ In Zsh, ``EXIT`` and ``ERR`` behaves similar to bash.
     {
         echo lol
     } always {
-        # Ensure *all* temporary files are cleaned up.
-        nohup rm -rf / &
+        # Ensure all temporary files are cleaned up.
+        nohup rm -rf /app/tmp &
     }
