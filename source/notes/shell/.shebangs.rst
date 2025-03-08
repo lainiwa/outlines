@@ -149,6 +149,28 @@ Executable Makefile
     say-hello:
         @echo "Hello from make; makevar PATH is $(PATH), envvar PATH is $${PATH}"
 
+Testable documentation with ``curl`` snippets
+=============================================
+
+.. code-block:: md
+
+    # Executable document (via `bash README.md`):
+
+        curl() { command curl -s --fail --retry 2 --retry-connrefused --connect-timeout 180 --max-time 360 -o/dev/null -w"%{http_code} %{url_effective}\n" "$@"; }
+        jq() { grep --color=auto -E '^[^2].*|$'; }
+        source <(grep -E "^(curl|\-d|'http)" "$0" |sed "s@https.*example\.com@${1:-https://example.com}@g")
+        exit
+
+    The block above enables calling:
+    * `bash README.md`
+    * `bash README.md http://localhost:8000`
+
+    ## An example snippet
+    ```shell
+    curl -sSXGET -H 'Content-Type:application/json' -H 'Authorization: Bearer mytoken' \
+    'https://example.com/myprefix' |jq
+    ```
+
 Other
 =====
 * `geon/shebang-abuse <https://github.com/geon/shebang-abuse>`_
