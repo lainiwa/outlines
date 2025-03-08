@@ -38,7 +38,7 @@ Critics
 
     + Go templates: no infix operators, functions instead.
       - No: ``{{ if a and b }}``. Yes: ``{{ if and a b }}``
-      - No: ``{{ if a and(b orc) }}``. Yes: ``{{ if and a (or b c) }}``
+      - No: ``{{ if a and(b or c) }}``. Yes: ``{{ if and a (or b c) }}``
 
     + Deeply nested variables: ``.Values.prometheus.ingress.enabled``
     + Accessing items:
