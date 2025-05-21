@@ -1,10 +1,10 @@
-
-================
+################
 Computer Science
-================
+################
 
+***********
 Type Theory
-###########
+***********
 
 Unit Type
 =========
@@ -96,11 +96,13 @@ It's just proving something a bit weaker than you might think at first.
 Instead of proving that "```foo()`` will compute something that is a ``String``"
 it's proving that "```foo()`` won't compute something that isn't a ``String``.
 
+***************
 Category Theory
-###############
+***************
 
+****************
 Abstract Algebra
-################
+****************
 * https://en.wikipedia.org/wiki/Associative_property
 * https://en.wikipedia.org/wiki/Commutative_property
 
@@ -119,8 +121,9 @@ Monoid
 
 Monoid is a set equipped with an associative binary operation and an identity element. For example, the nonnegative integers with addition form a monoid, the identity element being 0.
 
+********
 Laziness
-########
+********
 * http://james-iry.blogspot.com/2011/05/why-eager-languages-dont-have-products.html
 * https://www.quora.com/What-is-meant-by-lazy-languages-dont-have-real-sums-and-eager-languages-dont-have-real-products
 * https://www.reddit.com/r/types/comments/72djqu/eager_languages_dont_have_product_and_lazy/

@@ -1,23 +1,24 @@
-
-===================
+###################
 Network debug tools
-===================
+###################
 
 Sources:
 
 * https://habr.com/en/post/320278/
 
 
+*****************
 Ping & Traceroute
-#################
+*****************
 #. ``ping <host>`` - check node is available by sending ICMP packets
     * ``ping -[a]udible`` doesn't work
 #. ``traceroute <host>`` - ping every node on the way to ``<host>``
 #. ``mtr <host>`` - sort of a union of ping and traceroute
     * has gtk gui
 
+*******
 netstat
-#######
+*******
 Print:
 
 * network connections
@@ -34,8 +35,9 @@ Usage::
             [-p|--program]    <-- print PID/program using the address
             [-r|--route]      <-- routing table
 
+**
 ss
-###
+**
 Another utility to investigate sockets.
 
 Sources:
@@ -63,8 +65,9 @@ Examples:
     # Display all established HTTPS connections
     sudo ss -o state established '( dport = :https or sport = :https )'
 
+********
 nslookup
-########
+********
 Query internet name servers.
 
 Usage::
@@ -77,8 +80,9 @@ Usage::
     nslookup -type=soa microsoft.com  <-- SOA ("Start Of Authority") record (technical info)
     nslookup -type=any microsoft.com  <-- all types (error: NOT IMPlemented in bind<9.3)
 
+******
 vnstat
-######
+******
 Console-based network traffic monitor
 
 vnstati: png image output support for vnStat
@@ -104,16 +108,20 @@ Usage::
     vnstati [-h|--hours] -i enp0s3 -o summary.png  <-- hourly statistics
     vnstati -s -i docker0+enp0s3 -o summary.png    <-- cumulative output
 
+******
 iptraf
-######
+******
 Interactive colorful IP LAN monitor
 
+****
 ntop
-####
+****
 Display top network users (Web GUI)
 
+****
 nmap
-####
+****
 
+*******
 tcpdump
-#######
+*******

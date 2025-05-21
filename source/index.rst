@@ -15,9 +15,9 @@ Welcome to outlines's documentation!
    notes/**
 
 
-##################
+******************
 Indices and tables
-##################
+******************
 
 * :ref:`genindex`
 * :ref:`modindex`

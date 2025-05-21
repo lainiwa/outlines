@@ -1,11 +1,11 @@
-
-=====
+#####
 Idris
-=====
+#####
 * `A Crash Course in Idris 2 <https://idris2.readthedocs.io/en/latest/tutorial/index.html>`_
 
+*******************
 Types and Functions
-###################
+*******************
 * https://idris2.readthedocs.io/en/latest/tutorial/typesfuns.html
 
 .. code-block:: idris

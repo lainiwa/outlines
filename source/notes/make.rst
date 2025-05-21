@@ -1,11 +1,11 @@
-
-========
+########
 GNU Make
-========
+########
 * `Your Makefiles are wrong <https://tech.davis-hansson.com/p/make/>`_
 
+*****************
 Changing defaults
-#################
+*****************
 
 .. code-block:: make
    :force:
@@ -35,8 +35,9 @@ Changing defaults
    .RECIPEPREFIX = >
 
 
+****************
 Writing Makefile
-################
+****************
 
 .. code-block:: make
    :force:

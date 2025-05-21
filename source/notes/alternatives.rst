@@ -1,7 +1,6 @@
-
-============
+############
 Alternatives
-============
+############
 
 Different software I ever considered
 
@@ -12,8 +11,9 @@ Legend:
 * ★ means this is the thing I've currently settled with
 
 
+******************
 Zsh plugin manager
-##################
+******************
 
 I've tried a buch of zsh plugin managers
 (something like `antigen → antibody → zinit → antibody → zinit → zpm`).
@@ -46,8 +46,9 @@ with just wget/curl requests + jq for parsing.
 * ★ :gh:`zshing <zakariaGatter/zshing>` [180 loc Zsh]
 
 
+*******************************
 Dotfiles manager/bootstrapper
-#############################
+*******************************
 * :gh:`chezmoi <twpayne/chezmoi>` [13.9k loc Go]
 * :gh:`stow <aspiers/stow>` [2k loc Perl]
 * :gh:`yadm <TheLocehiliosan/yadm>` [1.5 loc Bash]
@@ -56,8 +57,9 @@ Dotfiles manager/bootstrapper
 * ★ :gh:`dotbot <anishathalye/dotbot>` [0.7k loc Python]
 
 
+*************
 IMage viewers
-#############################
+*************
 * :gh:`feh <derf/feh>` [13.8k loc C]
 * :gh:`imv <eXeC64/imv>` [6.8k loc C]
     - ✔ GIFs
@@ -67,8 +69,9 @@ IMage viewers
     - ✖ Repository archived
 
 
+**************
 Window Manager
-##############
+**************
 * ★ :gh:`i3 <i3/i3>` [24k loc C]
     - ✔ Has a drop-in Wayland-compatible replacement (:gh:`sway <swaywm/sway>`). X11 will get deprecated sooner or later.
     - ✔ Good docs.
@@ -83,8 +86,9 @@ Window Manager
     - ✖ Patching is PITA.
 
 
+******
 Picker
-######
+******
 
 Seems like only `fzf` has decent environment & tools built around it.
 
@@ -103,8 +107,9 @@ Seems like only `fzf` has decent environment & tools built around it.
     - ✖ No tools integrated
     - ✖ Not fuzzy
 
+*****************
 Terminal emulator
-#################
+*****************
 
 These two emulator seem to be most viable. `St` is better but source-code-as-a-config doesn't fit my workflow.
 
@@ -118,15 +123,17 @@ These two emulator seem to be most viable. `St` is better but source-code-as-a-c
     - ✖ Having terminal multiplexer is essential.
     - ✖ Settings in source code.
 
+*****
 Shell
-#####
+*****
 * `bash <https://www.gnu.org/software/bash/>`_ [107k loc C]
 * ★ `zsh <http://www.zsh.org/>`_ [102k loc C]
 * :gh:`mksh <MirBSD/mksh>` [19k loc C]
 * :gh:`rc <rakitzis/rc>` [6.5k loc C]
 
+************
 File Manager
-############
+************
 
 The one thing I think file manager is useful for is picking files based on preview of their contents. For now only `ranger` has this functionality.
 
@@ -138,18 +145,21 @@ The one thing I think file manager is useful for is picking files based on previ
 * :gh:`fff <dylanaraps/fff>` [674 loc Bash]
     - ✖ No image preview
 
+***************
 Package Manager
-###############
+***************
 * ★ :gh:`guix <guix-mirror/guix>` [~60k loc Scheme]
 * ★ :gh:`nix <NixOS/nix>` [~37 loc C++]
 
+*****************
 Grep through code
-#################
+*****************
 * :gh:`rg <BurntSushi/ripgrep>` [21k loc Rust]
 * ★ :gh:`ag <ggreer/the_silver_searcher>` [3.9 loc C]
 
+******************
 Browser Extensions
-##################
+******************
 * ★ :gh:`display-anchors <Rob--W/display-anchors>` []
 * ★ :gh:`Memex <WorldBrain/Memex>` []
 * ★ :gh:`what-hn-says-webext <pinoceniccola/what-hn-says-webext>` []
@@ -160,47 +170,57 @@ Browser Extensions
 * `decentraleyes <https://git.synz.io/Synzvato/decentraleyes>`_
 
 + Tab Management
+================
     * :gh:`Simple Tab Groups drive4ik/simple-tab-groups` []
     * :gh:`Vertical Tabs Reloaded Croydon/vertical-tabs-reloaded` []
     * :gh:`Tab Manager v2 xcv58/Tab-Manager-v2` []
     * :gh:`Tree Style Tab piroor/treestyletab` []
 + URLs Cleanup
+==============
     * ★ :gh:`Neat-URL <Smile4ever/Neat-URL>` []
     * ★ :gh:`ClearURLs <ClearURLs/Addon>` []
 + Redirect Skipping
+===================
     * ★ :gh:`Redirector <einaregilsson/Redirector>` []
     * ★ :gh:`Skip Redirect <sblask/webextension-skip-redirect>` []
 + Tab Hibernation
+=================
     * ★ :gh:`auto-tab-discard <rNeomy/auto-tab-discard>` []
     * :gh:`better-onetab <cnwangjie/better-onetab>` []
     * :gh:`Dormancy <autonome/Dormancy>` []
 + Hide Trash
+============
     * ★ :gh:`uBlock <gorhill/uBlock>` [~48k loc JavaScript]
     * ★ :gh:`uBlacklist <iorate/uBlacklist>` []
     * :gh:`blocktube <amitbl/blocktube>` []
     * :gh:`blocktube <ajayyy/SponsorBlock>` []
 + Github
+========
     * ★ :gh:`CodeFlower <fzaninotto/CodeFlower>` []
     * :gh:`octotree <ovity/octotree>` []
     * :gh:`git-history <pomber/git-history>` []
     * :gh:`refined-github <sindresorhus/refined-github>` []
 + Disabling JavaScript
+======================
     * ★ :gh:`uMatrix <gorhill/uMatrix>` []
         - ✖ Complicated UI
     * :gh:`noscript <hackademix/noscript>` []
 
+*************
 Screenshoters
-#############
+*************
 * :gh:`imagemagick <ImageMagick/ImageMagick>` [334k loc C]
 * :gh:`flameshot <lupoDharkael/flameshot>` [7.5k loc C++]
 * ★ :gh:`maim <naelstrof/maim>` [2.4k loc C++]
 * :gh:`scrot <dreamer/scrot>` [1.8k loc C]
 
+*****************
 Wallpaper Setters
-#################
+*****************
 
+*****************
 Internet Browsers
-#################
+*****************
 * ★ `firefox <http://localhost>`_ []
 * :gh:`brave <brave/brave-browser>` []
 * ★ `chromium <http://localhost>`_ []
@@ -209,32 +229,37 @@ Internet Browsers
     - ✔ can browse gemini, gopher and finger
 * `lynx <http://localhost>`_ []
 
+************
 Textual diff
-############
+************
 * :gh:`delta <dandavison/delta>` [11.1k loc Rust]
 * :gh:`diffr <mookid/diffr>` [2.7k loc Rust]
 * :gh:`diff-so-fancy <so-fancy/diff-so-fancy>` [1.9k loc Perl]
 * :gh:`icdiff <jeffkaufman/icdiff>` [560 loc Python]
 
+**********
 Image diff
-##########
+**********
 * :gh:`git-diff-image <ewanmellor/git-diff-image>` [264 loc Bash]
 * :gh:`spaceman-diff <holman/spaceman-diff>` [130 loc Sh]
 
+******************
 Directories jumper
-##################
+******************
 * :gh:`z.lua <skywind3000/z.lua>` [2.4k loc Lua]
 * ★ :gh:`zsh-z <agkozak/zsh-z>` [416 loc Zsh]
 * :gh:`fasd <clvv/fasd>` [513 loc Sh]
 * :gh:`rupa/z <rupa/z>` [191 loc Bash]
 
+**********
 Sandboxing
-##########
+**********
 * :gh:`firejail <netblue30/firejail>` [30k loc C]
 * :gh:`nsjail <google/nsjail>` [4.4k loc C++]
 * :gh:`bubblewrap <containers/bubblewrap>` [3.2k loc C]
 
+*****************
 Password Managers
-#################
+*****************
 * :gh:`bitwarden <bitwarden/browser>` []
 * :gh:`KeePassXC <keepassxreboot/keepassxc>` []

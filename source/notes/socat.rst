@@ -1,17 +1,18 @@
-
-=====
+#####
 Socat
-=====
+#####
 * https://gist.github.com/mario21ic/c09f0a648130ad6a91abdde41cb011c8
 * http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html
 * http://www.dest-unreach.org/socat/doc/socat-tun.html
 
+********
 Snippets
-########
+********
 * `Getting started with socat, a multipurpose relay tool for Linux <https://www.redhat.com/sysadmin/getting-started-socat>`_
 
+***********
 HTTP client
-===========
+***********
 
 .. code-block:: sh
 
@@ -25,11 +26,12 @@ HTTP client
     } | socat - TCP4:wttr.in:80
 
 
+***************
 Port forwarding
-===============
+***************
 
 Simple TCP port forwarding
---------------------------
+==========================
 
 .. code-block:: sh
 
@@ -38,7 +40,7 @@ Simple TCP port forwarding
     ssh lain@localhost -p 9999
 
 HTTP port forwarding
---------------------
+====================
 * `curl another host <https://daniel.haxx.se/blog/2018/04/05/curl-another-host/>`_
 
 .. code-block:: sh
@@ -52,7 +54,7 @@ HTTP port forwarding
     curl --connect-to wttr.in:443:localhost:9999 https://wttr.in
 
 Socket forwarding
------------------
+=================
 * `Can anyone explain docker.sock <https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock>`_
 * `Docker Tips: about /var/run/docker.sock <https://betterprogramming.pub/about-var-run-docker-sock-3bfd276e12fd>`_
 * `SO: Is it possible to access a Unix socket over the network? <https://unix.stackexchange.com/questions/683688/is-it-possible-to-access-a-unix-socket-over-the-network>`_
@@ -79,7 +81,7 @@ Socket forwarding
     socat UNIX-LISTEN:/tmp/remote_socket,fork,reuseaddr,unlink-early,user=file_owner,group=file_group,mode=770 TCP:1.2.3.4:6644
 
 MITM
-----
+====
 * https://stackoverflow.com/questions/46050238/socat-how-to-listen-on-non-ssl-tcp-and-forward-to-ssl-tcp-endpoint
 * https://funoverip.net/2011/01/reverse-ssl-backdoor-with-socat-and-metasploit/
 
@@ -94,7 +96,7 @@ MITM
         curl 'http://localhost:8443/?user=admin&password=NimdaLol' --data-binary @-
 
 Encrypted TLS-authenticated bind shell
---------------------------------------
+======================================
 * `ncat doesn't allow client authentication <https://github.com/nmap/nmap/issues/1898>`_
 * https://book.hacktricks.xyz/generic-methodologies-and-resources/tunneling-and-port-forwarding#bind-shell
 
@@ -131,8 +133,9 @@ Encrypted TLS-authenticated bind shell
     # Replace 'lainiwa.duckdns.org' with the server's address if not running locally.
     # socat - OPENSSL:lainiwa.duckdns.org:8888,cert=certs/client.pem,cafile=certs/ca.crt,verify=1
 
+**************
 Other examples
---------------
+**************
 
 .. code-block:: sh
 

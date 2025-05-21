@@ -1,14 +1,14 @@
-
-======
+######
 Netcat
-======
+######
 * `Netcat - All you need to know <https://blog.ikuamike.io/posts/2021/netcat/>`_
     - `HN <https://news.ycombinator.com/item?id=27973020>`__
 * `10 useful ncat (nc) Command Examples for Linux Systems <https://lpicentral.blogspot.com/2018/08/10-useful-ncat-nc-command-examples-for.html>`_
 * `How to Use Netcat Commands: Examples and Cheat Sheets <https://www.varonis.com/blog/netcat-commands/>`_
 
+**************
 Netcat flavors
-##############
+**************
 * Traditional
     - ``sudo apt install netcat-traditional``
     - if other flavor present, call ``nc.traditional`` binary
@@ -25,8 +25,9 @@ Netcat flavors
     - ``sudo apt install ncat``
     - most feature rich
 
+********************
 Server / Client mode
-####################
+********************
 
 Server:
 
@@ -45,8 +46,9 @@ Client:
     nc - 127.0.0.1 8080
     nc -u 127.0.0.1 8080  # udp
 
+*********************
 Reverse / Bind Shells
-#####################
+*********************
 
 Reverse shells:
 
@@ -76,8 +78,9 @@ Ncat encrypted reverse shell:
     # allow connections only from specific host
     ncat --allow 127.0.0.1 -e /bin/bash -lvnp 8000
 
+**********************
 HTTP Client and Server
-######################
+**********************
 
 Client:
 
@@ -105,8 +108,9 @@ Server:
     cat ~/.profile
     } | nc -l 8000
 
+*************
 File Transfer
-#############
+*************
 
 Example:
 
@@ -121,8 +125,9 @@ Example:
     # OR nc --send-only 192.168.125.20 8080 < infile  # server1
     nc -lp 8080 > outfile          # server2
 
+*************
 Port Scanning
-#############
+*************
 
 Example:
 
@@ -133,8 +138,9 @@ Example:
     # UDP
     nc -nvv -w 1 -z -u 127.0.0.1 1-65535
 
+*******************
 Traffic Redirection
-###################
+*******************
 
 Only possible on flavors with ``-e`` option:
 

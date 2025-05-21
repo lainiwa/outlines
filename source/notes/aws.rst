@@ -1,7 +1,6 @@
-
-===================
+###################
 Amazon Web Services
-===================
+###################
 
 Sources:
 
@@ -9,8 +8,9 @@ Sources:
 * `Chalice Docs <https://aws.github.io/chalice/main.html>`_
 
 
+*********************
 AWS Credentials Setup
-#####################
+*********************
 
 Install AWS CLI and start configuring:
 
@@ -40,8 +40,9 @@ Go to credentials menu:
 .. _`My Security Credentials`: https://console.aws.amazon.com/iam/home#security_credential
 
 
+****************************
 Chalice Serverless Framework
-############################
+****************************
 
 .. code-block:: bash
 
