@@ -205,6 +205,8 @@ Converting to Languages
 Other Tools
 ###########
 * https://github.com/lwthiker/curl-impersonate
+    - https://daniel.haxx.se/blog/2022/09/02/curls-tls-fingerprint/
+    - https://lwthiker.com/networks/2022/06/17/tls-fingerprinting.html
 * https://hurl.dev/
 
 
