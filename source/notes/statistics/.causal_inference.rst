@@ -117,5 +117,3 @@ Probability of each node is conditional probability of it's own given the probab
   - ``P(A,B,C,D) = P(A) P(B∣A) P(C∣A) P(D∣B,C)``
 3. ``B->C->D->E``, ``A->D``
   - ``P(A,B,C,D,E) = P(A) P(B) P(C∣B) P(D∣A,C) P(E∣D)``
-
-
