@@ -35,6 +35,7 @@ Measures of dispersion (variability)
 * https://en.wikipedia.org/wiki/Z-factor
 * https://en.wikipedia.org/wiki/Effect_size
 * https://en.wikipedia.org/wiki/Standard_score
+* https://z-table.com/ (z-score and std_dev to left-tail probabilty)
 
 - **Range**: simplest measure of spread; difference between the largest and smallest values in the data.
 
@@ -101,3 +102,158 @@ Combinations (order does not matter)
   .. math::
 
     {}_nC_r = C(n,r) = \binom{n}{r} = \frac{n!}{r!\,(n - r)!}
+
+
+Quantiles
+#########
+* https://en.wikipedia.org/wiki/Cumulative_distribution_function
+* https://pappubahry.substack.com/p/i-have-opinions-about-the-nine-definitions
+
+- Cumulative distribution function (CDF) of a real-valued random variable :math:`X`:
+
+  .. math::
+
+    F_X(x) = P(X \le x), \quad x \in \mathbb{R}.
+
+- For :math:`\alpha \in (0,1)`, a (lower) :math:`\alpha`-quantile :math:`q_\alpha` of :math:`X` is defined by
+
+  .. math::
+
+    q_\alpha = \inf\{x \in \mathbb{R} : F_X(x) \ge \alpha\}.
+
+- If :math:`F_X` is continuous and strictly increasing, the quantile is unique and satisfies
+
+  .. math::
+
+    F_X(q_\alpha) = \alpha
+    \quad\text{and}\quad
+    q_\alpha = F_X^{-1}(\alpha).
+
+- For a sample :math:`x_1,\dots,x_n` with order statistics
+  :math:`x_{(1)} \le \dots \le x_{(n)}`, an empirical :math:`\alpha`-quantile
+  is obtained by taking an order statistic near position :math:`\alpha n`
+  (possibly with interpolation, depending on the chosen convention).
+
+
+Percentiles
+###########
+
+- The :math:`p`-th percentile (for :math:`0 < p < 100`) is the quantile :math:`q_{p/100}`; if :math:`F_X` is continuous and strictly increasing, then
+
+  .. math::
+
+    F_X\!\bigl(q_{p/100}\bigr) = \frac{p}{100}.
+
+- Special cases (as quantiles):
+
+  - Median: :math:`q_{0.5}` (50th percentile).
+  - Quartiles: :math:`q_{0.25} = Q_1`, :math:`q_{0.75} = Q_3` (25th and 75th percentiles).
+
+- In a sample :math:`x_1,\dots,x_n` with order statistics
+  :math:`x_{(1)} \le \dots \le x_{(n)}`, an empirical :math:`p`-th percentile
+  is typically defined as the empirical :math:`q_{p/100}` (using the empirical quantile
+  rule chosen for the data/tool).
+
+
+Percentile rank
+###############
+
+- For a finite sample :math:`x_1,\dots,x_n`, the percentile rank of a value :math:`x`
+  is the percentage of observations less than or equal to :math:`x`, e.g.
+
+  .. math::
+
+    \mathrm{PR}(x)
+    = 100 \cdot \frac{\#\{\,i : x_i \le x\,\}}{n},
+
+  with minor variations in the inequality and handling of ties depending on convention.
+
+
+Types of Probability
+####################
+
+- Classical (Theoretical)
+  - Based on equally likely outcomes.
+  - Example: P(odd on fair d6) = 3/6.
+
+- Empirical (Relative Frequency)
+  - Based on observed data / experiments.
+  - Example: 23 heads in 50 flips → P(heads) ≈ 23/50.
+
+- Subjective
+  - Based on personal belief or expert judgment.
+  - Example: Analyst estimates 60% chance of market rise.
+
+- Axiomatic
+  - Defined via formal axioms (non-negativity, normalization, additivity).
+  - All probability rules are derived from these.
+
+
+Sampling distribution of a sample proportion
+###########################################
+
+- Let :math:`X \sim \text{Binomial}(n,p)` be the number of "successes" in :math:`n` trials. The **sample proportion** is
+
+  .. math::
+    \hat{p} = \frac{X}{n}.
+
+- Mean and standard deviation (standard error):
+
+  .. math::
+    \mathbb{E}[\hat{p}] = p, \quad
+    \sigma_{\hat p} = \sqrt{\frac{p(1-p)}{n}}.
+
+- For large enough :math:`n` (e.g. :math:`np \ge 5` and :math:`n(1-p) \ge 5`),
+
+  .. math::
+    \hat{p} \approx N\!\Bigl(p,\; \frac{p(1-p)}{n}\Bigr),
+    \quad
+    Z = \frac{\hat{p} - p}{\sqrt{p(1-p)/n}} \approx N(0,1),
+
+  so the empirical 68–95–99.7 rule and :math:`z`-tables apply.
+
+
+Standard error
+##############
+
+- **Standard error (SE)**: the standard deviation of a statistic’s **sampling distribution** (i.e., how much an estimator would vary over repeated samples of the same size).
+
+  .. math::
+
+    \mathrm{SE}(T) = \sqrt{\mathrm{Var}(T)}.
+
+- **Standard deviation vs. standard error**:
+  - **SD** describes variability of the *data* (single sample / population).
+  - **SE** describes variability of an *estimate* (across hypothetical repeated samples).
+
+- **Key scaling**: for many common estimators, :math:`\mathrm{SE} \propto 1/\sqrt{n}` (larger samples → smaller SE).
+
+Common examples
+===============
+
+- **Sample mean** (i.i.d. with population SD :math:`\sigma`):
+
+  .. math::
+
+    \mathrm{SE}(\bar{x}) = \frac{\sigma}{\sqrt{n}},
+    \qquad
+    \widehat{\mathrm{SE}}(\bar{x}) = \frac{s}{\sqrt{n}}.
+
+- **Sample proportion** (:math:`\hat p = X/n`, :math:`X \sim \mathrm{Binomial}(n,p)`):
+
+  .. math::
+
+    \mathrm{SE}(\hat p) = \sqrt{\frac{p(1-p)}{n}},
+    \qquad
+    \widehat{\mathrm{SE}}(\hat p) = \sqrt{\frac{\hat p(1-\hat p)}{n}}.
+
+Use in inference (rule of thumb)
+================================
+
+- Standardized statistic often has the form
+
+  .. math::
+
+    Z = \frac{\text{estimate} - \text{null value}}{\mathrm{SE}(\text{estimate})},
+
+  and for large samples :math:`Z \approx N(0,1)` (or a :math:`t`-distribution for means when :math:`\sigma` is unknown).
